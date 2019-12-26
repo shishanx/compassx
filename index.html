@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+<style type = "text/css">
+	body{
+		background-image:url(picture/back/compass_mark.png);
+		background-attachment:fixed;
+		background-position:center;
+		background-size:100%, 100%;
+	}
+	.title{
+		padding-top:15px;
+		padding-bottom:15px;
+	}
+	.title span{
+		 margin-right:15px;
+		 font-size:40px;
+		 font-family:"Comic Sans MS";
+		 font-weight:bold;
+	}
+	.title span:hover{
+		 color:red;
+		 cursor:pointer;
+	}
+</style>
+<script type = "text/javascript">
+	function changeTo(page){
+		if(page == "index"){
+			window.location.reload();
+		}
+		else{
+			//document.location = "http://127.0.0.1/" + page + ".html";
+			//document.location = "http://localhost:8080/Works1/" + page + ".html";
+			document.location = "https://shishan-x.github.io/" + page + ".html";
+		}
+	}
+</script>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+	<div class = "title">
+		<span id = "home" onclick = "changeTo('index');">HOME</span>
+		<span id = "role" onclick = "changeTo('role');">CHARACTER</span>
+		<span id = "cards" onclick = "changeTo('cards');">CARDS</span>
+	</div>
+</body>
+</html>
