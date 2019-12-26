@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -680,7 +680,7 @@
 		var jump = new XMLHttpRequest();//連接伺服器的物件
 		//jump.open("get", "http://127.0.0.1/picture/SR/SR_DATA.txt");
 		//jump.open("get", "http://localhost:8080/Works1/picture/SR/SR_DATA.txt");
-		jump.open("get", "http://shishanx.github.io/compassx/picture/SR/SR_DATA.txt");
+		jump.open("get", "https://shishanx.github.io/compassx/picture/SR/SR_DATA.txt");
 		jump.onload = function(){
 			CARD_DATA = this.responseText;
 			CARD_ARR = CARD_DATA.split("\n");
