@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Character</title>
+<style type = "text/css">
+	body{
+		background-image:url(picture/back/character_filter.png);
+		background-attachment:fixed;
+		background-position:center;
+		background-size:100%, 100%;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		unselectable: on;
+	}
+	.title{
+		padding-top:15px;
+	}
+	.title>span{
+		 margin-right:15px;
+		 font-size:40px;
+		 font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		 font-weight:bold;
+	}
+	.title span:hover{
+		 color:blue;
+		 cursor:pointer;
+	}
+	#roleALL{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:center;
+		align-items:center;
+		margin-left: 10px;
+		background: rgba(255, 255, 255, 0.5);
+		position: absolute;
+	}
+	.changepic img:hover{
+		cursor: pointer;
+	}
+	.changepic img:first-child{
+		position: absolute;
+		width: 140px;
+		height: 140px;
+	}
+	.changepic img:last-child{/*icon*/
+		position: absolue;
+		height: 140px;
+	}
+	.changepic img:first-child:hover{
+		opacity: 0;
+		transition-property: opacity;
+		transition-duration: 0.3s; 
+		transition-timing-function: ease-in;
+	}
+	#roleDETAIL{
+		width: 95vw;
+		height: 80vh;
+		display: none;
+		justify-content: center;
+		align-items: center;
+		margin-left: 10px;
+		position: absolute;
+	}
+	#roleintro{
+		position: relative;
+	}
+	#roleintro img{
+		position: absolute;
+	}
+	#img1{
+		width: 50%;
+		margin-left: 25%;
+		visibility: visibility;
+		opacity: 1;
+	}
+	#img2{
+		width: 26.8%;
+		margin-left: 37%;
+		visibility: hidden;
+		opacity: 0;
+	}
+	#img3{
+		width: 25.5%;
+		margin-left: 37%;
+		visibility: hidden;
+		opacity: 0;
+	}
+	#backTOall{
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		font-size: 28px;
+		font-weight: bold;
+		margin-left: 350px;
+		visibility: hidden;
+	}
+	#backTOall span:hover{
+		color: blue;
+		cursor: pointer;
+	}
+</style>
+<script type = "text/javascript">
+	function nextdiv(num){
+		var all = document.getElementById("roleALL");
+		var detail = document.getElementById("roleDETAIL");
+		var back = document.getElementById("backTOall");
+		
+		back.style.visibility = "visible";
+		all.style.opacity = 0;
+		all.style.transition = "opacity 0.5s ease-in";
+		detail.style.display = "inline";
+		
+		img1.src = "picture/character/" + num + "_d.png";
+		img2.src = "picture/character/" + num + "_s.png";
+		img3.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
+	}
+	function lastdiv(){
+		var all = document.getElementById("roleALL");
+		var detail = document.getElementById("roleDETAIL");
+		var back = document.getElementById("backTOall");
+		all.style.removeProperty("opacity");
+		all.style.removeProperty("transition");
+		
+		back.style.visibility = "hidden";
+		all.style.opacity = 1;
+		all.style.transition = "opacity 0.5s ease-in";
+		detail.style.display = "none";
+	}
+	function changeTo(page){
+		if(page == "role"){
+			window.location.reload();
+		}
+		else{
+			//document.location = "http://127.0.0.1/" + page + ".html";
+			//document.location = "http://localhost:8080/Works1/" + page + ".html";
+			document.location = "https://shishan-x.github.io/" + page + ".html";
+		}
+	}
+	const numOFpic = 3;
+	function slide(picNum){
+		var before = document.getElementById("img"+Number(picNum-1))
+		var now = document.getElementById("img"+picNum);
+		var next = document.getElementById("img"+Number(picNum+1));
+		var w = window.screen.width;
+		//-----Clear last change---from
+		now.style.removeProperty("visibility");
+		now.style.removeProperty("padding-left");
+		now.style.removeProperty("opacity");
+		now.style.removeProperty("transition-property");
+		now.style.removeProperty("transition-duration");
+		now.style.removeProperty("transition-timing-function");
+		//---------------------------end
+		
+		now.style.paddingLeft = w/4 + "px";
+		now.style.opacity = 0;
+		now.style.transitionProperty = "opacity padding-left";
+		now.style.transitionDuration = "0.5s";
+		now.style.transitionTimingFunction = "ease-in";
+		now.style.visibility = "hidden";
+		if(next != null){
+			next.style.visibility = "visible";
+			next.style.opacity = 1;
+			next.style.transitionProperty = "opacity";
+			next.style.transitionDuration = "0.5s";
+			next.style.transitionTimingFunction = "ease-in";
+		}
+		else{
+			img1.style.visibility = "visible";
+			img1.style.opacity = 1;
+			img1.style.transitionProperty = "opacity";
+			img1.style.transitionDuration = "0.5s";
+			img1.style.transitionTimingFunction = "ease-in";
+		}
+		
+		if(before != null){
+			before.style.paddingLeft = "0px";
+		}
+		else{
+			before = document.getElementById("img"+numOFpic);
+			before.style.paddingLeft = "0px";
+		}
+	}
+</script>
+<link rel="icon" href="favicon.ico"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body>
+	<div class = "title">
+		<span id = "home" onclick = "changeTo('index');">HOME</span>
+		<span id = "role" onclick = "changeTo('role');">CHARACTER</span>
+		<span id = "cards" onclick = "changeTo('cards');">CARDS</span>
+	</div>
+	<div id = "backTOall">
+		<span onclick = "lastdiv();">└ back</span>
+	</div>
+	<div class = "content">
+		<div id = "roleALL">
+			<div class = "changepic" id = "changepic1">
+				<img onclick = "nextdiv(1);" src = "picture/character/1_shiwenzi.png"/>
+				<img src = "picture/character/1.png"/>
+			</div>
+			<div class = "changepic" id = "changepic2">
+				<img onclick = "nextdiv(2);" src = "picture/character/2_justice.png"/>
+				<img src = "picture/character/2.png"/>
+			</div>
+			<div class = "changepic" id = "changepic3">
+				<img onclick = "nextdiv(3);" src = "picture/character/3_lilica.png"/>
+				<img src = "picture/character/3.png"/>
+			</div>
+			<div class = "changepic" id = "changepic4">
+				<img onclick = "nextdiv(4);" src = "picture/character/4_naibao.png"/>
+				<img src = "picture/character/4.png"/>
+			</div>
+			<div class = "changepic" id = "changepic5">
+				<img onclick = "nextdiv(5);" src = "picture/character/5_green.png"/>
+				<img src = "picture/character/5.png"/>
+			</div>
+			<div class = "changepic" id = "changepic6">
+				<img onclick = "nextdiv(6);" src = "picture/character/6_zhende.png"/>
+				<img src = "picture/character/6.png"/>
+			</div>
+			<div class = "changepic" id = "changepic7">
+				<img onclick = "nextdiv(7);" src = "picture/character/7_55.png"/>
+				<img src = "picture/character/7.png"/>
+			</div>
+			<div class = "changepic" id = "changepic8">
+				<img onclick = "nextdiv(8);" src = "picture/character/8_unclegun.png"/>
+				<img src = "picture/character/8.png"/>
+			</div>
+			<div class = "changepic" id = "changepic9">
+				<img onclick = "nextdiv(9);" src = "picture/character/9_littlewhite.png"/>
+				<img src = "picture/character/9.png"/>
+			</div>
+			<div class = "changepic" id = "changepic10">
+				<img onclick = "nextdiv(10);" src = "picture/character/10_paogirl.png"/>
+				<img src = "picture/character/10.png"/>
+			</div>
+			<div class = "changepic" id = "changepic11">
+				<img onclick = "nextdiv(11);" src = "picture/character/11_poision.png"/>
+				<img src = "picture/character/11.png"/>
+			</div>
+			<div class = "changepic" id = "changepic12">
+				<img onclick = "nextdiv(12);" src = "picture/character/12_scientist.png"/>
+				<img src = "picture/character/12.png"/>
+			</div>
+			<div class = "changepic" id = "changepic13">
+				<img onclick = "nextdiv(13);" src = "picture/character/13_musician.png"/>
+				<img src = "picture/character/13.png"/>
+			</div>
+			<div class = "changepic" id = "changepic14">
+				<img onclick = "nextdiv(14);" src = "picture/character/14_doll.png"/>
+				<img src = "picture/character/14.png"/>
+			</div>
+			<div class = "changepic" id = "changepic15">
+				<img onclick = "nextdiv(15);" src = "picture/character/15_cc.png"/>
+				<img src = "picture/character/15.png"/>
+			</div>
+			<div class = "changepic" id = "changepic16">
+				<img onclick = "nextdiv(16);" src = "picture/character/16_ice.png"/>
+				<img src = "picture/character/16.png"/>
+			</div>
+			<div class = "changepic" id = "changepic17">
+				<img onclick = "nextdiv(17);" src = "picture/character/17_13.png"/>
+				<img src = "picture/character/17.png"/>
+			</div>
+			<div class = "changepic" id = "changepic18">
+				<img onclick = "nextdiv(18);" src = "picture/character/18_jump.png"/>
+				<img src = "picture/character/18.png"/>
+			</div>
+			<div class = "changepic" id = "changepic19">
+				<img onclick = "nextdiv(19);" src = "picture/character/19_rabbit.png"/>
+				<img src = "picture/character/19.png"/>
+			</div>
+			<div class = "changepic" id = "changepic20">
+				<img onclick = "nextdiv(20);" src = "picture/character/20_eagle.png"/>
+				<img src = "picture/character/20.png"/>
+			</div>
+			<div class = "changepic" id = "changepic21">
+				<img onclick = "nextdiv(21);" src = "picture/character/21_ninja.png"/>
+				<img src = "picture/character/21.png"/>
+			</div>
+			<div class = "changepic" id = "changepic22">
+				<img onclick = "nextdiv(22);" src = "picture/character/22_tube.png"/>
+				<img src = "picture/character/22.png"/>
+			</div>
+			<div class = "changepic" id = "changepic23">
+				<img onclick = "nextdiv(23);" src = "picture/character/23_didi.png"/>
+				<img src = "picture/character/23.png"/>
+			</div>
+			<div class = "changepic" id = "changepic24">
+				<img onclick = "nextdiv(24);" src = "picture/character/24_ghostdragon.png"/>
+				<img src = "picture/character/24.png"/>
+			</div>
+			<div class = "changepic" id = "changepic25">
+				<img onclick = "nextdiv(25);" src = "picture/character/25_grandpa.png"/>
+				<img src = "picture/character/25.png"/>
+			</div>
+			<div class = "changepic" id = "changepic26">
+				<img onclick = "nextdiv(26);" src = "picture/character/26_skateboy.png"/>
+				<img src = "picture/character/26.png"/>
+			</div>
+		</div>
+		<div id = "roleDETAIL">
+			<div id = "roleintro">
+				<img onclick = "slide(1);" id = "img1">
+				<img onclick = "slide(2);" id = "img2">
+				<img onclick = "slide(3);" id = "img3">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

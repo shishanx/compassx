@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cards</title>
+<style type = "text/css">
+	body{
+		background-image: url(picture/back/back_card_filter.png);
+		background-attachment:fixed;
+		background-position: center;
+		background-size: 100%, 100%;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		unselectable: on;
+	}
+	.title{
+		padding-top: 15px;
+		/*position: sticky;
+		top: 10px;*/
+	}
+	.title span{
+		margin-right: 15px;
+		font-size: 40px;
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		font-weight: bold;
+	}
+	.title span:hover{
+		color: green;
+		cursor: pointer;
+	}
+	.content{
+		display: flex;
+	}
+	#leftarea{
+		width: 10%;
+		height: 350px;
+		border-top: 2px dashed black;
+		border-left: 2px dashed black;
+		border-bottom: 2px dashed black;
+		background: rgba(255, 255, 255, 0.8);
+		/*position: sticky;
+		top: 95px;*/
+	}
+	.list{
+		padding-top: 20px;
+		text-align: center;
+		font-size: 35px;
+		font-weight: bold;
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		cursor: pointer;
+		/*background: linear-gradient(150deg, rgb(255, 255, 0), rgb(255, 215, 0));
+        -webkit-background-clip: text;
+        color: transparent;*/
+	}
+	#rightarea{
+		width: 90%;
+		height: 79vh;
+		border: 2px solid black;
+		overflow: auto;
+	}
+	#ur{
+		font-size: 25px;
+		text-align: center;
+		font-weight: bold;
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+	}
+	#sr{
+		font-size: 25px;
+		text-align: center;
+		font-weight: bold;
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+	}
+	#ur:hover{
+		cursor: pointer;
+	}
+	#sr:hover{
+		cursor: pointer;
+	}
+	.attribute{
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		font-weight: bold;
+		padding-left: 30px;
+	}
+	#fire:hover{
+		color: #ff5555;
+	}
+	#water:hover{
+		color: #5555ff;
+	}
+	#wood:hover{
+		color: #33ff33;
+	}
+	#cardTable{
+		width: 100%;
+		text-align: center;
+		font-size: 20px;
+		border-collapse: collapse;
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		font-weight: bold;
+		table-layout: fixed;
+		overflow-y: scroll;
+	}
+	
+	th:nth-child(1), td:nth-child(1){/*NO.*/
+		width: 6%;
+		background: rgba(255, 255, 255, 0.8);
+	}
+	th:nth-child(2), td:nth-child(2){/*CARD*/
+		width: 130px;
+	}
+	th:nth-child(3), td:nth-child(3){/*ATRIBUTE*/
+		width: 18%;
+	}
+	th:nth-child(4), td:nth-child(4){/*NAME*/
+		width: 27%;
+	}
+	th:nth-child(5), td:nth-child(5){/*LV*/
+		width: 10%;
+	}
+	th:nth-child(6), td:nth-child(6){/*ATT*/
+		width: 10%;
+	}
+	th:nth-child(7), td:nth-child(7){/*DEF*/
+		width: 10%;
+	}
+	th:nth-child(8), td:nth-child(8){/*HP*/
+		width: 11%;
+	}
+	th{
+		background: rgba(255, 255, 255, 0.8);
+		position: sticky;
+		top: 0px;
+	}
+	img{
+		width: 130px;
+		height: 190px;
+	}
+	#viewAll{
+		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		font-size: 28px;
+		font-weight: bold;
+		margin-left: 500px;
+		visibility: visible;
+	}
+	#viewAll span:hover{
+		color: green;
+		cursor: pointer;
+	}
+</style>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body onload = "URnewTable(0); SRnewTable(0);">
+	<div class = "title">
+		<span id = "home" onclick = "changeTo('index');">HOME</span>
+		<span id = "role" onclick = "changeTo('role');">CHARACTER</span>
+		<span id = "cards" onclick = "changeTo('cards');">CARDS</span>
+	</div>
+	<div id = "viewAll">
+		<span onclick = "URnewTable(0); SRnewTable(0);">└ all</span>
+	</div>
+	<div class = "content">
+		<div id = "leftarea" onmouseout = "disappear();">
+			<div class = "list" onmouseover = "appear('ur');">UR<span style = "font-size:15px;">▼</span></div>
+			<div id = "ur" style = "visibility: hidden;">
+				<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(1);" id = "fire" >火</div>
+				<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(2);" id = "water">水</div>
+				<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(3);" id = "wood" >木</div>
+			</div>
+			<div class = "list" onmouseover = "appear('sr');">SR<span style = "font-size:15px">▼</span></div>
+			<div id = "sr" style = "visibility: hidden;">
+				<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(1);" id = "fire" >火</div>
+				<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(2);" id = "water">水</div>
+				<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(3);" id = "wood" >木</div>
+			</div>
+		</div>
+		<div id = "rightarea">
+			<table id = "cardTable">
+				<tr>
+					<th>NO.</th>
+					<th>CARD</th>
+					<th>ATTRIBUTE</th>
+					<th>NAME</th>
+					<th>LV</th>
+					<th>ATT</th>
+					<th>DEF</th>
+					<th>HP</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+<script type = "text/javascript">
+	function changeTo(page){
+		if(page == "cards"){
+			window.location.reload();
+		}
+		else{
+			//document.location = "http://127.0.0.1/" + page + ".html";
+			//document.location = "http://localhost:8080/Works1/" + page + ".html";
+			document.location = "https://shishan-x.github.io/" + page + ".html";
+		}
+	}
+	function appear(rare){
+		var r = document.getElementById(rare);
+		if(r.style.visibility != "visible"){
+			r.style.visibility = "visible";
+		}
+		else{
+			r.style.visibility = "hidden";
+		}
+	}
+	function disappear(){
+		var u = document.getElementById("ur");
+		var s = document.getElementById("sr");
+		if(u.style.visibility != "hidden"){
+			u.style.visibility = "hidden";
+		}
+		if(s.style.visibility != "hidden"){
+			s.style.visibility = "hidden";
+		}
+	}
+	var UR_NUM; 
+	function URnewTable(num){//--------------------------------------------------------For UR
+		var table = document.getElementById("cardTable");
+		const ALL = 0;
+		const FIRE = 1;
+		const WATER = 2;
+		const WOOD = 3;
+		var fire = 32;//Num of Fire's UR Card--card
+		var fName  = "火";
+		var water = 31;//Num of Water's UR Card--card
+		var wName = "水";
+		var wood = 26;//Num of Wood's UR Card--card
+		var woName = "木";
+		UR_NUM = fire + water + wood;
+		var row = table.rows.length;
+		var col;
+		var count = 1;
+		var CARD_DATA = "";//All of Data
+		var CARD_ARR = new Array(fire+water+wood);//Stored in array by split("\n");
+		var currentCard = new Array(7);//Each data stored by split(",");--col
+		var cur_col;
+		//var picHTML = "<img src = 'picture/UR/UR";
+		//var picHTML = "<img src = 'http://localhost:8080/Works1/picture/UR/UR";
+		var picHTML = "<img src = 'https://shishan-x.github.io/picture/UR/UR";
+		for(var i = 1; i < row; i++){
+			table.deleteRow(-1);
+		}
+		var jump = new XMLHttpRequest();//連接伺服器的物件
+		//jump.open("get", "http://127.0.0.1/picture/UR/UR_DATA.txt");
+		//jump.open("get", "http://localhost:8080/Works1/picture/UR/UR_DATA.txt");
+		jump.open("get", "https://shishan-x.github.io/picture/UR/UR_DATA.txt");
+		jump.onload = function(){
+			CARD_DATA = this.responseText;
+			CARD_ARR = CARD_DATA.split("\n");
+			var other = 0;
+			var before = 0;
+			if(num == FIRE){
+				other = water + wood;
+			}
+			else if(num == WATER){
+				other = fire + wood;
+				before = fire;
+				count = count + fire;
+			}
+			else if(num == WOOD){
+				other = fire + water;
+				before = fire + water;
+				count = count + fire + water;
+			}
+			row = table.rows.length;
+			for(var i = row; i < row+fire+water+wood-other; i++){
+				var new_row = table.insertRow(i);
+				col = 0;
+				cur_col = 0;
+
+				currentCard = CARD_ARR[count-1].split(",");
+				var NO = Number(currentCard[cur_col]);
+				if(num == ALL)
+					new_row.insertCell(col).innerHTML = count;
+				else
+					new_row.insertCell(col).innerHTML = Number(NO + before);//NO.
+				col++;
+				cur_col++;
+				
+				var curAttribute = currentCard[cur_col];
+				new_row.insertCell(col).innerHTML = picHTML + "_" + curAttribute + "_" + NO + ".jpg'/>";//Picture
+				col++;
+				count++;
+				
+				var att = new_row.insertCell(col);//ATTRIBUTE
+				col++;
+				if(curAttribute == "fire"){
+					att.innerHTML = fName;
+					att.style.backgroundColor = "#ffcccc";
+				}
+				if(curAttribute == "water"){
+					att.innerHTML = wName;
+					att.style.backgroundColor = "#ccccff";
+				}
+				if(curAttribute == "wood"){
+					att.innerHTML = woName;
+					att.style.backgroundColor = "#ccffcc";
+				}
+				cur_col++;
+				
+				var name = new_row.insertCell(col);//NAME
+				col++;
+				name.style.background = "rgba(100, 100, 100, 0.5)";
+				name.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var level = new_row.insertCell(col);//LV
+				col++;
+				level.style.background = "rgba(200, 200, 200, 0.6)";
+				level.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var attack = new_row.insertCell(col);//ATT
+				col++;
+				attack.style.background = "rgba(100, 100, 100, 0.5)";
+				attack.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var defence = new_row.insertCell(col);//DEF
+				col++;
+				defence.style.background = "rgba(200, 200, 200, 0.6)";
+				defence.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var hp = new_row.insertCell(col);//HP
+				hp.style.background = "rgba(100, 100, 100, 0.5)";
+				hp.innerHTML = currentCard[cur_col];//--col
+			}
+			/*switch(num){
+				case ALL:
+					//----------------------------------------------Fire----------------------------------------------
+					row = 1;
+					for(var i = row; i < row+fire; i++){
+						var new_row = table.insertRow(i);
+						col = 0;
+						cur_col = 0;
+						
+						new_row.insertCell(col).innerHTML = count;//NO.
+						col++;
+						cur_col++;
+						
+						new_row.insertCell(col).innerHTML = picHTML + "_fire_" + count + ".jpg'/>";//Picture
+						col++;
+						currentCard = CARD_ARR[count-1].split(",");
+						count++;
+						
+						var att = new_row.insertCell(col);//ATTRIBUTE
+						col++;
+						att.innerHTML = fName;
+						att.style.backgroundColor = "#ffcccc";
+						cur_col++;
+						
+						var name = new_row.insertCell(col);//NAME
+						col++;
+						name.style.background = "rgba(100, 100, 100, 0.5)";
+						name.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var level = new_row.insertCell(col);//LV
+						col++;
+						level.style.background = "rgba(200, 200, 200, 0.6)";
+						level.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var attack = new_row.insertCell(col);//ATT
+						col++;
+						attack.style.background = "rgba(100, 100, 100, 0.5)";
+						attack.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var defence = new_row.insertCell(col);//DEF
+						col++;
+						defence.style.background = "rgba(200, 200, 200, 0.6)";
+						defence.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var hp = new_row.insertCell(col);//HP
+						hp.style.background = "rgba(100, 100, 100, 0.5)";
+						hp.innerHTML = currentCard[cur_col];//--col
+					}
+					//----------------------------------------------Water----------------------------------------------
+					row = table.rows.length;
+					count = 1;
+					for(var i = row; i < row+water; i++){
+						var new_row = table.insertRow(i);
+						col = 0;
+						cur_col = 0;
+						
+						new_row.insertCell(col).innerHTML = count+fire;//NO.
+						col++;
+						cur_col++;
+						
+						new_row.insertCell(col).innerHTML = picHTML + "_water_" + count + ".jpg'/>";//Picture
+						col++;
+						currentCard = CARD_ARR[count+fire-1].split(",");
+						count++;
+						
+						var att = new_row.insertCell(col);//ATTRIBUTE
+						col++;
+						att.innerHTML = wName;
+						att.style.backgroundColor = "#ccccff";
+						cur_col++;
+						
+						var name = new_row.insertCell(col);//NAME
+						col++;
+						name.style.background = "rgba(100, 100, 100, 0.5)";
+						name.innerHTML = currentCard[cur_col]
+						cur_col++;
+						
+						var level = new_row.insertCell(col);//LV
+						col++;
+						level.style.background = "rgba(200, 200, 200, 0.6)";
+						level.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var attack = new_row.insertCell(col);//ATT
+						col++;
+						attack.style.background = "rgba(100, 100, 100, 0.5)";
+						attack.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var defence = new_row.insertCell(col);//DEF
+						col++;
+						defence.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var hp = new_row.insertCell(col);//HP
+						hp.style.background = "rgba(100, 100, 100, 0.5)";
+						hp.innerHTML = currentCard[cur_col];//--col
+					}
+					//----------------------------------------------Wood----------------------------------------------
+					row = table.rows.length;
+					count = 1;
+					for(var i = row; i < row+wood; i++){
+						var new_row = table.insertRow(i);
+						col = 0;
+						cur_col = 0;
+						
+						new_row.insertCell(col).innerHTML = count+fire+water;//NO.
+						col++;
+						cur_col++;
+						
+						new_row.insertCell(col).innerHTML = picHTML + "_wood_" + count + ".jpg'/>";//Picture
+						col++;
+						currentCard = CARD_ARR[count+fire+water-1].split(",");
+						count++;
+						
+						var att = new_row.insertCell(col);//ATTRIBUTE
+						col++;
+						att.innerHTML = woName;
+						att.style.backgroundColor = "#ccffcc";
+						cur_col++;
+						
+						var name = new_row.insertCell(col);//NAME
+						col++;
+						name.style.background = "rgba(100, 100, 100, 0.5)";
+						name.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var level = new_row.insertCell(col);//LV
+						col++;
+						level.style.background = "rgba(200, 200, 200, 0.6)";
+						level.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var attack = new_row.insertCell(col);//ATT
+						col++;
+						attack.style.background = "rgba(100, 100, 100, 0.5)";
+						attack.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var defence = new_row.insertCell(col);//DEF
+						col++;
+						defence.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var hp = new_row.insertCell(col);//HP
+						hp.style.background = "rgba(100, 100, 100, 0.5)";
+						hp.innerHTML = currentCard[cur_col];//--col
+					}
+					break;
+				
+				case FIRE:
+					row = 1;
+					count = 1;
+					//--------------------------------------------Only Fire--------------------------------------------
+					for(var i = row; i < row+fire; i++){
+						var new_row = table.insertRow(i);
+						col = 0;
+						cur_col = 0;
+						
+						new_row.insertCell(col).innerHTML = count;//NO.
+						col++;
+						cur_col++;
+						
+						new_row.insertCell(col).innerHTML = picHTML + "_fire_" + count + ".jpg'/>";//Picture
+						col++;
+						currentCard = CARD_ARR[count-1].split(",");
+						count++;
+						
+						var att = new_row.insertCell(col);//ATTRIBUTE
+						col++;
+						att.innerHTML = fName;
+						att.style.backgroundColor = "#ffcccc";
+						cur_col++;
+						
+						var name = new_row.insertCell(col);//NAME
+						col++;
+						name.style.background = "rgba(100, 100, 100, 0.5)";
+						name.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var level = new_row.insertCell(col);//LV
+						col++;
+						level.style.background = "rgba(200, 200, 200, 0.6)";
+						level.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var attack = new_row.insertCell(col);//ATT
+						col++;
+						attack.style.background = "rgba(100, 100, 100, 0.5)";
+						attack.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var defence = new_row.insertCell(col);//DEF
+						col++;
+						defence.style.background = "rgba(200, 200, 200, 0.6)";
+						defence.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var hp = new_row.insertCell(col);//HP
+						hp.style.background = "rgba(100, 100, 100, 0.5)";
+						hp.innerHTML = currentCard[cur_col];//--col
+					}
+					break;
+					
+				case WATER:
+					row = 1;
+					count = 1;
+					//--------------------------------------------Only Water--------------------------------------------
+					for(var i = row; i < row+water; i++){
+						var new_row = table.insertRow(i);
+						col = 0;
+						cur_col = 0;
+						
+						new_row.insertCell(col).innerHTML = count;//NO.
+						col++;
+						cur_col++;
+						
+						new_row.insertCell(col).innerHTML = picHTML + "_water_" + count + ".jpg'/>";//Picture
+						col++;
+						currentCard = CARD_ARR[count+fire-1].split(",");
+						count++;
+						
+						var att = new_row.insertCell(col);//ATTRIBUTE
+						col++;
+						att.innerHTML = wName;
+						att.style.backgroundColor = "#ccccff";
+						cur_col++;
+						
+						var name = new_row.insertCell(col);//NAME
+						col++;
+						name.style.background = "rgba(100, 100, 100, 0.5)";
+						name.innerHTML = currentCard[cur_col]
+						cur_col++;
+						
+						var level = new_row.insertCell(col);//LV
+						col++;
+						level.style.background = "rgba(200, 200, 200, 0.6)";
+						level.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var attack = new_row.insertCell(col);//ATT
+						col++;
+						attack.style.background = "rgba(100, 100, 100, 0.5)";
+						attack.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var defence = new_row.insertCell(col);//DEF
+						col++;
+						defence.style.background = "rgba(200, 200, 200, 0.6)";
+						defence.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var hp = new_row.insertCell(col);//HP
+						hp.style.background = "rgba(100, 100, 100, 0.5)";
+						hp.innerHTML = currentCard[cur_col];//--col
+					}
+					break;
+					
+				case WOOD:
+					row = 1;
+					count = 1;
+					//--------------------------------------------Only Wood--------------------------------------------
+					for(var i = row; i < row+wood; i++){
+						var new_row = table.insertRow(i);
+						col = 0;
+						cur_col = 0;
+						
+						new_row.insertCell(col).innerHTML = count;//NO.
+						col++;
+						cur_col++;
+						
+						new_row.insertCell(col).innerHTML = picHTML + "_wood_" + count + ".jpg'/>";//Picture
+						col++;
+						currentCard = CARD_ARR[count+fire+water-1].split(",");
+						count++;
+						
+						var att = new_row.insertCell(col);//ATTRIBUTE
+						col++;
+						att.innerHTML = woName;
+						att.style.backgroundColor = "#ccffcc";
+						cur_col++;
+						
+						var name = new_row.insertCell(col);//NAME
+						col++;
+						name.style.background = "rgba(100, 100, 100, 0.5)";
+						name.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var level = new_row.insertCell(col);//LV
+						col++;
+						level.style.background = "rgba(200, 200, 200, 0.6)";
+						level.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var attack = new_row.insertCell(col);//ATT
+						col++;
+						attack.style.background = "rgba(100, 100, 100, 0.5)";
+						attack.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var defence = new_row.insertCell(col);//DEF
+						col++;
+						defence.style.background = "rgba(200, 200, 200, 0.6)";
+						defence.innerHTML = currentCard[cur_col];
+						cur_col++;
+						
+						var hp = new_row.insertCell(col);//HP
+						hp.style.background = "rgba(100, 100, 100, 0.5)";
+						hp.innerHTML = currentCard[cur_col];//--col
+					}
+					break;
+			}*/
+		};
+		jump.send();
+	}
+	function SRnewTable(num){//--------------------------------------------------------For SR
+		var table = document.getElementById("cardTable");
+		const ALL = 0;
+		const FIRE = 1;
+		const WATER = 2;
+		const WOOD = 3;
+		var fire = 29;//Num of Fire's SR Card--card
+		var fName  = "火";
+		var water = 26;//Num of Water's SR Card--card
+		var wName = "水";
+		var wood = 27;//Num of Wood's SR Card--card
+		var woName = "木";
+		var row = table.rows.length;
+		var col;
+		var count = 1;
+		var CARD_DATA = "";//All of Data
+		var CARD_ARR = new Array(fire+water+wood);//Stored in array by split("\n");
+		var currentCard = new Array(7);//Each data stored by split(",");--col
+		var cur_col;
+		//var picHTML = "<img src = 'picture/SR/SR";
+		//var picHTML = "<img src = 'http://localhost:8080/Works1/picture/SR/SR";
+		var picHTML = "<img src = 'https://shishan-x.github.io/picture/SR/SR";
+		for(var i = 1; i < row; i++){
+			table.deleteRow(-1);
+		}
+		var jump = new XMLHttpRequest();//連接伺服器的物件
+		//jump.open("get", "http://127.0.0.1/picture/SR/SR_DATA.txt");
+		//jump.open("get", "http://localhost:8080/Works1/picture/SR/SR_DATA.txt");
+		jump.open("get", "http://shishan-x.github.io/picture/SR/SR_DATA.txt");
+		jump.onload = function(){
+			CARD_DATA = this.responseText;
+			CARD_ARR = CARD_DATA.split("\n");
+			var other = 0;
+			var before = 0;
+			if(num == FIRE){
+				other = water + wood;
+			}
+			else if(num == WATER){
+				other = fire + wood;
+				before = fire;
+				count = count + fire;
+			}
+			else if(num == WOOD){
+				other = fire + water;
+				before = fire + water;
+				count = count + fire + water;
+			}
+			row = table.rows.length;
+			for(var i = row; i < row+fire+water+wood-other; i++){
+				var new_row = table.insertRow(i);
+				col = 0;
+				cur_col = 0;
+
+				currentCard = CARD_ARR[count-1].split(",");
+				var NO = Number(currentCard[cur_col]);
+				if(num == ALL)
+					new_row.insertCell(col).innerHTML = count + UR_NUM;
+				else
+					new_row.insertCell(col).innerHTML = Number(NO + before + UR_NUM);//NO.
+				col++;
+				cur_col++;
+				
+				var curAttribute = currentCard[cur_col];
+				new_row.insertCell(col).innerHTML = picHTML + "_" + curAttribute + "_" + NO + ".jpg'/>";//Picture
+				col++;
+				count++;
+				
+				var att = new_row.insertCell(col);//ATTRIBUTE
+				col++;
+				if(curAttribute == "fire"){
+					att.innerHTML = fName;
+					att.style.backgroundColor = "#ffcccc";
+				}
+				if(curAttribute == "water"){
+					att.innerHTML = wName;
+					att.style.backgroundColor = "#ccccff";
+				}
+				if(curAttribute == "wood"){
+					att.innerHTML = woName;
+					att.style.backgroundColor = "#ccffcc";
+				}
+				cur_col++;
+				
+				var name = new_row.insertCell(col);//NAME
+				col++;
+				name.style.background = "rgba(100, 100, 100, 0.5)";
+				name.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var level = new_row.insertCell(col);//LV
+				col++;
+				level.style.background = "rgba(200, 200, 200, 0.6)";
+				level.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var attack = new_row.insertCell(col);//ATT
+				col++;
+				attack.style.background = "rgba(100, 100, 100, 0.5)";
+				attack.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var defence = new_row.insertCell(col);//DEF
+				col++;
+				defence.style.background = "rgba(200, 200, 200, 0.6)";
+				defence.innerHTML = currentCard[cur_col];
+				cur_col++;
+				
+				var hp = new_row.insertCell(col);//HP
+				hp.style.background = "rgba(100, 100, 100, 0.5)";
+				hp.innerHTML = currentCard[cur_col];//--col
+			}
+		};
+		jump.send();
+	}
+</script>
+</html>
