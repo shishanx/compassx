@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -105,25 +105,22 @@
 		width: 6%;
 		background: rgba(255, 255, 255, 0.8);
 	}
-	th:nth-child(2), td:nth-child(2){/*CARD*/
+	th:nth-child(2){/*CARD*/
 		width: 13%;
 	}
-	th:nth-child(3), td:nth-child(3){/*ATRIBUTE*/
-		width: 13%;
-	}
-	th:nth-child(4), td:nth-child(4){/*NAME*/
+	th:nth-child(3){/*NAME*/
 		width: 27%;
 	}
-	th:nth-child(5), td:nth-child(5){/*LV*/
+	th:nth-child(4){/*LV*/
 		width: 10%;
 	}
-	th:nth-child(6), td:nth-child(6){/*ATT*/
+	th:nth-child(5){/*ATT*/
 		width: 10%;
 	}
-	th:nth-child(7), td:nth-child(7){/*DEF*/
+	th:nth-child(6){/*DEF*/
 		width: 10%;
 	}
-	th:nth-child(8), td:nth-child(8){/*HP*/
+	th:nth-child(7){/*HP*/
 		width: 11%;
 	}
 	th{
@@ -132,7 +129,7 @@
 		top: 0px;
 	}
 	img{
-		width: 100%;
+		width: 85%;
 	}
 	#viewAll{
 		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
@@ -178,7 +175,6 @@
 				<tr>
 					<th>NO.</th>
 					<th>CARD</th>
-					<th>ATTRIBUTE</th>
 					<th>NAME</th>
 					<th>LV</th>
 					<th>ATT</th>
@@ -196,7 +192,7 @@
 		}
 		else{
 			//document.location = "http://127.0.0.1/" + page + ".html";
-			//document.location = "http://localhost:8080/Works1/" + page + ".html";
+			//document.location = "http://localhost:8080/CompassInfo/" + page + ".html";
 			document.location = "https://shishanx.github.io/compassx/" + page + ".html";
 		}
 	}
@@ -241,14 +237,14 @@
 		var currentCard = new Array(7);//Each data stored by split(",");--col
 		var cur_col;
 		//var picHTML = "<img src = 'picture/UR/UR";
-		//var picHTML = "<img src = 'http://localhost:8080/Works1/picture/UR/UR";
+		//var picHTML = "<img src = 'http://localhost:8080/CompassInfo/picture/UR/UR";
 		var picHTML = "<img src = 'https://shishanx.github.io/compassx/picture/UR/UR";
 		for(var i = 1; i < row; i++){
 			table.deleteRow(-1);
 		}
 		var jump = new XMLHttpRequest();//連接伺服器的物件
 		//jump.open("get", "http://127.0.0.1/picture/UR/UR_DATA.txt");
-		//jump.open("get", "http://localhost:8080/Works1/picture/UR/UR_DATA.txt");
+		//jump.open("get", "http://localhost:8080/CompassInfo/picture/UR/UR_DATA.txt");
 		jump.open("get", "https://shishanx.github.io/compassx/picture/UR/UR_DATA.txt");
 		jump.onload = function(){
 			CARD_DATA = this.responseText;
@@ -284,52 +280,87 @@
 				cur_col++;
 				
 				var curAttribute = currentCard[cur_col];
-				new_row.insertCell(col).innerHTML = picHTML + "_" + curAttribute + "_" + NO + ".jpg'/>";//Picture
+				var pic = new_row.insertCell(col);
+				pic.innerHTML = picHTML + "_" + curAttribute + "_" + NO + ".jpg'/>";//Picture
+				if(curAttribute == "fire"){
+					pic.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					pic.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					pic.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				col++;
 				count++;
 				
-				var att = new_row.insertCell(col);//ATTRIBUTE
-				col++;
-				if(curAttribute == "fire"){
-					att.innerHTML = fName;
-					att.style.backgroundColor = "#ffcccc";
-				}
-				if(curAttribute == "water"){
-					att.innerHTML = wName;
-					att.style.backgroundColor = "#ccccff";
-				}
-				if(curAttribute == "wood"){
-					att.innerHTML = woName;
-					att.style.backgroundColor = "#ccffcc";
-				}
-				cur_col++;
-				
+				cur_col++;//因為少了屬性所以多加一次
 				var name = new_row.insertCell(col);//NAME
 				col++;
-				name.style.background = "rgba(100, 100, 100, 0.5)";
+				if(curAttribute == "fire"){
+					name.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					name.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					name.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				name.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var level = new_row.insertCell(col);//LV
 				col++;
-				level.style.background = "rgba(200, 200, 200, 0.8)";
+				if(curAttribute == "fire"){
+					level.style.backgroundColor = "rgba(255, 165, 165, 0.9)";
+				}
+				if(curAttribute == "water"){
+					level.style.backgroundColor = "rgba(165, 165, 255, 0.9)";
+				}
+				if(curAttribute == "wood"){
+					level.style.backgroundColor = "rgba(151, 221, 159, 0.9)";
+				}
 				level.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var attack = new_row.insertCell(col);//ATT
 				col++;
-				attack.style.background = "rgba(100, 100, 100, 0.5)";
+				if(curAttribute == "fire"){
+					attack.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					attack.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					attack.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				attack.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var defence = new_row.insertCell(col);//DEF
 				col++;
-				defence.style.background = "rgba(200, 200, 200, 0.8)";
+				if(curAttribute == "fire"){
+					defence.style.backgroundColor = "rgba(255, 165, 165, 0.9)";
+				}
+				if(curAttribute == "water"){
+					defence.style.backgroundColor = "rgba(165, 165, 255, 0.9)";
+				}
+				if(curAttribute == "wood"){
+					defence.style.backgroundColor = "rgba(151, 221, 159, 0.9)";
+				}
 				defence.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var hp = new_row.insertCell(col);//HP
-				hp.style.background = "rgba(100, 100, 100, 0.5)";
+				if(curAttribute == "fire"){
+					hp.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					hp.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					hp.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				hp.innerHTML = currentCard[cur_col];//--col
 			}
 			/*switch(num){
@@ -671,14 +702,14 @@
 		var currentCard = new Array(7);//Each data stored by split(",");--col
 		var cur_col;
 		//var picHTML = "<img src = 'picture/SR/SR";
-		//var picHTML = "<img src = 'http://localhost:8080/Works1/picture/SR/SR";
+		//var picHTML = "<img src = 'http://localhost:8080/CompassInfo/picture/SR/SR";
 		var picHTML = "<img src = 'https://shishanx.github.io/compassx/picture/SR/SR";
 		for(var i = 1; i < row; i++){
 			table.deleteRow(-1);
 		}
 		var jump = new XMLHttpRequest();//連接伺服器的物件
-		//jump.open("get", "http://127.0.0.1/picture/SR/SR_DATA.txt");
-		//jump.open("get", "http://localhost:8080/Works1/picture/SR/SR_DATA.txt");
+		//jump.open("get", "https://127.0.0.1/picture/SR/SR_DATA.txt");
+		//jump.open("get", "http://localhost:8080/CompassInfo/picture/SR/SR_DATA.txt");
 		jump.open("get", "https://shishanx.github.io/compassx/picture/SR/SR_DATA.txt");
 		jump.onload = function(){
 			CARD_DATA = this.responseText;
@@ -714,52 +745,87 @@
 				cur_col++;
 				
 				var curAttribute = currentCard[cur_col];
-				new_row.insertCell(col).innerHTML = picHTML + "_" + curAttribute + "_" + NO + ".jpg'/>";//Picture
+				var pic = new_row.insertCell(col);
+				pic.innerHTML = picHTML + "_" + curAttribute + "_" + NO + ".jpg'/>";//Picture
+				if(curAttribute == "fire"){
+					pic.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					pic.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					pic.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				col++;
 				count++;
 				
-				var att = new_row.insertCell(col);//ATTRIBUTE
-				col++;
-				if(curAttribute == "fire"){
-					att.innerHTML = fName;
-					att.style.backgroundColor = "#ffcccc";
-				}
-				if(curAttribute == "water"){
-					att.innerHTML = wName;
-					att.style.backgroundColor = "#ccccff";
-				}
-				if(curAttribute == "wood"){
-					att.innerHTML = woName;
-					att.style.backgroundColor = "#ccffcc";
-				}
 				cur_col++;
-				
 				var name = new_row.insertCell(col);//NAME
 				col++;
-				name.style.background = "rgba(100, 100, 100, 0.5)";
+				if(curAttribute == "fire"){
+					name.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					name.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					name.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				name.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var level = new_row.insertCell(col);//LV
 				col++;
-				level.style.background = "rgba(200, 200, 200, 0.8)";
+				if(curAttribute == "fire"){
+					level.style.backgroundColor = "rgba(255, 165, 165, 0.9)";
+				}
+				if(curAttribute == "water"){
+					level.style.backgroundColor = "rgba(165, 165, 255, 0.9)";
+				}
+				if(curAttribute == "wood"){
+					level.style.backgroundColor = "rgba(151, 221, 159, 0.9)";
+				}
 				level.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var attack = new_row.insertCell(col);//ATT
 				col++;
-				attack.style.background = "rgba(100, 100, 100, 0.5)";
+				if(curAttribute == "fire"){
+					attack.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					attack.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					attack.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				attack.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var defence = new_row.insertCell(col);//DEF
 				col++;
-				defence.style.background = "rgba(200, 200, 200, 0.8)";
+				if(curAttribute == "fire"){
+					defence.style.backgroundColor = "rgba(255, 165, 165, 0.9)";
+				}
+				if(curAttribute == "water"){
+					defence.style.backgroundColor = "rgba(165, 165, 255, 0.9)";
+				}
+				if(curAttribute == "wood"){
+					defence.style.backgroundColor = "rgba(151, 221, 159, 0.9)";
+				}
 				defence.innerHTML = currentCard[cur_col];
 				cur_col++;
 				
 				var hp = new_row.insertCell(col);//HP
-				hp.style.background = "rgba(100, 100, 100, 0.5)";
+				if(curAttribute == "fire"){
+					hp.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+				}
+				if(curAttribute == "water"){
+					hp.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+				}
+				if(curAttribute == "wood"){
+					hp.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+				}
 				hp.innerHTML = currentCard[cur_col];//--col
 			}
 		};
