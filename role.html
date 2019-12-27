@@ -31,7 +31,6 @@
 		flex-wrap: wrap;
 		justify-content:center;
 		align-items:center;
-		margin-left: 10px;
 		background: rgba(255, 255, 255, 0.5);
 		position: absolute;
 	}
@@ -57,8 +56,6 @@
 		width: 95vw;
 		height: 80vh;
 		display: none;
-		justify-content: center;
-		align-items: center;
 		margin-left: 10px;
 		position: absolute;
 	}
@@ -97,6 +94,25 @@
 		color: blue;
 		cursor: pointer;
 	}
+	@media screen and (min-width:1400px){
+		#roleALL{
+			width: 1300px;
+		}
+	}
+	@media screen and (max-width:1000px){
+		#img1{
+			width: 80%;
+			margin-left: 10%;
+		}
+		#img2{
+			width: 80%;
+			margin-left: 11%;
+		}
+		#img3{
+			width: 85%;
+			margin-left: 7%;
+		}
+	}
 </style>
 <script type = "text/javascript">
 	function nextdiv(num){
@@ -131,7 +147,7 @@
 		}
 		else{
 			//document.location = "http://127.0.0.1/" + page + ".html";
-			//document.location = "http://localhost:8080/Works1/" + page + ".html";
+			//document.location = "http://localhost:8080/CompassInfo/" + page + ".html";
 			document.location = "https://shishanx.github.io/compassx/" + page + ".html";
 		}
 	}
@@ -140,6 +156,7 @@
 		var before = document.getElementById("img"+Number(picNum-1))
 		var now = document.getElementById("img"+picNum);
 		var next = document.getElementById("img"+Number(picNum+1));
+		var wind = document.getElementById("roleDETAIL")
 		var w = window.screen.width;
 		//-----Clear last change---from
 		now.style.removeProperty("visibility");
