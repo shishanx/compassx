@@ -17,7 +17,7 @@
 		background-attachment: fixed;
 		background-position: center;
 		background-size: 100%, 100%;
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 	.introvideo{
 		text-align: center;
@@ -161,7 +161,7 @@
 			font-size: 45px;
 		}
 		#welcome img{
-			width: 85%;
+			width: 95%;
 		}
 		#icon{
 			width: 50%;
@@ -233,13 +233,13 @@
 			wel.style.animationName = "topappear";
 			wel.style.animationDuration = "6.5s";
 			wel.style.animationTimingFunction = "ease";
-		}, 5800);
+		}, 5600);
 		setTimeout(function(){
 			wel.innerHTML = "<img src = 'picture/character/green.gif'>";
 			wel.style.animationName = "rightappear";
 			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "ease";
-		}, 10000);
+		}, 9800);
 		setTimeout(function(){
 			if(window.screen.height < 800){
 				wel.innerHTML = "<img src = 'bigicon.png' style = 'width: 30%;'>";
@@ -251,14 +251,14 @@
 			wel.style.animationName = "bigger";
 			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "linear";
-		}, 15200);
+		}, 15000);
 		setTimeout(function(){
 			video.style.display = "inline";
 			wel.style.display = "none";
 			if(clickcount == 0){
 				iconclick.style.visibility = "visible";
 			}
-		}, 21000);
+		}, 20800);
 	}
 	function icon(){
 		clickcount++;
