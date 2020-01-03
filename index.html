@@ -17,13 +17,10 @@
 		background-attachment: fixed;
 		background-position: center;
 		background-size: 100%, 100%;
-		overflow-x: hidden;
+		overflow: hidden;
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		unselectable: on;
-	}
-	body::-webkit-scrollbar {
-		display: none;
 	}
 	.introvideo{
 		text-align: center;
@@ -97,7 +94,7 @@
 	        opacity: 1;
 	    }
 	    100%{
-	    	margin-left: 2000px;
+	    	margin-left: 4000px;
 	    	opacity: 1;
 	    }
 	}
@@ -156,7 +153,10 @@
 	  		opacity: 0;
 		}
 	}
-	@media screen and (max-width:500px){
+	@media screen and (max-width:550px){
+		.title{
+			margin-left: -10%;
+		}
 		.title div{
 			font-size: 45px;
 			height: 0px;
@@ -211,6 +211,14 @@
 	role.style.height = h + "px";
 	videoW = $("iframe").width();
 	$("iframe").css("height", videoW*56/100);
+	var gif1 = new Image();
+	var gif2 = new Image();
+	var gif3 = new Image();
+	var bigicon = new Image();
+	gif1.src = "picture/character/didi.gif";
+	gif2.src = "picture/character/rabbit.gif";
+	gif3.src = "picture/character/green.gif";
+	bigicon.src = "bigicon.png";
 	function changeTo(page){
 		if(page == "index"){
 			window.location.reload();
@@ -229,29 +237,35 @@
 		wel.style.transition = "opacity 0.5s ease-in 1s";
 		setTimeout(function(){
 			wel.style.marginTop = 0;
-			wel.innerHTML = "<img src = 'picture/character/didi.gif'>";
+			wel.innerHTML = "";
+			wel.append(gif1);
 			wel.style.animationName = "leftappear";
 			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "ease";
 		}, 2000);
 		setTimeout(function(){
-			wel.innerHTML = "<img src = 'picture/character/rabbit.gif'>";
+			wel.innerHTML = "";
+			wel.append(gif2);
 			wel.style.animationName = "topappear";
 			wel.style.animationDuration = "6.5s";
 			wel.style.animationTimingFunction = "ease";
 		}, 5600);
 		setTimeout(function(){
-			wel.innerHTML = "<img src = 'picture/character/green.gif'>";
+			wel.innerHTML = "";
+			wel.append(gif3);
 			wel.style.animationName = "rightappear";
 			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "ease";
 		}, 9800);
 		setTimeout(function(){
 			if(window.screen.height < 800){
-				wel.innerHTML = "<img src = 'bigicon.png' style = 'width: 30%;'>";
+				wel.innerHTML = "";
+				bigicon.style.width = "30%";
+				wel.append(bigicon);
 			}
 			else{
-				wel.innerHTML = "<img src = 'bigicon.png'>";
+				wel.innerHTML = "";
+				wel.append(bigicon);
 				$("#welcome").css("margin-top", "-20%");
 			}
 			wel.style.animationName = "bigger";
