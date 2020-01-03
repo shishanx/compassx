@@ -96,7 +96,7 @@
 	}
 	@keyframes leftappear{
 	    0%{
-	        margin-left: -2000px;
+	        margin-left: -200%;
 	        opacity: 0;
 	    }
 	    50%{
@@ -105,13 +105,13 @@
 	        opacity: 1;
 	    }
 	    100%{
-	    	margin-left: 4000px;
+	    	margin-left: 400%;
 	    	opacity: 1;
 	    }
 	}
 	@keyframes topappear{
 	    0%{
-	        margin-top: -2000px;
+	        margin-top: -100%;
 	        opacity: 0;
 	    }
 	    50%{
@@ -120,13 +120,13 @@
 	        opacity: 1;
 	    }
 	    100%{
-	    	margin-top: 4000px;
+	    	margin-top: 700%;
 	    	opacity: 1;
 	    }
 	}
 	@keyframes rightappear{
 	    0%{
-	        margin-left: 3000px;
+	        margin-left: 200%;
 	        opacity: 1;
 	    }
 	    50%{
@@ -135,7 +135,7 @@
 	        opacity: 1;
 	    }
 	    100%{
-	    	margin-left: -13000px;
+	    	margin-left: -1000%;
 	    	opacity: 1;
 	    }
 	}
@@ -270,16 +270,16 @@
 			wel.innerHTML = "";
 			wel.append(gif2);
 			wel.style.animationName = "topappear";
-			wel.style.animationDuration = "6.5s";
+			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "ease";
 		}, 5200);
 		setTimeout(function(){
 			wel.innerHTML = "";
 			wel.append(gif3);
 			wel.style.animationName = "rightappear";
-			wel.style.animationDuration = "6s";
+			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "ease";
-		}, 9400);
+		}, 8300);
 		setTimeout(function(){
 			if(window.screen.width > 550){
 				wel.innerHTML = "";
@@ -294,14 +294,14 @@
 			wel.style.animationName = "bigger";
 			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "linear";
-		}, 13700);
+		}, 12200);
 		setTimeout(function(){
 			video.style.display = "inline";
 			wel.style.display = "none";
 			if(clickcount == 0){
 				iconclick.style.visibility = "visible";
 			}
-		}, 17700);
+		}, 15400);
 	}
 	function icon(){
 		clickcount++;
