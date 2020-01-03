@@ -272,37 +272,36 @@
 			wel.style.animationName = "topappear";
 			wel.style.animationDuration = "6.5s";
 			wel.style.animationTimingFunction = "ease";
-		}, 5500);
+		}, 5200);
 		setTimeout(function(){
 			wel.innerHTML = "";
 			wel.append(gif3);
 			wel.style.animationName = "rightappear";
 			wel.style.animationDuration = "6s";
 			wel.style.animationTimingFunction = "ease";
-		}, 9700);
+		}, 9400);
 		setTimeout(function(){
-			if(window.screen.height < 800){
+			if(window.screen.height < 770){
 				wel.innerHTML = "";
 				bigicon.style.width = "30%";
 				wel.append(bigicon);
 			}
 			else{
 				wel.innerHTML = "";
-				bigicon.style.width = "100%";
 				wel.append(bigicon);
 				$("#welcome").css("margin-top", "-20%");
 			}
 			wel.style.animationName = "bigger";
 			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "linear";
-		}, 14000);
+		}, 13700);
 		setTimeout(function(){
 			video.style.display = "inline";
 			wel.style.display = "none";
 			if(clickcount == 0){
 				iconclick.style.visibility = "visible";
 			}
-		}, 18000);
+		}, 17700);
 	}
 	function icon(){
 		clickcount++;
