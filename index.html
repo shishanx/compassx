@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Home</title>
 <meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1"/>
-<link href="https://fonts.googleapis.com/css?family=Audiowide|Shadows+Into+Light&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Cute+Font|Audiowide&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -18,6 +18,12 @@
 		background-position: center;
 		background-size: 100%, 100%;
 		overflow-x: hidden;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		unselectable: on;
+	}
+	body::-webkit-scrollbar {
+		display: none;
 	}
 	.introvideo{
 		text-align: center;
@@ -66,8 +72,8 @@
 		background-position: center;
 		background-size: 40px 40px;*/
 		margin-right: 5%;
-		font-size: 50px;
-		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		font-size: 75px;
+		font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 		font-weight: bold;
 	}
 	.title div:hover{
@@ -152,7 +158,7 @@
 	}
 	@media screen and (max-width:500px){
 		.title div{
-			font-size: 25px;
+			font-size: 45px;
 			height: 0px;
 			padding-top: 0%;
 			margin-right: 10%;
@@ -161,7 +167,7 @@
 			font-size: 45px;
 		}
 		#welcome img{
-			width: 95%;
+			width: 100%;
 		}
 		#icon{
 			width: 50%;
@@ -246,7 +252,7 @@
 			}
 			else{
 				wel.innerHTML = "<img src = 'bigicon.png'>";
-				$("#welcome").css("margin-top", "-13%");
+				$("#welcome").css("margin-top", "-20%");
 			}
 			wel.style.animationName = "bigger";
 			wel.style.animationDuration = "5.5s";
