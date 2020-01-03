@@ -265,7 +265,7 @@
 			}
 			else{
 				wel.innerHTML = "";
-				bigicon.style.width = "80%";
+				bigicon.style.width = "100%";
 				wel.append(bigicon);
 				$("#welcome").css("margin-top", "-20%");
 			}
@@ -276,6 +276,7 @@
 		setTimeout(function(){
 			video.style.display = "inline";
 			wel.style.display = "none";
+			$("body").css("overflow-y", "auto");
 			if(clickcount == 0){
 				iconclick.style.visibility = "visible";
 			}
