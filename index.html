@@ -59,8 +59,6 @@
 	}
 	nav{
 		display: flex;
-		align-items: center;
-		padding-bottom: 0.2%;
 	}
 	#icon{
 		width: 70%;
@@ -96,6 +94,15 @@
 	}
 	#cards{
 		text-align: center;
+	}
+	#skip{
+		text-align: right;
+		font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		font-size: 30px;
+	}
+	#skip:hover{
+		cursor: pointer;
+		color: red;
 	}
 	@keyframes leftappear{
 	    0%{
@@ -179,7 +186,6 @@
 		}
 		.title div{
 			font-size: 45px;
-			height: 0px;
 			padding-top: 0%;
 			margin-right: 10%;
 		}
@@ -210,7 +216,7 @@
 			<div style = "font-size: 50px;">Loading...</div>
 			<div style = "width: 100%;"><img class = "spinner-border text-light" src = "compass mark.png"></div>
 		</div>
-		<nav style = "margin-bottom: 10px;">
+		<nav>
 			<div class = "iconbox" style = "display: inline-block;">
 				<img id = "icon" src = "compass mark.png" onclick = "icon();" alt="">
 				<div id = "iconclick">&larr;click</div>
@@ -220,6 +226,7 @@
 				<div onclick = "changeTo('cards');" id = "cards">CARDS</div>
 			</div>
 		</nav>
+		<div id = "skip"><span onclick = "skip();">skip</span></div>
 		<div class = "introvideo">
 			<iframe src="https://www.youtube.com/embed/MrCWk_ihfiQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			<div id = "welcome" >Welcome To #COMPASS</div>
@@ -233,6 +240,7 @@
 		window.open('','_self');
 		window.close();
 	}
+	$("nav").css("height", $(".title div").height());
 	var h = role.style.backgroundSize;
 	role.style.height = h + "px";
 	videoW = $("iframe").width();
@@ -303,6 +311,7 @@
 		setTimeout(function(){
 			video.style.display = "inline";
 			wel.style.display = "none";
+			$("#skip").css("display", "none");
 			if(clickcount == 0){
 				iconclick.style.visibility = "visible";
 			}
@@ -316,7 +325,7 @@
 		}
 		if(clickcount % 2 != 0){
 			$("#icon").css("animation", "initial");
-			title.css("margin-top", "0px");
+			title.css("margin-top", "0%");
 			title.css("transition", "margin-top 0.8s ease");
 		}
 		else{
@@ -324,6 +333,12 @@
 			title.css("margin-top", "-1000px");
 			title.css("transition", "margin-top 1s ease");
 		}
+	}
+	function skip(){
+		$("#skip").css("display", "none");
+		$("#welcome").css("display", "none");
+		$(".introvideo iframe").css("display", "inline");
+		$("#iconclick").css("visibility", "hidden");
 	}
 </script>
 </html>
