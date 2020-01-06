@@ -20,6 +20,10 @@
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		unselectable: on;
+		overflow: hidden;
+	}
+	body>div::-webkit-scrollbar{
+		display: none;
 	}
 	.loading{
 		padding-top: 10%;
@@ -254,6 +258,7 @@
 	var clickcount = 0;
 	function show(){
 		$(".loading").css("display", "none");
+		$("body>div").css("overflow", "");
 		var wel = document.getElementById("welcome");
 		var video = document.getElementsByTagName("iframe")[0];
 		wel.style.opacity = 0;
