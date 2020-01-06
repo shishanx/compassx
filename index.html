@@ -21,6 +21,9 @@
 		-moz-user-select: none;
 		unselectable: on;
 	}
+	body::-webkit-scrollbar {
+		display: none;
+	}
 	.loading{
 		padding-top: 10%;
 		width: 100%;
@@ -49,6 +52,8 @@
 		color: black;
 		text-align: center;
 		margin-top: 13%;
+		position: absolute;
+		width: 100%;
 	}
 	#welcome img{
 		width: 70%;
@@ -95,17 +100,16 @@
 	}
 	@keyframes leftappear{
 	    0%{
-	        margin-left: -200%;
 	        opacity: 0;
 	    }
 	    50%{
-	        margin-left: 0%;
+	    	width: 100%;
 	        background-color: rgba(0, 0, 0, 1);
 	        opacity: 1;
 	    }
 	    100%{
-	    	margin-left: 400%;
-	    	opacity: 1;
+	    	width: 0%;
+	    	opacity: 0;
 	    }
 	}
 	@keyframes topappear{
@@ -120,22 +124,22 @@
 	    }
 	    100%{
 	    	margin-top: 1000%;
-	    	opacity: 1;
+	    	opacity: 0;
 	    }
 	}
-	@keyframes rightappear{
+	@keyframes growappear{
 	    0%{
-	        margin-left: 200%;
+	        transform: scale(0.1);
 	        opacity: 1;
 	    }
 	    50%{
-	        margin-left: 0%;
-	        background-color: rgba(0, 0, 0, 1);
+	        transform: scale(1);
+	        background-color: black;
 	        opacity: 1;
 	    }
 	    100%{
-	    	margin-left: -1000%;
-	    	opacity: 1;
+	    	transform: scale(5);
+	    	opacity: 0;
 	    }
 	}
 	@keyframes bigger{
@@ -262,7 +266,7 @@
 			wel.innerHTML = "";
 			wel.append(gif1);
 			wel.style.animationName = "leftappear";
-			wel.style.animationDuration = "5.5s";
+			wel.style.animationDuration = "5s";
 			wel.style.animationTimingFunction = "ease";
 		}, 2000);
 		setTimeout(function(){
@@ -275,7 +279,7 @@
 		setTimeout(function(){
 			wel.innerHTML = "";
 			wel.append(gif3);
-			wel.style.animationName = "rightappear";
+			wel.style.animationName = "growappear";
 			wel.style.animationDuration = "5.5s";
 			wel.style.animationTimingFunction = "ease";
 		}, 8300);
