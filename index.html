@@ -73,7 +73,8 @@
 	}
 	.title{
 		width: 90%;
-		margin-top: -2000px;
+		margin-top: -20%;
+		visibility: hidden;
 	}
 	.title div{
 		display: inline-block;
@@ -320,6 +321,7 @@
 	function icon(){
 		clickcount++;
 		var title = $(".title");
+		title.css("visibility", "visible");
 		if(clickcount > 0){
 			$("#iconclick").css("visibility", "hidden");
 		}
@@ -330,7 +332,7 @@
 		}
 		else{
 			$("#icon").css("animation", "grow 0.65s linear infinite");
-			title.css("margin-top", "-1000px");
+			title.css("margin-top", "-20%");
 			title.css("transition", "margin-top 1s ease");
 		}
 	}
