@@ -16,7 +16,7 @@
 		background-attachment: fixed;
 		background-position: center;
 		background-size: 100%, 100%;
-		overflow: hidden;
+		/*overflow: hidden;*/
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		unselectable: on;
@@ -52,8 +52,6 @@
 		color: black;
 		text-align: center;
 		margin-top: 13%;
-		position: absolute;
-		width: 100%;
 	}
 	#welcome img{
 		width: 70%;
@@ -301,7 +299,6 @@
 		setTimeout(function(){
 			video.style.display = "inline";
 			wel.style.display = "none";
-			$("body").css("overflow", "auto");
 			if(clickcount == 0){
 				iconclick.style.visibility = "visible";
 			}
