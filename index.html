@@ -60,17 +60,6 @@
 	nav{
 		display: flex;
 	}
-	#icon{
-		width: 70%;
-		animation: grow 0.65s linear infinite;
-	}
-	#iconclick{
-		visibility: hidden;
-		display: inline-block;
-	}
-	#icon:hover{
-		cursor: pointer;
-	}
 	.title{
 		width: 90%;
 		margin-top: -20%;
@@ -86,8 +75,19 @@
 		font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 		font-weight: bold;
 	}
-	.title div:hover{
+	.title span:hover{
 		color: red;
+		cursor: pointer;
+	}
+	#icon{
+		width: 70%;
+		animation: grow 0.65s linear infinite;
+	}
+	#iconclick{
+		visibility: hidden;
+		display: inline-block;
+	}
+	#icon:hover{
 		cursor: pointer;
 	}
 	#role{
@@ -225,8 +225,8 @@
 				<div id = "iconclick">&larr;click</div>
 			</div>
 			<div class = "title">
-				<div onclick = "changeTo('role');" id = "role">HERO</div>
-				<div onclick = "changeTo('cards');" id = "cards">CARDS</div>
+				<div id = "role"><span onclick = "changeTo('role');">HERO</span></div>
+				<div id = "cards"><span onclick = "changeTo('cards');">CARDS</span></div>
 			</div>
 		</nav>
 		<div id = "skip"><span onclick = "skip();">skip</span></div>
