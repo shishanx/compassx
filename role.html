@@ -355,25 +355,11 @@
 	var title = $(".title");
 	var side = $("#category");
 	function nextdiv(num){
-		clickcount = 0;
+		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
 		var back = document.getElementById("backTOall");
 		$("html,body").animate({scrollTop:0}, 333);
-		if(clickcount % 2 != 0){
-			$("#icon").css("animation", "initial");
-			title.css("margin-top", "0%");
-			title.css("transition", "margin-top 0.8s ease");
-			side.css("margin-left", "0%");
-			side.css("transition", "margin-left 0.8s ease");
-		}
-		else{
-			$("#icon").css("animation", "grow 0.65s linear infinite");
-			title.css("margin-top", "-20%");
-			title.css("transition", "margin-top 1s ease");
-			side.css("margin-left", "-18%");
-			side.css("transition", "margin-left 1s ease");
-		}
 		
 		back.style.visibility = "visible";
 		all.style.opacity = 0;
@@ -384,7 +370,9 @@
 		img2.src = "picture/character/" + num + "_s.png";
 		img3.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
 	}
+	
 	function lastdiv(){
+		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
 		var back = document.getElementById("backTOall");
@@ -396,12 +384,10 @@
 		all.style.transition = "opacity 0.5s ease-in";
 		detail.style.display = "none";
 	}
+	
 	function icon(){
 		clickcount++;
 		title.css("visibility", "visible");
-		if(clickcount > 0){
-			$("#iconclick").css("visibility", "hidden");
-		}
 		if(clickcount % 2 != 0){
 			$("#icon").css("animation", "initial");
 			title.css("margin-top", "0%");
@@ -417,8 +403,9 @@
 			side.css("transition", "margin-left 1s ease");
 		}
 	}
+	
 	function herotype(type){
-		clickcount++;
+		toolBack();
 		var hero_num = 26;
 		var hero;
 		for(var i = 1; i <= hero_num; i++){
@@ -433,21 +420,8 @@
 				}
 			}
 		}
-		if(clickcount % 2 != 0){
-			$("#icon").css("animation", "initial");
-			title.css("margin-top", "0%");
-			title.css("transition", "margin-top 0.8s ease");
-			side.css("margin-left", "0%");
-			side.css("transition", "margin-left 0.8s ease");
-		}
-		else{
-			$("#icon").css("animation", "grow 0.65s linear infinite");
-			title.css("margin-top", "-20%");
-			title.css("transition", "margin-top 1s ease");
-			side.css("margin-left", "-18%");
-			side.css("transition", "margin-left 1s ease");
-		}
 	}
+	
 	function changeTo(page){
 		if(page == "role"){
 			window.location.reload();
@@ -458,8 +432,10 @@
 			document.location = "https://shishanx.github.io/compassx/" + page + ".html";
 		}
 	}
+	
 	const numOFpic = 3;
 	function slide(picNum){
+		toolBack();
 		var before = document.getElementById("img"+Number(picNum-1))
 		var now = document.getElementById("img"+picNum);
 		var next = document.getElementById("img"+Number(picNum+1));
@@ -501,6 +477,24 @@
 		else{
 			before = document.getElementById("img"+numOFpic);
 			before.style.paddingLeft = "0px";
+		}
+	}
+	
+	function toolBack(){
+		clickcount = 0;
+		if(clickcount % 2 != 0){
+			$("#icon").css("animation", "initial");
+			title.css("margin-top", "0%");
+			title.css("transition", "margin-top 0.8s ease");
+			side.css("margin-left", "0%");
+			side.css("transition", "margin-left 0.8s ease");
+		}
+		else{
+			$("#icon").css("animation", "grow 0.65s linear infinite");
+			title.css("margin-top", "-20%");
+			title.css("transition", "margin-top 1s ease");
+			side.css("margin-left", "-18%");
+			side.css("transition", "margin-left 1s ease");
 		}
 	}
 </script>
