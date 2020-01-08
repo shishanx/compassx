@@ -406,6 +406,8 @@
 	
 	function herotype(type){
 		toolBack();
+		if($("#backTOall").css("visibility") == "visible")
+			lastdiv();
 		var hero_num = 26;
 		var hero;
 		for(var i = 1; i <= hero_num; i++){
