@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Character</title>
 <meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1"/>
-<link href="https://fonts.googleapis.com/css?family=Cute+Font|Audiowide&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Play|Exo|Cute+Font|Audiowide&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -109,22 +109,74 @@
 	#roleintro{
 		position: relative;
 	}
-	#roleintro img{
+	#roleintro>img{
 		position: absolute;
 	}
+	#HERONAME{
+		font-size: 38px;
+		font-family: 'Microsoft YaHei';
+		font-weight: bold;
+		margin-bottom: 1%;
+	}
+	.FIGURE{
+		font-size: 25px;
+		font-family: 'Microsoft YaHei';
+		display: inline-block;
+	}
+	/*add*/
 	#img1{
-		width: 50%;
-		margin-left: 28%;
-		visibility: visibility;
+		width: 65%;
+		margin-left: 16%;
+		height: 80vh;
+		background: white;
+		position: absolute;
+		visibility: visible;
 		opacity: 1;
+		display: flex;
+	}
+	#figurebox{
+		width: 71.5%;
+		padding: 3.5%;
+	}
+	.progressbar{
+		display: inline-flex;
+		align-items: center;
+		width: 90%;
+		font-size: 20px;
+		font-family: "Play", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		color: white;
+		background-color: #555555;
+		border: 3px solid #777777;
+	}
+	.progressinner{
+		width: 0;
+		height: 21px;
+		text-align: right;
+		background-color: salmon;
+	}
+	.progressinner2{
+		height: 21px;
+		text-align: right;
+		background-color: rgba(0, 0, 0, 0);
+		position: absolute;
+		padding-bottom: 3.75%;
+	}
+	#salonbox{
+		width: 28.5%;
 	}
 	#img2{
+		width: 50%;
+		margin-left: 28%;
+		visibility: hidden;
+		opacity: 0;
+	}
+	#img3{
 		width: 26%;
 		margin-left: 40%;
 		visibility: hidden;
 		opacity: 0;
 	}
-	#img3{
+	#img4{
 		width: 24%;
 		margin-left: 40%;
 		visibility: hidden;
@@ -182,15 +234,50 @@
 			position: absolue;
 			height: 100px;
 		}
+		/*add*/
 		#img1{
-			width: 80%;
-			margin-left: 10%;
+			width: 100vw;
+			margin-left: -2.5%;
+			display: inline;
+		}
+		#figurebox{
+			width: 100%;
+		}
+		#HERONAME{
+			font-size: 24px;
+		}
+		.FIGURE{
+			font-size: 18px;
+		}
+		#salonbox{
+			width: 100%;
+		}
+		#herosalon{
+			width: 99.5vw;
+		}
+		#typeicon{
+			width: 11%;
+		}
+		.progressbar{
+			width: 84.5%;
+			font-size: 18px;
+		}
+		.progressinner{
+			height: 18px;
+		}
+		.progressinner2{
+			height: 18px;
+			padding-bottom: 7.5%;
 		}
 		#img2{
 			width: 80%;
-			margin-left: 11%;
+			margin-left: 10%;
 		}
 		#img3{
+			width: 80%;
+			margin-left: 11%;
+		}
+		#img4{
 			width: 85%;
 			margin-left: 7%;
 		}
@@ -336,9 +423,32 @@
 		</div>
 		<div id = "roleDETAIL">
 			<div id = "roleintro">
-				<img onclick = "slide(1);" id = "img1">
+				<div onclick = "slide(1);" id = "img1">
+					<div id = "figurebox">
+						<div id = "HERONAME"><img id = "typeicon"> </div>
+						<div class = "FIGURE">攻擊</div>
+						<div class = "progressbar">
+							<div class = "progressinner" id = "attack"></div>
+							<div class = "progressinner2" id = "attack2"></div>
+						</div>
+						<div></div>
+						<div class = "FIGURE">防禦</div>
+						<div class = "progressbar">
+							<div class = "progressinner" id = "defence"></div>
+							<div class = "progressinner2" id = "defence2"></div>
+						</div>
+						<div></div>
+						<div class = "FIGURE">體力</div>
+						<div class = "progressbar">
+							<div class = "progressinner" id = "hp"></div>
+							<div class = "progressinner2" id = "hp2"></div>
+						</div>
+					</div>
+					<div id = "salonbox"><img id = "herosalon" style = "height: 100%;"></div>
+				</div>
 				<img onclick = "slide(2);" id = "img2">
 				<img onclick = "slide(3);" id = "img3">
+				<img onclick = "slide(4);" id = "img4">
 			</div>
 		</div>
 	</div>
@@ -350,7 +460,16 @@
 		h = $("#roleALL").height() + 10;
 	}
 	$("#category").css("height", h-10);
-	
+
+	var hero_num = 26;
+	var hero = new Array(hero_num);
+	var getHero = new XMLHttpRequest();
+	getHero.open("get", "https://shishanx.github.io/compassx/picture/character/figure.txt");
+	getHero.onload = function(){
+		var data = this.responseText;
+		hero = data.split("\n");
+	};
+	getHero.send();
 	var clickcount = 0;
 	var title = $(".title");
 	var side = $("#category");
@@ -366,9 +485,34 @@
 		all.style.transition = "opacity 0.5s ease-in";
 		detail.style.display = "inline";
 		
-		img1.src = "picture/character/" + num + "_d.png";
-		img2.src = "picture/character/" + num + "_s.png";
-		img3.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
+		var herodetail = hero[num-1].split(",");
+		var t = herodetail[1];
+		var n = herodetail[2];
+		var a = herodetail[3];
+		var d = herodetail[4];
+		var h = herodetail[5];
+		typeicon.src = "picture/character/" + t + "icon.png";
+		HERONAME.innerHTML = HERONAME.innerHTML + n;
+		var per = a*100/1.5;
+		$("#attack").css("width", per+"%");
+		$("#attack").css("transition", "width 2s ease");
+		$("#attack2").css("width", $(".progressbar").width());
+		attack2.innerHTML = "&times;" + a;
+		per = d*100/1.5;
+		$("#defence").css("width", per+"%");
+		$("#defence").css("transition", "width 2s ease");
+		$("#defence2").css("width", $(".progressbar").width());
+		defence2.innerHTML = "&times;" + d;
+		per = h*100/1.5;
+		$("#hp").css("width", per+"%");
+		$("#hp").css("transition", "width 2s ease");
+		$("#hp2").css("width", $(".progressbar").width());
+		hp2.innerHTML = "&times;" + h;
+		herosalon.src = "picture/character/" + num + "_s.png"
+		//add
+		img2.src = "picture/character/" + num + "_d.png";
+		img3.src = "picture/character/" + num + "_s.png";
+		img4.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
 	}
 	
 	function lastdiv(){
@@ -383,6 +527,16 @@
 		all.style.opacity = 1;
 		all.style.transition = "opacity 0.5s ease-in";
 		detail.style.display = "none";
+		$("#attack").css("width", "");
+		$("#attack2").css("width", "");
+		$("#defence").css("width", "");
+		$("#defence2").css("width", "");
+		$("#hp").css("width", "");
+		$("#hp2").css("width", "");
+		attack2.innerHTML = "";
+		defence2.innerHTML = "";
+		hp2.innerHTML = "";
+		HERONAME.innerHTML = "<img id = 'typeicon'> ";
 	}
 	
 	function icon(){
@@ -431,11 +585,12 @@
 		else{
 			//document.location = "http://127.0.0.1/" + page + ".html";
 			//document.location = "http://localhost:8080/CompassInfo/" + page + ".html";
+			//window.open("https://shishanx.github.io/compassx/" + page + ".html");
 			document.location = "https://shishanx.github.io/compassx/" + page + ".html";
 		}
 	}
 	
-	const numOFpic = 3;
+	const numOFpic = 4;//add
 	function slide(picNum){
 		toolBack();
 		var before = document.getElementById("img"+Number(picNum-1))
@@ -445,16 +600,16 @@
 		var w = window.screen.width;
 		//-----Clear last change---from
 		now.style.removeProperty("visibility");
-		now.style.removeProperty("padding-left");
+		now.style.removeProperty("padding-right");
 		now.style.removeProperty("opacity");
 		now.style.removeProperty("transition-property");
 		now.style.removeProperty("transition-duration");
 		now.style.removeProperty("transition-timing-function");
 		//---------------------------end
 		
-		now.style.paddingLeft = w/4 + "px";
+		now.style.paddingRight = w/4 + "px";
 		now.style.opacity = 0;
-		now.style.transitionProperty = "opacity padding-left";
+		now.style.transitionProperty = "opacity padding-right";
 		now.style.transitionDuration = "0.5s";
 		now.style.transitionTimingFunction = "ease-in";
 		now.style.visibility = "hidden";
@@ -474,11 +629,11 @@
 		}
 		
 		if(before != null){
-			before.style.paddingLeft = "0px";
+			before.style.paddingRight = "0px";
 		}
 		else{
 			before = document.getElementById("img"+numOFpic);
-			before.style.paddingLeft = "0px";
+			before.style.paddingRight = "0px";
 		}
 	}
 	
