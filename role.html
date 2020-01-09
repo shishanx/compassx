@@ -62,7 +62,7 @@
 		justify-content: center;
 		background: rgba(255, 255, 255, 0.5);
 		z-index: 1;
-		margin-left: -18%;
+		margin-left: -20%;
 	}
 	#category img{
 		margin-bottom: 45%;
@@ -454,13 +454,16 @@
 	</div>
 </body>
 <script type = "text/javascript">
-	$("#category").css("width", $("#icon").width());
-	var h = document.documentElement.clientHeight-$("#icon").height();
-	if(h < $("#roleALL").height()){
-		h = $("#roleALL").height() + 10;
+	window.onresize = function(){
+		$("#category").css("width", $("#icon").width());
+		var h = document.documentElement.clientHeight-$("#icon").height();
+		if(h < $("#roleALL").height()){
+			h = $("#roleALL").height() + 10;
+		}
+		$("#category").css("height", h-10);
+		$(".progressinner2").css("width", $(".progressbar").width());
 	}
-	$("#category").css("height", h-10);
-
+	
 	var hero_num = 26;
 	var hero = new Array(hero_num);
 	var getHero = new XMLHttpRequest();
@@ -528,11 +531,8 @@
 		all.style.transition = "opacity 0.5s ease-in";
 		detail.style.display = "none";
 		$("#attack").css("width", "");
-		$("#attack2").css("width", "");
 		$("#defence").css("width", "");
-		$("#defence2").css("width", "");
 		$("#hp").css("width", "");
-		$("#hp2").css("width", "");
 		attack2.innerHTML = "";
 		defence2.innerHTML = "";
 		hp2.innerHTML = "";
