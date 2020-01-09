@@ -123,6 +123,15 @@
 		font-family: 'Microsoft YaHei';
 		display: inline-block;
 	}
+	#loadingpic{
+		padding-top: 10%;
+		width: 100%;
+		bakground-color: rgba(0,0,0,0);
+		text-align: center;
+	}
+	#loadingpic img{
+		animation: turn 0.65s linear infinite;
+	}
 	/*add*/
 	#img1{
 		width: 65%;
@@ -130,7 +139,7 @@
 		height: 80vh;
 		background: white;
 		position: absolute;
-		visibility: visible;
+		visibility: hidden;
 		opacity: 1;
 		display: flex;
 	}
@@ -207,6 +216,14 @@
 		100%{
 	  		transform: scale(1);
 	  		opacity: 0;
+		}
+	}
+	@keyframes turn{
+		0%{
+			transform: rotate(0deg);
+		}
+		100%{
+	  		transform: rotate(360deg);
 		}
 	}
 	@media screen and (max-width:550px){
@@ -423,6 +440,9 @@
 		</div>
 		<div id = "roleDETAIL">
 			<div id = "roleintro">
+				<div id = "loadingpic">
+					<div style = "width: 100%;"><img src = "compass mark.png"></div>
+				</div>
 				<div onclick = "slide(1);" id = "img1">
 					<div id = "figurebox">
 						<div id = "HERONAME"><img id = "typeicon"> </div>
@@ -474,6 +494,15 @@
 	var title = $(".title");
 	var side = $("#category");
 	function nextdiv(num){
+		$("body").css("overflow", "hidden");
+		herosalon.src = "picture/character/" + num + "_s.png"
+		//add
+		img2.src = "picture/character/" + num + "_d.png";
+		img3.src = "picture/character/" + num + "_s.png";
+		img4.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
+		$("#loadingpic").css("display", "none");
+		$("body").css("overflow", "auto");
+		img1.style.visibility = "visible";
 		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
@@ -508,11 +537,6 @@
 		$("#hp").css("transition", "width 2s ease");
 		$("#hp2").css("width", $(".progressbar").width());
 		hp2.innerHTML = "&times;" + h;
-		herosalon.src = "picture/character/" + num + "_s.png"
-		//add
-		img2.src = "picture/character/" + num + "_d.png";
-		img3.src = "picture/character/" + num + "_s.png";
-		img4.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
 	}
 	
 	function lastdiv(){
@@ -537,6 +561,7 @@
 		defence2.innerHTML = "";
 		hp2.innerHTML = "";
 		HERONAME.innerHTML = "<img id = 'typeicon'> ";
+		herosalon.src = "";
 	}
 	
 	function icon(){
