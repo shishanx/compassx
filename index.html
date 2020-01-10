@@ -40,7 +40,7 @@
 		text-align: center;
 	}
 	.introvideo iframe{
-		width: 900px;
+		width: 66%;
 		border-radius: 30px;
 		display: none;
 	}
@@ -246,7 +246,7 @@
 	$("nav").css("height", $(".title div").height());
 	var h = role.style.backgroundSize;
 	role.style.height = h + "px";
-	videoW = $("iframe").width();
+	var videoW = $("iframe").width();
 	$("iframe").css("height", videoW*480/853);
 	
 	var gif1 = new Image();
@@ -257,13 +257,13 @@
 	gif2.src = "picture/character/rabbit.gif";
 	gif3.src = "picture/character/green.gif";
 	bigicon.src = "bigicon.png";
-	window.onresize(function(){
+	window.onresize = function(){
 		$("nav").css("height", $(".title div").height());
 		var h = role.style.backgroundSize;
 		role.style.height = h + "px";
 		videoW = $("iframe").width();
 		$("iframe").css("height", videoW*480/853);
-	});
+	}
 	
 	function changeTo(page){
 		if(page == "index"){
