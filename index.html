@@ -243,6 +243,11 @@
 		window.open('','_self');
 		window.close();
 	}
+	$("nav").css("height", $(".title div").height());
+	var h = role.style.backgroundSize;
+	role.style.height = h + "px";
+	videoW = $("iframe").width();
+	$("iframe").css("height", videoW*480/853);
 	window.onresize(function(){
 		$("nav").css("height", $(".title div").height());
 		var h = role.style.backgroundSize;
