@@ -546,7 +546,26 @@
 		img2.innerHTML = "";
 		img3.innerHTML = "";
 		img4.innerHTML = "";
-		
+		salonbox.append(salonbox_img);
+		img2.append(detail_img);
+		img3.append(salon_img);
+		img4.append(model_img);
+		if(document.documentElement.clientHeight < document.documentElement.clientWidth){
+			$("#img2 img").css("height", "75vh");
+			$("#img2 img").css("width", "initial");
+			$("#img3 img").css("height", "75vh");
+			$("#img3 img").css("width", "initial");
+			$("#img4 img").css("height", "75vh");
+			$("#img4 img").css("width", "initial");
+		}
+		else{
+			$("#img2 img").css("height", "initial");
+			$("#img2 img").css("width", "100vw");
+			$("#img3 img").css("height", "initial");
+			$("#img3 img").css("width", "100vw");
+			$("#img4 img").css("height", "initial");
+			$("#img4 img").css("width", "100vw");
+		}
 		$(".loading").css("display", "none");
 		$("#img1").css("visibility", "visible");
 		
@@ -584,27 +603,6 @@
 		$("#hp").css("transition", "width 2s ease");
 		$("#hp2").css("width", $(".progressbar").width());
 		hp2.innerHTML = "&times;" + h;
-		//add
-		salonbox.append(salonbox_img);
-		img2.append(detail_img);
-		img3.append(salon_img);
-		img4.append(model_img);
-		if(document.documentElement.clientHeight < document.documentElement.clientWidth){
-			$("#img2 img").css("height", "75vh");
-			$("#img2 img").css("width", "initial");
-			$("#img3 img").css("height", "75vh");
-			$("#img3 img").css("width", "initial");
-			$("#img4 img").css("height", "75vh");
-			$("#img4 img").css("width", "initial");
-		}
-		else{
-			$("#img2 img").css("height", "initial");
-			$("#img2 img").css("width", "100vw");
-			$("#img3 img").css("height", "initial");
-			$("#img3 img").css("width", "100vw");
-			$("#img4 img").css("height", "initial");
-			$("#img4 img").css("width", "100vw");
-		}
 	}
 	
 	function lastdiv(){
