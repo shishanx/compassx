@@ -454,6 +454,13 @@
 	</div>
 </body>
 <script type = "text/javascript">
+	$("#category").css("width", $("#icon").width());
+	var h = document.documentElement.clientHeight-$("#icon").height();
+	if(h < $("#roleALL").height()){
+		h = $("#roleALL").height() + 10;
+	}
+	$("#category").css("height", h-10);
+	$(".progressinner2").css("width", $(".progressbar").width());
 	window.onresize = function(){
 		$("#category").css("width", $("#icon").width());
 		var h = document.documentElement.clientHeight-$("#icon").height();
