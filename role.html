@@ -566,15 +566,15 @@
 			$("#img4 img").css("height", "initial");
 			$("#img4 img").css("width", "100vw");
 		}
-		$(".loading").css("display", "none");
-		$("#img1").css("visibility", "visible");
 		
 		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
 		var back = document.getElementById("backTOall");
 		$("html,body").animate({scrollTop:0}, 333);
-		
+
+		$(".loading").css("display", "none");
+		$("#img1").css("visibility", "visible");
 		back.style.visibility = "visible";
 		all.style.opacity = 0;
 		all.style.transition = "opacity 0.5s ease-in";
