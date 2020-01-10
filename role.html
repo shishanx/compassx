@@ -533,6 +533,44 @@
 	var title = $(".title");
 	var side = $("#category");
 	function nextdiv(num){
+		preload(num);
+		toolBack();
+		var all = document.getElementById("roleALL");
+		var detail = document.getElementById("roleDETAIL");
+		var back = document.getElementById("backTOall");
+		$("html,body").animate({scrollTop:0}, 333);
+
+		back.style.visibility = "visible";
+		all.style.opacity = 0;
+		all.style.transition = "opacity 0.5s ease-in";
+		detail.style.display = "inline";
+		
+		var herodetail = hero[num-1].split(",");
+		var t = herodetail[1];
+		var n = herodetail[2];
+		var a = herodetail[3];
+		var d = herodetail[4];
+		var h = herodetail[5];
+		typeicon.src = "picture/character/" + t + "icon.png";
+		HERONAME.innerHTML = HERONAME.innerHTML + n;
+		var per = a*100/1.5;
+		$("#attack").css("width", per+"%");
+		$("#attack").css("transition", "width 2s ease");
+		$("#attack2").css("width", $(".progressbar").width());
+		attack2.innerHTML = "&times;" + a;
+		per = d*100/1.5;
+		$("#defence").css("width", per+"%");
+		$("#defence").css("transition", "width 2s ease");
+		$("#defence2").css("width", $(".progressbar").width());
+		defence2.innerHTML = "&times;" + d;
+		per = h*100/1.5;
+		$("#hp").css("width", per+"%");
+		$("#hp").css("transition", "width 2s ease");
+		$("#hp2").css("width", $(".progressbar").width());
+		hp2.innerHTML = "&times;" + h;
+	}
+	
+	function preload(num){
 		//add
 		var salonbox_img = new Image();
 		var detail_img = new Image();
@@ -566,43 +604,8 @@
 			$("#img4 img").css("height", "initial");
 			$("#img4 img").css("width", "100vw");
 		}
-		
-		toolBack();
-		var all = document.getElementById("roleALL");
-		var detail = document.getElementById("roleDETAIL");
-		var back = document.getElementById("backTOall");
-		$("html,body").animate({scrollTop:0}, 333);
-
 		$(".loading").css("display", "none");
 		$("#img1").css("visibility", "visible");
-		back.style.visibility = "visible";
-		all.style.opacity = 0;
-		all.style.transition = "opacity 0.5s ease-in";
-		detail.style.display = "inline";
-		
-		var herodetail = hero[num-1].split(",");
-		var t = herodetail[1];
-		var n = herodetail[2];
-		var a = herodetail[3];
-		var d = herodetail[4];
-		var h = herodetail[5];
-		typeicon.src = "picture/character/" + t + "icon.png";
-		HERONAME.innerHTML = HERONAME.innerHTML + n;
-		var per = a*100/1.5;
-		$("#attack").css("width", per+"%");
-		$("#attack").css("transition", "width 2s ease");
-		$("#attack2").css("width", $(".progressbar").width());
-		attack2.innerHTML = "&times;" + a;
-		per = d*100/1.5;
-		$("#defence").css("width", per+"%");
-		$("#defence").css("transition", "width 2s ease");
-		$("#defence2").css("width", $(".progressbar").width());
-		defence2.innerHTML = "&times;" + d;
-		per = h*100/1.5;
-		$("#hp").css("width", per+"%");
-		$("#hp").css("transition", "width 2s ease");
-		$("#hp2").css("width", $(".progressbar").width());
-		hp2.innerHTML = "&times;" + h;
 	}
 	
 	function lastdiv(){
@@ -628,6 +631,9 @@
 		img2.src = "";
 		img3.src = "";
 		img4.src = "";
+
+		$(".loading").css("display", "inline");
+		$("#img1").css("visibility", "hidden");
 	}
 	
 	function icon(){
