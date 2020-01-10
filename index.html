@@ -248,13 +248,6 @@
 	role.style.height = h + "px";
 	videoW = $("iframe").width();
 	$("iframe").css("height", videoW*480/853);
-	window.onresize(function(){
-		$("nav").css("height", $(".title div").height());
-		var h = role.style.backgroundSize;
-		role.style.height = h + "px";
-		videoW = $("iframe").width();
-		$("iframe").css("height", videoW*480/853);
-	});
 	
 	var gif1 = new Image();
 	var gif2 = new Image();
@@ -264,6 +257,14 @@
 	gif2.src = "picture/character/rabbit.gif";
 	gif3.src = "picture/character/green.gif";
 	bigicon.src = "bigicon.png";
+	window.onresize(function(){
+		$("nav").css("height", $(".title div").height());
+		var h = role.style.backgroundSize;
+		role.style.height = h + "px";
+		videoW = $("iframe").width();
+		$("iframe").css("height", videoW*480/853);
+	});
+	
 	function changeTo(page){
 		if(page == "index"){
 			window.location.reload();
