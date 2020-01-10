@@ -244,8 +244,6 @@
 		window.close();
 	}
 	$("nav").css("height", $(".title div").height());
-	var h = role.style.backgroundSize;
-	role.style.height = h + "px";
 	var videoW = $("iframe").width();
 	$("iframe").css("height", videoW*480/853);
 	
@@ -259,8 +257,6 @@
 	bigicon.src = "bigicon.png";
 	window.onresize = function(){
 		$("nav").css("height", $(".title div").height());
-		var h = role.style.backgroundSize;
-		role.style.height = h + "px";
 		videoW = $("iframe").width();
 		$("iframe").css("height", videoW*480/853);
 	}
