@@ -20,6 +20,9 @@
 		-moz-user-select: none;
 		unselectable: on;
 	}
+	body::-webkit-scrollbar{
+		display: none;
+	}
 	nav{
 		display: flex;
 	}
@@ -100,17 +103,23 @@
 		transition-timing-function: ease-in;
 	}
 	#roleDETAIL{
-		width: 95vw;
+		width: 100%;
 		height: 80vh;
 		display: none;
-		margin-left: 10px;
 		position: absolute;
 	}
 	#roleintro{
 		position: relative;
 	}
-	#roleintro>img{
-		position: absolute;
+	.loading{
+		padding-top: 10%;
+		width: 100%;
+		height: 100vh;
+		background-color: rgba(0,0,0,0);
+		text-align: center;
+	}
+	.spinmark{
+		animation: turn 0.65s linear infinite;
 	}
 	#HERONAME{
 		font-size: 38px;
@@ -119,18 +128,18 @@
 		margin-bottom: 1%;
 	}
 	.FIGURE{
-		font-size: 25px;
+		font-size: 23px;
 		font-family: 'Microsoft YaHei';
-		display: inline-block;
+		white-space:nowrap;
 	}
 	/*add*/
 	#img1{
 		width: 65%;
 		margin-left: 16%;
-		height: 80vh;
+		height: 70vh;
 		background: white;
 		position: absolute;
-		visibility: visible;
+		visibility: hidden;
 		opacity: 1;
 		display: flex;
 	}
@@ -140,9 +149,7 @@
 	}
 	.progressbar{
 		display: inline-flex;
-		align-items: center;
 		width: 90%;
-		font-size: 20px;
 		font-family: "Play", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 		color: white;
 		background-color: #555555;
@@ -150,37 +157,53 @@
 	}
 	.progressinner{
 		width: 0;
-		height: 21px;
 		text-align: right;
 		background-color: salmon;
 	}
 	.progressinner2{
-		height: 21px;
 		text-align: right;
+		font-size: 22px;
 		background-color: rgba(0, 0, 0, 0);
 		position: absolute;
-		padding-bottom: 3.75%;
+	}
+	.spaceline{
+		font-size: 1px;
 	}
 	#salonbox{
 		width: 28.5%;
 	}
+	#salonbox img{
+		height: 100%;
+	}
 	#img2{
-		width: 50%;
-		margin-left: 28%;
+		width: 100%;
+		text-align: center;
+		position: absolute;
 		visibility: hidden;
 		opacity: 0;
+	}
+	#img2 img{
+		height: 80vh;
 	}
 	#img3{
-		width: 26%;
-		margin-left: 40%;
+		width: 100%;
+		text-align: center;
+		position: absolute;
 		visibility: hidden;
 		opacity: 0;
 	}
+	#img3 img{
+		height: 80vh;
+	}
 	#img4{
-		width: 24%;
-		margin-left: 40%;
+		width: 100%;
+		text-align: center;
+		position: absolute;
 		visibility: hidden;
 		opacity: 0;
+	}
+	#img4 img{
+		height: 80vh;
 	}
 	#backTOall{
 		width: 100%;
@@ -207,6 +230,14 @@
 		100%{
 	  		transform: scale(1);
 	  		opacity: 0;
+		}
+	}
+	@keyframes turn {
+		0%{
+			transform: rotate(0deg);
+		}
+		100%{
+	  		transform: rotate(360deg);
 		}
 	}
 	@media screen and (max-width:550px){
@@ -237,11 +268,11 @@
 		/*add*/
 		#img1{
 			width: 100vw;
-			margin-left: -2.5%;
+			margin-left: 0%;
 			display: inline;
 		}
 		#figurebox{
-			width: 100%;
+			width: 100vw;
 		}
 		#HERONAME{
 			font-size: 24px;
@@ -250,9 +281,9 @@
 			font-size: 18px;
 		}
 		#salonbox{
-			width: 100%;
+			width: 100vw;
 		}
-		#herosalon{
+		#salonbox img{
 			width: 99.5vw;
 		}
 		#typeicon{
@@ -260,26 +291,18 @@
 		}
 		.progressbar{
 			width: 84.5%;
-			font-size: 18px;
-		}
-		.progressinner{
-			height: 18px;
 		}
 		.progressinner2{
-			height: 18px;
-			padding-bottom: 7.5%;
+			font-size: 18px;
 		}
-		#img2{
-			width: 80%;
-			margin-left: 10%;
+		#img2 img{
+			width: 100%;
 		}
-		#img3{
-			width: 80%;
-			margin-left: 11%;
+		#img3 img{
+			width: 100%;
 		}
-		#img4{
-			width: 85%;
-			margin-left: 7%;
+		#img4 img{
+			width: 100%;
 		}
 	}
 	@media screen and (min-width:1400px){
@@ -423,32 +446,41 @@
 		</div>
 		<div id = "roleDETAIL">
 			<div id = "roleintro">
+				<div class = "loading">
+					<div style = "width: 100%;"><img class = "spinmark" src = "compass mark.png"></div>
+				</div>
 				<div onclick = "slide(1);" id = "img1">
 					<div id = "figurebox">
 						<div id = "HERONAME"><img id = "typeicon"> </div>
-						<div class = "FIGURE">攻擊</div>
-						<div class = "progressbar">
-							<div class = "progressinner" id = "attack"></div>
-							<div class = "progressinner2" id = "attack2"></div>
+						<div style = "width: 100%; display: flex;">
+							<div class = "FIGURE">攻擊</div>
+							<div class = "progressbar">
+								<div class = "progressinner" id = "attack">&emsp;</div>
+								<div class = "progressinner2" id = "attack2"></div>
+							</div>
 						</div>
-						<div></div>
-						<div class = "FIGURE">防禦</div>
-						<div class = "progressbar">
-							<div class = "progressinner" id = "defence"></div>
-							<div class = "progressinner2" id = "defence2"></div>
+						<div class = "spaceline">&emsp;</div>
+						<div style = "width: 100%; display: flex;">
+							<div class = "FIGURE">防禦</div>
+							<div class = "progressbar">
+								<div class = "progressinner" id = "defence">&emsp;</div>
+								<div class = "progressinner2" id = "defence2"></div>
+							</div>
 						</div>
-						<div></div>
-						<div class = "FIGURE">體力</div>
-						<div class = "progressbar">
-							<div class = "progressinner" id = "hp"></div>
-							<div class = "progressinner2" id = "hp2"></div>
+						<div class = "spaceline">&emsp;</div>
+						<div style = "width: 100%; display: flex;">
+							<div class = "FIGURE">體力</div>
+							<div class = "progressbar">
+								<div class = "progressinner" id = "hp">&emsp;</div>
+								<div class = "progressinner2" id = "hp2"></div>
+							</div>
 						</div>
 					</div>
-					<div id = "salonbox"><img id = "herosalon" style = "height: 100%;"></div>
+					<div id = "salonbox"></div>
 				</div>
-				<img onclick = "slide(2);" id = "img2">
-				<img onclick = "slide(3);" id = "img3">
-				<img onclick = "slide(4);" id = "img4">
+				<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
+				<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
+				<div onclick = "slide(4);" id = "img4"><!-- <img> by JS--></div>
 			</div>
 		</div>
 	</div>
@@ -461,6 +493,7 @@
 	}
 	$("#category").css("height", h-10);
 	$(".progressinner2").css("width", $(".progressbar").width());
+	
 	window.onresize = function(){
 		$("#category").css("width", $("#icon").width());
 		var h = document.documentElement.clientHeight-$("#icon").height();
@@ -469,6 +502,22 @@
 		}
 		$("#category").css("height", h-10);
 		$(".progressinner2").css("width", $(".progressbar").width());
+		if(document.documentElement.clientHeight < document.documentElement.clientWidth){
+			$("#img2 img").css("height", "75vh");
+			$("#img2 img").css("width", "initial");
+			$("#img3 img").css("height", "75vh");
+			$("#img3 img").css("width", "initial");
+			$("#img4 img").css("height", "75vh");
+			$("#img4 img").css("width", "initial");
+		}
+		else{
+			$("#img2 img").css("height", "initial");
+			$("#img2 img").css("width", "100vw");
+			$("#img3 img").css("height", "initial");
+			$("#img3 img").css("width", "100vw");
+			$("#img4 img").css("height", "initial");
+			$("#img4 img").css("width", "100vw");
+		}
 	}
 	
 	var hero_num = 26;
@@ -484,6 +533,23 @@
 	var title = $(".title");
 	var side = $("#category");
 	function nextdiv(num){
+		//add
+		var salonbox_img = new Image();
+		var detail_img = new Image();
+		var salon_img = new Image();
+		var model_img = new Image();
+		salonbox_img.src = "picture/character/" + num + "_s.png";//(0,147)1068*1475
+		detail_img.src = "picture/character/" + num + "_d.png";
+		salon_img.src = "picture/character/" + num + "_s.png";//(0,147)1068*1475
+		model_img.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
+		salonbox.innerHTML = "";
+		img2.innerHTML = "";
+		img3.innerHTML = "";
+		img4.innerHTML = "";
+		
+		$(".loading").css("display", "none");
+		$("#img1").css("visibility", "visible");
+		
 		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
@@ -518,11 +584,27 @@
 		$("#hp").css("transition", "width 2s ease");
 		$("#hp2").css("width", $(".progressbar").width());
 		hp2.innerHTML = "&times;" + h;
-		herosalon.src = "picture/character/" + num + "_s.png";
 		//add
-		img2.src = "picture/character/" + num + "_d.png";
-		img3.src = "picture/character/" + num + "_s.png";
-		img4.src = "picture/character/" + num + "_s2.png";//(20,84)1041*1592
+		salonbox.append(salonbox_img);
+		img2.append(detail_img);
+		img3.append(salon_img);
+		img4.append(model_img);
+		if(document.documentElement.clientHeight < document.documentElement.clientWidth){
+			$("#img2 img").css("height", "75vh");
+			$("#img2 img").css("width", "initial");
+			$("#img3 img").css("height", "75vh");
+			$("#img3 img").css("width", "initial");
+			$("#img4 img").css("height", "75vh");
+			$("#img4 img").css("width", "initial");
+		}
+		else{
+			$("#img2 img").css("height", "initial");
+			$("#img2 img").css("width", "100vw");
+			$("#img3 img").css("height", "initial");
+			$("#img3 img").css("width", "100vw");
+			$("#img4 img").css("height", "initial");
+			$("#img4 img").css("width", "100vw");
+		}
 	}
 	
 	function lastdiv(){
@@ -544,7 +626,6 @@
 		defence2.innerHTML = "";
 		hp2.innerHTML = "";
 		HERONAME.innerHTML = "<img id = 'typeicon'> ";
-		herosalon.src = "";
 		//add
 		img2.src = "";
 		img3.src = "";
@@ -565,7 +646,7 @@
 			$("#icon").css("animation", "grow 0.65s linear infinite");
 			title.css("margin-top", "-20%");
 			title.css("transition", "margin-top 1s ease");
-			side.css("margin-left", "-18%");
+			side.css("margin-left", "-20%");
 			side.css("transition", "margin-left 1s ease");
 		}
 	}
@@ -662,7 +743,7 @@
 			$("#icon").css("animation", "grow 0.65s linear infinite");
 			title.css("margin-top", "-20%");
 			title.css("transition", "margin-top 1s ease");
-			side.css("margin-left", "-18%");
+			side.css("margin-left", "-20%");
 			side.css("transition", "margin-left 1s ease");
 		}
 	}
