@@ -544,7 +544,7 @@
 		}
 	}
 	
-	var hero_num = 26;
+	const hero_num = 26;
 	var herodetail = new Array(6);
 	var getHero = new XMLHttpRequest();
 	var clickcount = 0;
@@ -727,6 +727,8 @@
 	const numOFpic = 4;//add
 	function slide(picNum){
 		nowpicNum = picNum + 1;
+		if(nowpicNum == numOFpic+1)
+			nowpicNum = 1;
 		toolBack();
 		$(".progressinner2").css("width", $(".progressbar").width());
 		var before = document.getElementById("img"+Number(picNum-1))
