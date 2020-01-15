@@ -218,15 +218,10 @@
 		cursor: pointer;
 	}
 	#musicbox{
+		font-size: 30px;
 		right: 0px;
 		text-align: right;
 		position: absolute;
-	}
-	#pl{
-		font-size: 30px;
-	}
-	#pau{
-		font-size: 25px;
 	}
 	@keyframes grow {
 		0%{
@@ -317,11 +312,8 @@
 		#img4 img{
 			width: 100%;
 		}
-		#pl{
+		#musicbox{
 			font-size: 20px;
-		}
-		#pau{
-			font-size: 15px;
 		}
 	}
 	@media screen and (min-width:1400px){
@@ -344,9 +336,9 @@
 			<div id = "cards"><span onclick = "changeTo('cards');">CARDS</span></div>
 		</div>
 		<div id = "musicbox">
-			<span id = "pl" style = "cursor: pointer;" onclick = "playmusic();">▶&ensp;</span>
-			<span id = "pau" style = "cursor: pointer; display: none;" onclick = "stopmusic();">▎ ▎&ensp;&ensp;</span>
-			<audio id = "music" src="music/COMPASS.mp3" hidden></audio>
+			<span id = "pl" style = "cursor: pointer;" onclick = "playmusic();">🔊&ensp;</span>
+			<span id = "pau" style = "cursor: pointer; display: none;" onclick = "stopmusic();">🔇&ensp;</span>
+			<audio id = "music" src="music/COMPASS.mp3" hidden="true" loop="loop"></audio>
 		</div>
 	</nav>
 	<div id = "backTOall">
