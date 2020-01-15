@@ -139,7 +139,7 @@
 		height: 70vh;
 		background: white;
 		position: absolute;
-		visibility: visible;
+		visibility: hidden;
 		opacity: 1;
 		display: flex;
 	}
@@ -474,40 +474,38 @@
 				<div class = "loading">
 					<div style = "width: 100%;"><img class = "spinmark" src = "compass mark.png"></div>
 				</div>
-				<div id = "imgshow" style = "visibility: hidden;">
-					<div onclick = "slide(1);" id = "img1">
-						<div id = "figurebox">
-							<div id = "HERONAME"><img id = "typeicon"> </div>
-							<div style = "width: 100%; display: flex;">
-								<div class = "FIGURE">攻擊</div>
-								<div class = "progressbar">
-									<div class = "progressinner" id = "attack">&emsp;</div>
-									<div class = "progressinner2" id = "attack2"></div>
-								</div>
-							</div>
-							<div class = "spaceline">&emsp;</div>
-							<div style = "width: 100%; display: flex;">
-								<div class = "FIGURE">防禦</div>
-								<div class = "progressbar">
-									<div class = "progressinner" id = "defence">&emsp;</div>
-									<div class = "progressinner2" id = "defence2"></div>
-								</div>
-							</div>
-							<div class = "spaceline">&emsp;</div>
-							<div style = "width: 100%; display: flex;">
-								<div class = "FIGURE">體力</div>
-								<div class = "progressbar">
-									<div class = "progressinner" id = "hp">&emsp;</div>
-									<div class = "progressinner2" id = "hp2"></div>
-								</div>
+				<div onclick = "slide(1);" id = "img1">
+					<div id = "figurebox">
+						<div id = "HERONAME"><img id = "typeicon"> </div>
+						<div style = "width: 100%; display: flex;">
+							<div class = "FIGURE">攻擊</div>
+							<div class = "progressbar">
+								<div class = "progressinner" id = "attack">&emsp;</div>
+								<div class = "progressinner2" id = "attack2"></div>
 							</div>
 						</div>
-						<div id = "salonbox"></div>
+						<div class = "spaceline">&emsp;</div>
+						<div style = "width: 100%; display: flex;">
+							<div class = "FIGURE">防禦</div>
+							<div class = "progressbar">
+								<div class = "progressinner" id = "defence">&emsp;</div>
+								<div class = "progressinner2" id = "defence2"></div>
+							</div>
+						</div>
+						<div class = "spaceline">&emsp;</div>
+						<div style = "width: 100%; display: flex;">
+							<div class = "FIGURE">體力</div>
+							<div class = "progressbar">
+								<div class = "progressinner" id = "hp">&emsp;</div>
+								<div class = "progressinner2" id = "hp2"></div>
+							</div>
+						</div>
 					</div>
-					<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
-					<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
-					<div onclick = "slide(4);" id = "img4"><!-- <img> by JS--></div>
+					<div id = "salonbox"></div>
 				</div>
+				<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
+				<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
+				<div onclick = "slide(4);" id = "img4"><!-- <img> by JS--></div>
 			</div>
 		</div>
 	</div>
@@ -566,7 +564,6 @@
 		$("html,body").animate({scrollTop:0}, 333);
 
 		back.style.visibility = "visible";
-		music.style.visibility = "visible";
 		all.style.opacity = 0;
 		all.style.transition = "opacity 0.5s ease-in";
 		detail.style.display = "inline";
@@ -602,15 +599,16 @@
 		getHero.send();
 	}
 	
+	var nowpicNum;
 	function preload(who){
 		//add
 		var salonbox_img = new Image();
-		var detail_img = new Image();
-		var salon_img = new Image();
-		var model_img = new Image();
 		salonbox_img.src = "picture/character/" + who + "/s.png";//(0,147)1068*1475
+		var detail_img = new Image();
 		detail_img.src = "picture/character/" + who + "/d.png";
+		var salon_img = new Image();
 		salon_img.src = "picture/character/" + who + "/s.png";//(0,147)1068*1475
+		var model_img = new Image();
 		model_img.src = "picture/character/" + who + "/s2.png";//(20,84)1041*1592
 		salonbox.innerHTML = "";
 		img2.innerHTML = "";
@@ -637,8 +635,11 @@
 			$("#img4 img").css("width", "100vw");
 		}
 		model_img.onload = function(){
+			if(nowpicNum == null)
+				nowpicNum = 1;
+			var s = "#img" + nowpicNum;
 			$(".loading").css("display", "none");
-			$("#imgshow").css("visibility", "visible");
+			$(s).css("visibility", "visible");
 		}
 	}
 	
@@ -666,8 +667,11 @@
 		img3.src = "";
 		img4.src = "";
 
+		if(nowpicNum == null)
+			nowpicNum = 1;
+		var s = "#img" + nowpicNum;
 		$(".loading").css("display", "inline");
-		$("#imgshow").css("visibility", "hidden");
+		$(s).css("visibility", "hidden");
 	}
 	
 	function icon(){
@@ -723,6 +727,7 @@
 	
 	const numOFpic = 4;//add
 	function slide(picNum){
+		nowpicNum = picNum + 1;
 		toolBack();
 		var before = document.getElementById("img"+Number(picNum-1))
 		var now = document.getElementById("img"+picNum);
