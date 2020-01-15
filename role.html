@@ -139,7 +139,7 @@
 		height: 70vh;
 		background: white;
 		position: absolute;
-		visibility: hidden;
+		visibility: visible;
 		opacity: 1;
 		display: flex;
 	}
@@ -474,38 +474,40 @@
 				<div class = "loading">
 					<div style = "width: 100%;"><img class = "spinmark" src = "compass mark.png"></div>
 				</div>
-				<div onclick = "slide(1);" id = "img1">
-					<div id = "figurebox">
-						<div id = "HERONAME"><img id = "typeicon"> </div>
-						<div style = "width: 100%; display: flex;">
-							<div class = "FIGURE">攻擊</div>
-							<div class = "progressbar">
-								<div class = "progressinner" id = "attack">&emsp;</div>
-								<div class = "progressinner2" id = "attack2"></div>
+				<div id = "imgshow" style = "visibility: hidden;">
+					<div onclick = "slide(1);" id = "img1">
+						<div id = "figurebox">
+							<div id = "HERONAME"><img id = "typeicon"> </div>
+							<div style = "width: 100%; display: flex;">
+								<div class = "FIGURE">攻擊</div>
+								<div class = "progressbar">
+									<div class = "progressinner" id = "attack">&emsp;</div>
+									<div class = "progressinner2" id = "attack2"></div>
+								</div>
+							</div>
+							<div class = "spaceline">&emsp;</div>
+							<div style = "width: 100%; display: flex;">
+								<div class = "FIGURE">防禦</div>
+								<div class = "progressbar">
+									<div class = "progressinner" id = "defence">&emsp;</div>
+									<div class = "progressinner2" id = "defence2"></div>
+								</div>
+							</div>
+							<div class = "spaceline">&emsp;</div>
+							<div style = "width: 100%; display: flex;">
+								<div class = "FIGURE">體力</div>
+								<div class = "progressbar">
+									<div class = "progressinner" id = "hp">&emsp;</div>
+									<div class = "progressinner2" id = "hp2"></div>
+								</div>
 							</div>
 						</div>
-						<div class = "spaceline">&emsp;</div>
-						<div style = "width: 100%; display: flex;">
-							<div class = "FIGURE">防禦</div>
-							<div class = "progressbar">
-								<div class = "progressinner" id = "defence">&emsp;</div>
-								<div class = "progressinner2" id = "defence2"></div>
-							</div>
-						</div>
-						<div class = "spaceline">&emsp;</div>
-						<div style = "width: 100%; display: flex;">
-							<div class = "FIGURE">體力</div>
-							<div class = "progressbar">
-								<div class = "progressinner" id = "hp">&emsp;</div>
-								<div class = "progressinner2" id = "hp2"></div>
-							</div>
-						</div>
+						<div id = "salonbox"></div>
 					</div>
-					<div id = "salonbox"></div>
+					<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
+					<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
+					<div onclick = "slide(4);" id = "img4"><!-- <img> by JS--></div>
 				</div>
-				<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
-				<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
-				<div onclick = "slide(4);" id = "img4"><!-- <img> by JS--></div>
 			</div>
 		</div>
 	</div>
@@ -636,7 +638,7 @@
 		}
 		model_img.onload = function(){
 			$(".loading").css("display", "none");
-			$("#img1").css("visibility", "visible");
+			$("#imgshow").css("visibility", "visible");
 		}
 	}
 	
@@ -665,7 +667,7 @@
 		img4.src = "";
 
 		$(".loading").css("display", "inline");
-		$("#img1").css("visibility", "hidden");
+		$("#imgshow").css("visibility", "hidden");
 	}
 	
 	function icon(){
