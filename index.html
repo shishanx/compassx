@@ -228,9 +228,9 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
-<body onload = "show();" onclick = "skip();">
+<body onload = "show();">
 	<div>
-		<div class = "loading">
+		<div class = "loading"  onclick = "skip();">
 			<div style = "font-size: 50px;">Loading...</div>
 			<div style = "width: 100%;"><img class = "spinner-border text-light" src = "compass mark.png"></div>
 		</div>
@@ -261,16 +261,11 @@
 	$("nav").css("height", $(".title div").height());
 	var videoW = $("iframe").width();
 	$("iframe").css("height", videoW*480/853);
-	
-	
 	var gif1 = new Image();
 	var gif2 = new Image();
 	var gif3 = new Image();
 	var bigicon = new Image();
-	gif1.src = "picture/character/didi.gif";
-	gif2.src = "picture/character/rabbit.gif";
-	gif3.src = "picture/character/green.gif";
-	bigicon.src = "bigicon.png";
+	
 	window.onresize = function(){
 		$("nav").css("height", $(".title div").height());
 		videoW = $("iframe").width();
@@ -288,7 +283,11 @@
 		}
 	}
 	var clickcount = 0;
+	var skipcount = 0;
 	function show(){
+		setTimeout(function(){
+			preload();
+		},500);
 		$(".loading").css("display", "none");
 		$("body>div").css("overflow", "");
 		var wel = document.getElementById("welcome");
@@ -341,6 +340,14 @@
 			}
 		}, 15400);
 	}
+	function preload(){
+		if(skipcount == 0){
+			gif1.src = "picture/character/didi.gif";
+			gif2.src = "picture/character/rabbit.gif";
+			gif3.src = "picture/character/green.gif";
+			bigicon.src = "bigicon.png";
+		}
+	}
 	function icon(){
 		clickcount++;
 		var title = $(".title");
@@ -360,6 +367,7 @@
 		}
 	}
 	function skip(){
+		skipcount++;
 		$("#skip").css("display", "none");
 		$("#welcome").css("display", "none");
 		$(".introvideo iframe").css("display", "inline");
