@@ -223,6 +223,10 @@
 		text-align: right;
 		position: absolute;
 	}
+	#pau{
+		right: 0px;
+		position: absolute;
+	}
 	@keyframes grow {
 		0%{
 			transform: scale(0.1);
@@ -336,8 +340,8 @@
 			<div id = "cards"><span onclick = "changeTo('cards');">CARDS</span></div>
 		</div>
 		<div id = "musicbox">
-			<span id = "pl" style = "cursor: pointer;" onclick = "playmusic();">🔊&ensp;</span>
-			<span id = "pau" style = "cursor: pointer; display: none;" onclick = "stopmusic();">🔇&ensp;</span>
+			<span id = "pl" style = "cursor: pointer;" onclick = "stopmusic();">&#9835;&ensp;</span>
+			<div id = "pau" style = "cursor: pointer; display: inline;" onclick = "playmusic();">&#10006;&ensp;</div>
 			<audio id = "music" src="music/COMPASS.mp3" hidden="true" loop="loop"></audio>
 		</div>
 	</nav>
@@ -545,6 +549,7 @@
 	var pauseClick = 0;
 	function nextdiv(who){
 		music.src = "music/compass_" + who + ".mp3";
+		music.volume = 0.2;
 		if(pauseClick == 0)
 			playmusic();
 		preload(who);
@@ -787,15 +792,13 @@
 	
 	function playmusic(){
 		pauseClick = 0;
-		$("#pl").css("display", "none");
-		$("#pau").css("display", "inline");
+		$("#pau").css("display", "none");
 		music.play();
 	}
 	
 	function stopmusic(){
 		pauseClick = 1;
-		$("#pl").css("display", "inline");
-		$("#pau").css("display", "none");
+		$("#pau").css("display", "inline");
 		music.pause();
 	}
 </script>
