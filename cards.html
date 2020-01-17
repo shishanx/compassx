@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Cards</title>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <style type = "text/css">
 	body{
 		background-image: url(picture/back/back_card_filter.png);
@@ -58,6 +59,9 @@
 		border: 2px solid black;
 		overflow: auto;
 	}
+	#rightarea::-webkit-scrollbar {
+		display: none;
+	}
 	#ur{
 		font-size: 25px;
 		text-align: center;
@@ -100,7 +104,6 @@
 		table-layout: fixed;
 		overflow-y: scroll;
 	}
-	
 	th:nth-child(1), td:nth-child(1){/*NO.*/
 		width: 6%;
 		background: rgba(255, 255, 255, 0.8);
@@ -141,6 +144,14 @@
 	#viewAll span:hover{
 		color: green;
 		cursor: pointer;
+	}
+	@media screen and (min-width:1400px){
+		#cardTable{
+			width: 1300px;
+		}
+		#rightarea{
+			width: 1300px;
+		}
 	}
 </style>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -236,16 +247,12 @@
 		var CARD_ARR = new Array(fire+water+wood);//Stored in array by split("\n");
 		var currentCard = new Array(7);//Each data stored by split(",");--col
 		var cur_col;
-		//var picHTML = "<img src = 'picture/UR/UR";
-		//var picHTML = "<img src = 'http://localhost:8080/CompassInfo/picture/UR/UR";
-		var picHTML = "<img src = 'https://shishanx.github.io/compassx/picture/UR/UR";
+		var picHTML = "<img src = 'picture/UR/UR";
 		for(var i = 1; i < row; i++){
 			table.deleteRow(-1);
 		}
-		var jump = new XMLHttpRequest();//連接伺服器的物件
-		//jump.open("get", "http://127.0.0.1/picture/UR/UR_DATA.txt");
-		//jump.open("get", "http://localhost:8080/CompassInfo/picture/UR/UR_DATA.txt");
-		jump.open("get", "https://shishanx.github.io/compassx/picture/UR/UR_DATA.txt");
+		var jump = new XMLHttpRequest();
+		jump.open("get", "picture/UR/UR_DATA.txt");
 		jump.onload = function(){
 			CARD_DATA = this.responseText;
 			CARD_ARR = CARD_DATA.split("\n");
@@ -701,16 +708,12 @@
 		var CARD_ARR = new Array(fire+water+wood);//Stored in array by split("\n");
 		var currentCard = new Array(7);//Each data stored by split(",");--col
 		var cur_col;
-		//var picHTML = "<img src = 'picture/SR/SR";
-		//var picHTML = "<img src = 'http://localhost:8080/CompassInfo/picture/SR/SR";
-		var picHTML = "<img src = 'https://shishanx.github.io/compassx/picture/SR/SR";
+		var picHTML = "<img src = 'picture/SR/SR";
 		for(var i = 1; i < row; i++){
 			table.deleteRow(-1);
 		}
-		var jump = new XMLHttpRequest();//連接伺服器的物件
-		//jump.open("get", "https://127.0.0.1/picture/SR/SR_DATA.txt");
-		//jump.open("get", "http://localhost:8080/CompassInfo/picture/SR/SR_DATA.txt");
-		jump.open("get", "https://shishanx.github.io/compassx/picture/SR/SR_DATA.txt");
+		var jump = new XMLHttpRequest();
+		jump.open("get", "picture/SR/SR_DATA.txt");
 		jump.onload = function(){
 			CARD_DATA = this.responseText;
 			CARD_ARR = CARD_DATA.split("\n");
