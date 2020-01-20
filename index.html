@@ -252,7 +252,7 @@
 	</div>
 </body>
 <script type = "text/javascript">
-	if(navigator.userAgent.match("MSIE")){
+	if(navigator.userAgent.match("MSIE") || (/Trident\/7\./).test(navigator.userAgent)){
 		alert("Change explorer for better view.");
 		window.opener=null;
 		window.open('','_self');
