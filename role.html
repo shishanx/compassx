@@ -557,12 +557,20 @@
 	var title = $(".title");
 	var side = $("#category");
 	var pauseClick = 0;
+	var nowWho;
+	var t;
+	var n;
+	var a;
+	var d;
+	var h;
+	var per;
 	function nextdiv(who){
-		music.src = "music/compass_" + who + ".mp3";
+		nowWho = who;
+		music.src = "music/compass_" + nowWho + ".mp3";
 		music.volume = 0.2;
 		if(pauseClick == 0)
 			playmusic();
-		preload(who);
+		preload();
 		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
@@ -573,49 +581,31 @@
 		all.style.opacity = 0;
 		all.style.transition = "opacity 0.5s ease-in";
 		detail.style.display = "inline";
-		
-		getHero.open("get", "picture/character/" + who + "/figure.txt");
+		getHero.open("get", "picture/character/" + nowWho + "/figure.txt");
 		getHero.onload = function(){
 			var data = this.responseText;
 			herodetail = data.split(",");
 		
-			var t = herodetail[1];
-			var n = herodetail[2];
-			var a = herodetail[3];
-			var d = herodetail[4];
-			var h = herodetail[5];
-			typeicon.src = "picture/character/" + t + "icon.png";
-			HERONAME.innerHTML = HERONAME.innerHTML + n;
-			var per = a*100/1.5;
-			$("#attack").css("width", per+"%");
-			$("#attack").css("transition", "width 2s ease 0.5s");
-			$("#attack2").css("width", $(".progressbar").width());
-			attack2.innerHTML = "&times;" + a;
-			per = d*100/1.5;
-			$("#defence").css("width", per+"%");
-			$("#defence").css("transition", "width 2s ease 0.5s");
-			$("#defence2").css("width", $(".progressbar").width());
-			defence2.innerHTML = "&times;" + d;
-			per = h*100/1.5;
-			$("#hp").css("width", per+"%");
-			$("#hp").css("transition", "width 2s ease 0.5s");
-			$("#hp2").css("width", $(".progressbar").width());
-			hp2.innerHTML = "&times;" + h;
+			t = herodetail[1];
+			n = herodetail[2];
+			a = herodetail[3];
+			d = herodetail[4];
+			h = herodetail[5];
 		};
 		getHero.send();
 	}
 	
 	var nowpicNum;
-	function preload(who){
+	function preload(){
 		//add
 		var salonbox_img = new Image();
-		salonbox_img.src = "picture/character/" + who + "/s.png";//(0,147)1068*1475
+		salonbox_img.src = "picture/character/" + nowWho + "/s.png";//(0,147)1068*1475
 		var detail_img = new Image();
-		detail_img.src = "picture/character/" + who + "/d.png";
+		detail_img.src = "picture/character/" + nowWho + "/d.png";
 		var salon_img = new Image();
-		salon_img.src = "picture/character/" + who + "/s.png";//(0,147)1068*1475
+		salon_img.src = "picture/character/" + nowWho + "/s.png";//(0,147)1068*1475
 		var model_img = new Image();
-		model_img.src = "picture/character/" + who + "/s2.png";//(20,84)1041*1592
+		model_img.src = "picture/character/" + nowWho + "/s2.png";//(20,84)1041*1592
 		salonbox.innerHTML = "";
 		img2.innerHTML = "";
 		img3.innerHTML = "";
@@ -646,6 +636,7 @@
 			$(".loading").css("display", "none");
 			var s = "#img" + nowpicNum;
 			$(s).css("visibility", "visible");
+			runHerodata();
 		}
 	}
 	
@@ -770,6 +761,7 @@
 			img1.style.transitionProperty = "opacity";
 			img1.style.transitionDuration = "0.5s";
 			img1.style.transitionTimingFunction = "ease-in";
+			runHerodata();
 		}
 		
 		if(before != null){
@@ -797,6 +789,34 @@
 			side.css("margin-left", "-20%");
 			side.css("transition", "margin-left 1s ease");
 		}
+	}
+	
+	function runHerodata(){
+		$("#attack").css("width", "");
+		$("#defence").css("width", "");
+		$("#hp").css("width", "");
+		$("#attack").css("transition", "");
+		$("#defence").css("transition", "");
+		$("#hp").css("transition", "");
+		HERONAME.innerHTML = "<img id = 'typeicon'> ";
+		
+		typeicon.src = "picture/character/" + t + "icon.png";
+		HERONAME.innerHTML = HERONAME.innerHTML + n;
+		per = a*100/1.5;
+		$("#attack").css("width", per+"%");
+		$("#attack").css("transition", "width 2s ease 0.5s");
+		$("#attack2").css("width", $(".progressbar").width());
+		attack2.innerHTML = "&times;" + a;
+		per = d*100/1.5;
+		$("#defence").css("width", per+"%");
+		$("#defence").css("transition", "width 2s ease 0.5s");
+		$("#defence2").css("width", $(".progressbar").width());
+		defence2.innerHTML = "&times;" + d;
+		per = h*100/1.5;
+		$("#hp").css("width", per+"%");
+		$("#hp").css("transition", "width 2s ease 0.5s");
+		$("#hp2").css("width", $(".progressbar").width());
+		hp2.innerHTML = "&times;" + h;
 	}
 	
 	function playmusic(){
