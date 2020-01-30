@@ -231,7 +231,7 @@
 <body onload = "show();">
 	<div>
 		<div class = "loading"  onclick = "skip();">
-			<div style = "font-size: 50px;">Loading...</div>
+			<div style = "font-size: 50px;">Loading...<span id = "fileprogress">0</span><span>%</span></div>
 			<div style = "width: 100%;"><img class = "spinner-border text-light" src = "compass mark.png"></div>
 		</div>
 		<nav>
@@ -342,10 +342,40 @@
 	}
 	function preload(){
 		if(skipcount == 0){
-			gif1.src = "picture/character/didi.gif";
-			gif2.src = "picture/character/rabbit.gif";
-			gif3.src = "picture/character/green.gif";
-			bigicon.src = "bigicon.png";
+			var progressnum = 0;
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "picture/character/didi.gif");
+			xhr.addEventListener("progress", function(e){
+				progressnum = e.loaded*25/e.total;
+				fileprogress.innerHTML = parseInt(progressnum);
+				if(e.loaded/e.total == 1)
+					gif1.src = "picture/character/didi.gif";
+			}, false);
+			xhr.send();
+			xhr.open("get", "picture/character/rabbit.gif");
+			xhr.addEventListener("progress", function(e){
+				progressnum = e.loaded*25/e.total;
+				fileprogress.innerHTML = Number(fileprogress.innerHTML) + parseInt(progressnum);
+				if(e.loaded/e.total == 1)
+					gif2.src = "picture/character/rabbit.gif";
+			}, false);
+			xhr.send();
+			xhr.open("get", "picture/character/green.gif");
+			xhr.addEventListener("progress", function(e){
+				progressnum = e.loaded*25/e.total;
+				fileprogress.innerHTML = Number(fileprogress.innerHTML) + parseInt(progressnum);
+				if(e.loaded/e.total == 1)
+					gif3.src = "picture/character/green.gif";
+			}, false);
+			xhr.send();
+			xhr.open("get", "bigicon.png");
+			xhr.addEventListener("progress", function(e){
+				progressnum = e.loaded*25/e.total;
+				fileprogress.innerHTML = Number(fileprogress.innerHTML) + parseInt(progressnum);
+				if(e.loaded/e.total == 1)
+					bigicon.src = "bigicon.png";
+			}, false);
+			xhr.send();
 		}
 	}
 	function icon(){
