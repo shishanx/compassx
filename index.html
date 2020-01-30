@@ -228,7 +228,7 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
-<body onload = "show();">
+<body onload = "preload();">
 	<div>
 		<div class = "loading"  onclick = "skip();">
 			<div style = "font-size: 50px;">Loading...<span id = "fileprogress">0</span><span>%</span></div>
@@ -284,10 +284,13 @@
 	}
 	var clickcount = 0;
 	var skipcount = 0;
+	var load = 0;
+	var t = setInterval(function(){
+		if(load == 4)
+			show();
+	}, 500);
 	function show(){
-		setTimeout(function(){
-			preload();
-		},500);
+		clearInterval(t);
 		$(".loading").css("display", "none");
 		$("body>div").css("overflow", "");
 		var wel = document.getElementById("welcome");
@@ -353,8 +356,10 @@
 				var progressnum1 = now1 - pre1; 
 				pre1 = now1;
 				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum1;
-				if(e.loaded/e.total == 1)
+				if(e.loaded/e.total == 1){
 					gif1.src = "picture/character/didi.gif";
+					load++;
+				}
 			}, false);
 			getgif1.send();
 			
@@ -365,8 +370,10 @@
 				var progressnum2 = now2 - pre2; 
 				pre2 = now2;
 				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum2;
-				if(e.loaded/e.total == 1)
+				if(e.loaded/e.total == 1){
 					gif2.src = "picture/character/rabbit.gif";
+					load++;
+				}
 			}, false);
 			getgif2.send();
 			
@@ -377,8 +384,10 @@
 				var progressnum3 = now3 - pre3; 
 				pre3 = now3;
 				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum3;
-				if(e.loaded/e.total == 1)
+				if(e.loaded/e.total == 1){
 					gif3.src = "picture/character/green.gif";
+					load++;
+				}
 			}, false);
 			getgif3.send();
 			
@@ -389,8 +398,10 @@
 				var progressnum = now - pre; 
 				pre = now;
 				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum;
-				if(e.loaded/e.total == 1)
+				if(e.loaded/e.total == 1){
 					bigicon.src = "bigicon.png";
+					load++;
+				}
 			}, false);
 			getbigicon.send();
 		}
