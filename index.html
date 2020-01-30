@@ -283,12 +283,11 @@
 		}
 	}
 	var clickcount = 0;
-	var skipcount = 0;
 	var load = 0;
 	var t = setInterval(function(){
 		if(load == 4)
 			show();
-	}, 500);
+	}, 50);
 	function show(){
 		clearInterval(t);
 		$(".loading").css("display", "none");
@@ -344,67 +343,65 @@
 		}, 15400);
 	}
 	function preload(){
-		if(skipcount == 0){
-			var pre = 0;
-			var pre1 = 0;
-			var pre2 = 0;
-			var pre3 = 0;
-			var getgif1 = new XMLHttpRequest();
-			getgif1.open("get", "picture/character/didi.gif");
-			getgif1.addEventListener("progress", function(e){
-				var now1 = parseInt(e.loaded*25/e.total);
-				var progressnum1 = now1 - pre1; 
-				pre1 = now1;
-				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum1;
-				if(e.loaded/e.total == 1){
-					gif1.src = "picture/character/didi.gif";
-					load++;
-				}
-			}, false);
-			getgif1.send();
-			
-			var getgif2 = new XMLHttpRequest();
-			getgif2.open("get", "picture/character/rabbit.gif");
-			getgif2.addEventListener("progress", function(e){
-				var now2 = parseInt(e.loaded*25/e.total);
-				var progressnum2 = now2 - pre2; 
-				pre2 = now2;
-				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum2;
-				if(e.loaded/e.total == 1){
-					gif2.src = "picture/character/rabbit.gif";
-					load++;
-				}
-			}, false);
-			getgif2.send();
-			
-			var getgif3 = new XMLHttpRequest();
-			getgif3.open("get", "picture/character/green.gif");
-			getgif3.addEventListener("progress", function(e){
-				var now3 = parseInt(e.loaded*25/e.total);
-				var progressnum3 = now3 - pre3; 
-				pre3 = now3;
-				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum3;
-				if(e.loaded/e.total == 1){
-					gif3.src = "picture/character/green.gif";
-					load++;
-				}
-			}, false);
-			getgif3.send();
-			
-			var getbigicon = new XMLHttpRequest();
-			getbigicon.open("get", "bigicon.png");
-			getbigicon.addEventListener("progress", function(e){
-				var now = parseInt(e.loaded*25/e.total);
-				var progressnum = now - pre; 
-				pre = now;
-				fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum;
-				if(e.loaded/e.total == 1){
-					bigicon.src = "bigicon.png";
-					load++;
-				}
-			}, false);
-			getbigicon.send();
-		}
+		var pre = 0;
+		var pre1 = 0;
+		var pre2 = 0;
+		var pre3 = 0;
+		var getgif1 = new XMLHttpRequest();
+		getgif1.open("get", "picture/character/didi.gif");
+		getgif1.addEventListener("progress", function(e){
+			var now1 = parseInt(e.loaded*25/e.total);
+			var progressnum1 = now1 - pre1; 
+			pre1 = now1;
+			fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum1;
+			if(e.loaded/e.total == 1){
+				gif1.src = "picture/character/didi.gif";
+				load++;
+			}
+		}, false);
+		getgif1.send();
+		
+		var getgif2 = new XMLHttpRequest();
+		getgif2.open("get", "picture/character/rabbit.gif");
+		getgif2.addEventListener("progress", function(e){
+			var now2 = parseInt(e.loaded*25/e.total);
+			var progressnum2 = now2 - pre2; 
+			pre2 = now2;
+			fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum2;
+			if(e.loaded/e.total == 1){
+				gif2.src = "picture/character/rabbit.gif";
+				load++;
+			}
+		}, false);
+		getgif2.send();
+		
+		var getgif3 = new XMLHttpRequest();
+		getgif3.open("get", "picture/character/green.gif");
+		getgif3.addEventListener("progress", function(e){
+			var now3 = parseInt(e.loaded*25/e.total);
+			var progressnum3 = now3 - pre3; 
+			pre3 = now3;
+			fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum3;
+			if(e.loaded/e.total == 1){
+				gif3.src = "picture/character/green.gif";
+				load++;
+			}
+		}, false);
+		getgif3.send();
+		
+		var getbigicon = new XMLHttpRequest();
+		getbigicon.open("get", "bigicon.png");
+		getbigicon.addEventListener("progress", function(e){
+			var now = parseInt(e.loaded*25/e.total);
+			var progressnum = now - pre; 
+			pre = now;
+			fileprogress.innerHTML = Number(fileprogress.innerHTML) + progressnum;
+			if(e.loaded/e.total == 1){
+				bigicon.src = "bigicon.png";
+				load++;
+			}
+		}, false);
+		getbigicon.send();
 	}
 	function icon(){
 		clickcount++;
@@ -425,7 +422,7 @@
 		}
 	}
 	function skip(){
-		skipcount++;
+		load = 4;
 		$("#skip").css("display", "none");
 		$("#welcome").css("display", "none");
 		$(".introvideo iframe").css("display", "inline");
