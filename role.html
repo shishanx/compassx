@@ -51,7 +51,7 @@
 		font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 		font-weight: bold;
 	}
-	.title span:hover{
+	#cards span:hover{
 		color: blue;
 		cursor: pointer;
 	}
@@ -185,6 +185,53 @@
 	#salonbox img{
 		height: 100%;
 	}
+	#useCard{
+		width: 100%;
+		margin-top: 3%;
+		border: 3px solid #AEAEAC;
+		border-radius: 5px;
+		background-color: #281B15;
+		font-family: "Play", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+	}
+	#useCardm{
+		width: 100%;
+		border: 3px solid #AEAEAC;
+		border-radius: 5px;
+		background-color: #281B15;
+		font-family: "Play", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+		display: none;
+	}
+	#useCardTitle{
+		width: 100%;
+		color: white;
+		border-bottom: 2px solid darkgray;
+		text-align: center;
+		font-size: 23px;
+		font-weight: bold;
+	}
+	.cardType{
+		width: 25%;
+		color: white;
+		text-align: center;
+		font-size: 23px;
+		border-right: 2px solid darkgray;
+		background-color: #424242;
+	}
+	.continueCard{
+		width: 25%;
+		color: white;
+		text-align: center;
+		font-size: 23px;
+		background-color: #424242;
+	}
+	.cardRate{
+		width: 100%;
+		color: white;
+		text-align: center;
+		font-size: 80px;
+		font-weight: bold;
+		margin-top: -20px;
+	}
 	#img2{
 		width: 100%;
 		text-align: center;
@@ -317,6 +364,12 @@
 		.progressinner2{
 			font-size: 18px;
 		}
+		#useCard{
+			display: none;
+		}
+		#useCardm{
+			display: block;
+		}
 		#img2 img{
 			width: 100%;
 		}
@@ -346,11 +399,11 @@
 			<div id = "iconclick">&larr;click</div>
 		</div>
 		<div class = "title">
-			<div id = "home"><span onclick = "changeTo('index');">HOME</span></div>
+			<div><span style = "color: midnightblue;">HERO</span></div>
 			<div id = "cards"><span onclick = "changeTo('cards');">CARDS</span></div>
 		</div>
 		<div id = "musicbox">
-			<span id = "pl" style = "cursor: pointer;" onclick = "stopmusic();">&#9836;&ensp;</span>
+			<span id = "pl" style = "cursor: pointer;" onclick = "stopmusic();">&#9835;&ensp;</span>
 			<div id = "pau" style = "cursor: pointer; display: inline; right: 0px; position: absolute;" onclick = "playmusic();">&#10006;&ensp;</div>
 			<audio id = "music" src="music/COMPASS.mp3" hidden="true" loop="loop"></audio>
 		</div>
@@ -473,6 +526,10 @@
 				<img onclick = "nextdiv('skateboy');" src = "picture/character/skateboy/26_skateboy.png"/>
 				<img src = "picture/character/skateboy/26.png"/>
 			</div>
+			<div class = "changepic a" id = "changepic27">
+				<img onclick = "nextdiv('ruruca');" src = "picture/character/ruruca/27_ruruca.png"/>
+				<img src = "picture/character/ruruca/27.png"/>
+			</div>
 		</div>
 		<div id = "roleDETAIL">
 			<div id = "roleintro">
@@ -505,8 +562,42 @@
 								<div class = "progressinner2" id = "hp2"></div>
 							</div>
 						</div>
+						<div id = "useCard">
+							<div id = "useCardTitle">カードスキル発動速度</div>
+							<div style = "display: flex;">
+								<div class = "cardType">近距離
+									<div class = "cardRate nearRate">速</div>
+								</div>
+								<div class = "cardType">遠距離
+									<div class = "cardRate farRate">速</div>
+								</div>
+								<div class = "cardType">周　圍
+									<div class = "cardRate roundRate">速</div>
+								</div>
+								<div class = "continueCard">連　續
+									<div class = "cardRate continueRate">速</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div id = "salonbox"></div>
+					<div id = "useCardm">
+						<div id = "useCardTitle">カードスキル発動速度</div>
+						<div style = "display: flex;">
+							<div class = "cardType">近距離
+								<div class = "cardRate nearRate">速</div>
+							</div>
+							<div class = "cardType">遠距離
+								<div class = "cardRate farRate">速</div>
+							</div>
+							<div class = "cardType">周　圍
+								<div class = "cardRate roundRate">速</div>
+							</div>
+							<div class = "continueCard">連　續
+								<div class = "cardRate continueRate">速</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
 				<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
@@ -550,8 +641,8 @@
 		}
 	}
 	
-	const hero_num = 26;
-	var herodetail = new Array(6);
+	const hero_num = 27;
+	var herodetail = new Array(10);
 	var getHero = new XMLHttpRequest();
 	var clickcount = 0;
 	var title = $(".title");
@@ -563,9 +654,29 @@
 	var a;
 	var d;
 	var h;
+	var near;
+	var far;
+	var round;
+	var conti;
 	var per;
 	function nextdiv(who){
 		nowWho = who;
+		getHero.open("get", "picture/character/" + nowWho + "/figure.txt");
+		getHero.onload = function(){
+			var data = this.responseText;
+			herodetail = data.split(",");
+		
+			t = herodetail[1];
+			n = herodetail[2];
+			a = herodetail[3];
+			d = herodetail[4];
+			h = herodetail[5];
+			near = herodetail[6];
+			far = herodetail[7];
+			round = herodetail[8];
+			conti = herodetail[9];
+		};
+		getHero.send();
 		music.src = "music/compass_" + nowWho + ".mp3";
 		music.volume = 0.2;
 		if(pauseClick == 0)
@@ -581,18 +692,6 @@
 		all.style.opacity = 0;
 		all.style.transition = "opacity 0.5s ease-in";
 		detail.style.display = "inline";
-		getHero.open("get", "picture/character/" + nowWho + "/figure.txt");
-		getHero.onload = function(){
-			var data = this.responseText;
-			herodetail = data.split(",");
-		
-			t = herodetail[1];
-			n = herodetail[2];
-			a = herodetail[3];
-			d = herodetail[4];
-			h = herodetail[5];
-		};
-		getHero.send();
 	}
 	
 	var nowpicNum;
@@ -817,6 +916,11 @@
 		$("#hp").css("transition", "width 2s ease");
 		$("#hp2").css("width", $(".progressbar").width());
 		hp2.innerHTML = "&times;" + h;
+
+		$(".nearRate").html(near);
+		$(".farRate").html(far);
+		$(".roundRate").html(round);
+		$(".continueRate").html(conti);
 	}
 	
 	function playmusic(){
