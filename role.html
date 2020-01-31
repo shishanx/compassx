@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -719,10 +719,8 @@
 		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
-		var back = document.getElementById("backTOall");
 		$("html,body").animate({scrollTop:0}, 333);
 
-		back.style.visibility = "visible";
 		all.style.opacity = 0;
 		all.style.transition = "opacity 0.5s ease-in";
 		side.css("opacity", 0);
@@ -782,6 +780,7 @@
 				nowpicNum = 1;
 			$(".loading").css("display", "none");
 			var s = "#img" + nowpicNum;
+			$("#backTOall").css("visibility", "visible");
 			$(s).css("visibility", "visible");
 			runHerodata();
 		}
