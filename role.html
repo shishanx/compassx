@@ -21,7 +21,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <style type = "text/css">
-	body{
+	body>div{
 		background-image:url(picture/back/character_filter.png);
 		background-attachment:fixed;
 		background-position:center;
@@ -39,6 +39,7 @@
 	.title{
 		width: 90%;
 		margin-top: -20%;
+		margin-bottom: -4%;
 		visibility: hidden;
 	}
 	.title div{
@@ -75,7 +76,6 @@
 		justify-content: center;
 		background: rgba(255, 255, 255, 0.5);
 		z-index: 1;
-		margin-left: -20%;
 	}
 	#category img{
 		margin-bottom: 45%;
@@ -92,7 +92,7 @@
 		align-items: center;
 		background: rgba(255, 255, 255, 0.5);
 		position: absolute;
-		width: 100%;
+		right: 0px;
 	}
 	.changepic img:hover{
 		cursor: pointer;
@@ -143,19 +143,19 @@
 	}
 	/*add*/
 	#img1{
-		width: 65%;
-		margin-left: 16%;
+		width: 100%;
 		height: 70vh;
-		background: white;
 		position: absolute;
+		justify-content: center;
 		visibility: hidden;
 		opacity: 1;
 		display: flex;
 		cursor: pointer;
 	}
 	#figurebox{
-		width: 71.5%;
+		width: 50%;
 		padding: 3.5%;
+		background: white;
 	}
 	.progressbar{
 		display: inline-flex;
@@ -180,7 +180,6 @@
 		font-size: 1px;
 	}
 	#salonbox{
-		width: 28.5%;
 	}
 	#salonbox img{
 		height: 100%;
@@ -206,14 +205,14 @@
 		color: white;
 		border-bottom: 2px solid darkgray;
 		text-align: center;
-		font-size: 23px;
+		font-size: 20px;
 		font-weight: bold;
 	}
 	.cardType{
 		width: 25%;
 		color: white;
 		text-align: center;
-		font-size: 23px;
+		font-size: 20px;
 		border-right: 2px solid darkgray;
 		background-color: #424242;
 	}
@@ -221,14 +220,14 @@
 		width: 25%;
 		color: white;
 		text-align: center;
-		font-size: 23px;
+		font-size: 20px;
 		background-color: #424242;
 	}
 	.cardRate{
 		width: 100%;
 		color: white;
 		text-align: center;
-		font-size: 80px;
+		font-size: 75px;
 		font-weight: bold;
 		margin-top: -20px;
 	}
@@ -271,8 +270,11 @@
 		font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 		font-size: 30px;
 		font-weight: bold;
-		margin-top: -3%;
+		margin-top: -2%;
 		visibility: hidden;
+	}
+	#backTOall span{
+		width: 1%;
 	}
 	#backTOall span:hover{
 		color: blue;
@@ -336,9 +338,7 @@
 		}
 		/*add*/
 		#img1{
-			width: 100vw;
-			margin-left: 0%;
-			display: inline;
+			flex-wrap: wrap;
 		}
 		#figurebox{
 			width: 100vw;
@@ -350,10 +350,10 @@
 			font-size: 18px;
 		}
 		#salonbox{
-			width: 100vw;
+			/*width in JS*/
 		}
 		#salonbox img{
-			width: 99.5vw;
+			width: 100%;
 		}
 		#typeicon{
 			width: 11%;
@@ -369,6 +369,18 @@
 		}
 		#useCardm{
 			display: block;
+		}
+		#useCardTitle{
+			font-size: 17px;
+		}
+		.cardType{
+			font-size: 17px;
+		}
+		.continueCard{
+			font-size: 17px;
+		}
+		.cardRate{
+			font-size: 65px;
 		}
 		#img2 img{
 			width: 100%;
@@ -393,176 +405,200 @@
 <link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <body>
-	<nav>
-		<div class = "iconbox" style = "display: inline-block;">
-			<img id = "icon" src = "compass mark.png" onclick = "icon();" alt="">
-			<div id = "iconclick">&larr;click</div>
+	<div>
+		<nav>
+			<div class = "iconbox" style = "display: inline-block;">
+				<img id = "icon" src = "compass mark.png" onclick = "icon();" alt="">
+				<div id = "iconclick">click</div>
+			</div>
+			<div class = "title">
+				<div id = "home"><span onclick = "changeTo('index');">HOME</span></div>
+				<div id = "cards"><span onclick = "changeTo('cards');">CARDS</span></div>
+			</div>
+			<div id = "musicbox">
+				<span id = "pl" style = "cursor: pointer;" onclick = "stopmusic();">&#9835;&ensp;</span>
+				<div id = "pau" style = "cursor: pointer; display: inline; right: 0px; position: absolute;" onclick = "playmusic();">&#10006;&ensp;</div>
+				<audio id = "music" src="music/COMPASS.mp3" hidden="true" loop="loop"></audio>
+			</div>
+		</nav>
+		<div id = "backTOall">
+			<span id = "img1_num" onclick = "slideto(1);" style = "color: blue;">1</span>
+			<span id = "img2_num" onclick = "slideto(2);">2</span>
+			<span id = "img3_num" onclick = "slideto(3);">3</span>
+			<span id = "img4_num" onclick = "slideto(4);">4</span>
+			<span onclick = "lastdiv();">back</span>
 		</div>
-		<div class = "title">
-			<div id = "home"><span onclick = "changeTo('index');">HOME</span></div>
-			<div id = "cards"><span onclick = "changeTo('cards');">CARDS</span></div>
-		</div>
-		<div id = "musicbox">
-			<span id = "pl" style = "cursor: pointer;" onclick = "stopmusic();">&#9835;&ensp;</span>
-			<div id = "pau" style = "cursor: pointer; display: inline; right: 0px; position: absolute;" onclick = "playmusic();">&#10006;&ensp;</div>
-			<audio id = "music" src="music/COMPASS.mp3" hidden="true" loop="loop"></audio>
-		</div>
-	</nav>
-	<div id = "backTOall">
-		<span onclick = "lastdiv();">back</span>
-	</div>
-	<div class = "content">
-		<div id = "category">
-			<div>
-				<img id = "picw" onclick = "herotype('w');" src = "picture/character/wicon.png">
-				<img id = "picr" onclick = "herotype('r');" src = "picture/character/ricon.png">
-				<img id = "picd" onclick = "herotype('d');" src = "picture/character/dicon.png">
-				<img id = "pica" onclick = "herotype('a');" src = "picture/character/aicon.png">
-				<img id = "picg" onclick = "herotype('g');" src = "picture/character/gicon.png">
-			</div>
-		</div>
-		<div id = "roleALL">
-			<div class = "changepic r" id = "changepic1">
-				<img onclick = "nextdiv('shiwenzi');" src = "picture/character/shiwenzi/1_shiwenzi.png"/>
-				<img src = "picture/character/shiwenzi/1.png"/>
-			</div>
-			<div class = "changepic d" id = "changepic2">
-				<img onclick = "nextdiv('justice');" src = "picture/character/justice/2_justice.png"/>
-				<img src = "picture/character/justice/2.png"/>
-			</div>
-			<div class = "changepic g" id = "changepic3">
-				<img onclick = "nextdiv('lilica');" src = "picture/character/lilica/3_lilica.png"/>
-				<img src = "picture/character/lilica/3.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic4">
-				<img onclick = "nextdiv('naibao');" src = "picture/character/naibao/4_naibao.png"/>
-				<img src = "picture/character/naibao/4.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic5">
-				<img onclick = "nextdiv('green');" src = "picture/character/green/5_green.png"/>
-				<img src = "picture/character/green/5.png"/>
-			</div>
-			<div class = "changepic d" id = "changepic6">
-				<img onclick = "nextdiv('zhende');" src = "picture/character/zhende/6_zhende.png"/>
-				<img src = "picture/character/zhende/6.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic7">
-				<img onclick = "nextdiv('55');" src = "picture/character/55/7_55.png"/>
-				<img src = "picture/character/55/7.png"/>
-			</div>
-			<div class = "changepic g" id = "changepic8">
-				<img onclick = "nextdiv('unclegun');" src = "picture/character/unclegun/8_unclegun.png"/>
-				<img src = "picture/character/unclegun/8.png"/>
-			</div>
-			<div class = "changepic r" id = "changepic9">
-				<img onclick = "nextdiv('littlewhite');" src = "picture/character/littlewhite/9_littlewhite.png"/>
-				<img src = "picture/character/littlewhite/9.png"/>
-			</div>
-			<div class = "changepic g" id = "changepic10">
-				<img onclick = "nextdiv('paogirl');" src = "picture/character/paogirl/10_paogirl.png"/>
-				<img src = "picture/character/paogirl/10.png"/>
-			</div>
-			<div class = "changepic d" id = "changepic11">
-				<img onclick = "nextdiv('poison');" src = "picture/character/poison/11_poison.png"/>
-				<img src = "picture/character/poison/11.png"/>
-			</div>
-			<div class = "changepic r" id = "changepic12">
-				<img onclick = "nextdiv('scientist');" src = "picture/character/scientist/12_scientist.png"/>
-				<img src = "picture/character/scientist/12.png"/>
-			</div>
-			<div class = "changepic d" id = "changepic13">
-				<img onclick = "nextdiv('musician');" src = "picture/character/musician/13_musician.png"/>
-				<img src = "picture/character/musician/13.png"/>
-			</div>
-			<div class = "changepic r" id = "changepic14">
-				<img onclick = "nextdiv('doll');" src = "picture/character/doll/14_doll.png"/>
-				<img src = "picture/character/doll/14.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic15">
-				<img onclick = "nextdiv('cc');" src = "picture/character/cc/15_cc.png"/>
-				<img src = "picture/character/cc/15.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic16">
-				<img onclick = "nextdiv('ice');" src = "picture/character/ice/16_ice.png"/>
-				<img src = "picture/character/ice/16.png"/>
-			</div>
-			<div class = "changepic g" id = "changepic17">
-				<img onclick = "nextdiv('13');" src = "picture/character/13/17_13.png"/>
-				<img src = "picture/character/13/17.png"/>
-			</div>
-			<div class = "changepic r" id = "changepic18">
-				<img onclick = "nextdiv('jump');" src = "picture/character/jump/18_jump.png"/>
-				<img src = "picture/character/jump/18.png"/>
-			</div>
-			<div class = "changepic g" id = "changepic19">
-				<img onclick = "nextdiv('rabbit');" src = "picture/character/rabbit/19_rabbit.png"/>
-				<img src = "picture/character/rabbit/19.png"/>
-			</div>
-			<div class = "changepic g" id = "changepic20">
-				<img onclick = "nextdiv('eagle');" src = "picture/character/eagle/20_eagle.png"/>
-				<img src = "picture/character/eagle/20.png"/>
-			</div>
-			<div class = "changepic r" id = "changepic21">
-				<img onclick = "nextdiv('ninja');" src = "picture/character/ninja/21_ninja.png"/>
-				<img src = "picture/character/ninja/21.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic22">
-				<img onclick = "nextdiv('tube');" src = "picture/character/tube/22_tube.png"/>
-				<img src = "picture/character/tube/22.png"/>
-			</div>
-			<div class = "changepic g" id = "changepic23">
-				<img onclick = "nextdiv('didi');" src = "picture/character/didi/23_didi.png"/>
-				<img src = "picture/character/didi/23.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic24">
-				<img onclick = "nextdiv('ghostdragon');" src = "picture/character/ghostdragon/24_ghostdragon.png"/>
-				<img src = "picture/character/ghostdragon/24.png"/>
-			</div>
-			<div class = "changepic d" id = "changepic25">
-				<img onclick = "nextdiv('grandpa');" src = "picture/character/grandpa/25_grandpa.png"/>
-				<img src = "picture/character/grandpa/25.png"/>
-			</div>
-			<div class = "changepic r" id = "changepic26">
-				<img onclick = "nextdiv('skateboy');" src = "picture/character/skateboy/26_skateboy.png"/>
-				<img src = "picture/character/skateboy/26.png"/>
-			</div>
-			<div class = "changepic a" id = "changepic27">
-				<img onclick = "nextdiv('ruruca');" src = "picture/character/ruruca/27_ruruca.png"/>
-				<img src = "picture/character/ruruca/27.png"/>
-			</div>
-		</div>
-		<div id = "roleDETAIL">
-			<div id = "roleintro">
-				<div class = "loading">
-					<div style = "width: 100%;"><img class = "spinmark" src = "compass mark.png"></div>
+		<div class = "content">
+			<div id = "category">
+				<div>
+					<img id = "picw" onclick = "herotype('w');" src = "picture/character/wicon.png">
+					<img id = "picr" onclick = "herotype('r');" src = "picture/character/ricon.png">
+					<img id = "picd" onclick = "herotype('d');" src = "picture/character/dicon.png">
+					<img id = "pica" onclick = "herotype('a');" src = "picture/character/aicon.png">
+					<img id = "picg" onclick = "herotype('g');" src = "picture/character/gicon.png">
 				</div>
-				<div onclick = "slide(1);" id = "img1">
-					<div id = "figurebox">
-						<div id = "HERONAME"><img id = "typeicon"> </div>
-						<div style = "width: 100%; display: flex;">
-							<div class = "FIGURE">攻擊</div>
-							<div class = "progressbar">
-								<div class = "progressinner" id = "attack">&emsp;</div>
-								<div class = "progressinner2" id = "attack2"></div>
+			</div>
+			<div id = "roleALL">
+				<div class = "changepic r" id = "changepic1">
+					<img onclick = "nextdiv('shiwenzi');" src = "picture/character/shiwenzi/1_shiwenzi.png"/>
+					<img src = "picture/character/shiwenzi/1.png"/>
+				</div>
+				<div class = "changepic d" id = "changepic2">
+					<img onclick = "nextdiv('justice');" src = "picture/character/justice/2_justice.png"/>
+					<img src = "picture/character/justice/2.png"/>
+				</div>
+				<div class = "changepic g" id = "changepic3">
+					<img onclick = "nextdiv('lilica');" src = "picture/character/lilica/3_lilica.png"/>
+					<img src = "picture/character/lilica/3.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic4">
+					<img onclick = "nextdiv('naibao');" src = "picture/character/naibao/4_naibao.png"/>
+					<img src = "picture/character/naibao/4.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic5">
+					<img onclick = "nextdiv('green');" src = "picture/character/green/5_green.png"/>
+					<img src = "picture/character/green/5.png"/>
+				</div>
+				<div class = "changepic d" id = "changepic6">
+					<img onclick = "nextdiv('zhende');" src = "picture/character/zhende/6_zhende.png"/>
+					<img src = "picture/character/zhende/6.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic7">
+					<img onclick = "nextdiv('55');" src = "picture/character/55/7_55.png"/>
+					<img src = "picture/character/55/7.png"/>
+				</div>
+				<div class = "changepic g" id = "changepic8">
+					<img onclick = "nextdiv('unclegun');" src = "picture/character/unclegun/8_unclegun.png"/>
+					<img src = "picture/character/unclegun/8.png"/>
+				</div>
+				<div class = "changepic r" id = "changepic9">
+					<img onclick = "nextdiv('littlewhite');" src = "picture/character/littlewhite/9_littlewhite.png"/>
+					<img src = "picture/character/littlewhite/9.png"/>
+				</div>
+				<div class = "changepic g" id = "changepic10">
+					<img onclick = "nextdiv('paogirl');" src = "picture/character/paogirl/10_paogirl.png"/>
+					<img src = "picture/character/paogirl/10.png"/>
+				</div>
+				<div class = "changepic d" id = "changepic11">
+					<img onclick = "nextdiv('poison');" src = "picture/character/poison/11_poison.png"/>
+					<img src = "picture/character/poison/11.png"/>
+				</div>
+				<div class = "changepic r" id = "changepic12">
+					<img onclick = "nextdiv('scientist');" src = "picture/character/scientist/12_scientist.png"/>
+					<img src = "picture/character/scientist/12.png"/>
+				</div>
+				<div class = "changepic d" id = "changepic13">
+					<img onclick = "nextdiv('musician');" src = "picture/character/musician/13_musician.png"/>
+					<img src = "picture/character/musician/13.png"/>
+				</div>
+				<div class = "changepic r" id = "changepic14">
+					<img onclick = "nextdiv('doll');" src = "picture/character/doll/14_doll.png"/>
+					<img src = "picture/character/doll/14.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic15">
+					<img onclick = "nextdiv('cc');" src = "picture/character/cc/15_cc.png"/>
+					<img src = "picture/character/cc/15.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic16">
+					<img onclick = "nextdiv('ice');" src = "picture/character/ice/16_ice.png"/>
+					<img src = "picture/character/ice/16.png"/>
+				</div>
+				<div class = "changepic g" id = "changepic17">
+					<img onclick = "nextdiv('13');" src = "picture/character/13/17_13.png"/>
+					<img src = "picture/character/13/17.png"/>
+				</div>
+				<div class = "changepic r" id = "changepic18">
+					<img onclick = "nextdiv('jump');" src = "picture/character/jump/18_jump.png"/>
+					<img src = "picture/character/jump/18.png"/>
+				</div>
+				<div class = "changepic g" id = "changepic19">
+					<img onclick = "nextdiv('rabbit');" src = "picture/character/rabbit/19_rabbit.png"/>
+					<img src = "picture/character/rabbit/19.png"/>
+				</div>
+				<div class = "changepic g" id = "changepic20">
+					<img onclick = "nextdiv('eagle');" src = "picture/character/eagle/20_eagle.png"/>
+					<img src = "picture/character/eagle/20.png"/>
+				</div>
+				<div class = "changepic r" id = "changepic21">
+					<img onclick = "nextdiv('ninja');" src = "picture/character/ninja/21_ninja.png"/>
+					<img src = "picture/character/ninja/21.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic22">
+					<img onclick = "nextdiv('tube');" src = "picture/character/tube/22_tube.png"/>
+					<img src = "picture/character/tube/22.png"/>
+				</div>
+				<div class = "changepic g" id = "changepic23">
+					<img onclick = "nextdiv('didi');" src = "picture/character/didi/23_didi.png"/>
+					<img src = "picture/character/didi/23.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic24">
+					<img onclick = "nextdiv('ghostdragon');" src = "picture/character/ghostdragon/24_ghostdragon.png"/>
+					<img src = "picture/character/ghostdragon/24.png"/>
+				</div>
+				<div class = "changepic d" id = "changepic25">
+					<img onclick = "nextdiv('grandpa');" src = "picture/character/grandpa/25_grandpa.png"/>
+					<img src = "picture/character/grandpa/25.png"/>
+				</div>
+				<div class = "changepic r" id = "changepic26">
+					<img onclick = "nextdiv('skateboy');" src = "picture/character/skateboy/26_skateboy.png"/>
+					<img src = "picture/character/skateboy/26.png"/>
+				</div>
+				<div class = "changepic a" id = "changepic27">
+					<img onclick = "nextdiv('ruruca');" src = "picture/character/ruruca/27_ruruca.png"/>
+					<img src = "picture/character/ruruca/27.png"/>
+				</div>
+			</div>
+			<div id = "roleDETAIL">
+				<div id = "roleintro">
+					<div class = "loading">
+						<div style = "width: 100%;"><img class = "spinmark" src = "compass mark.png"></div>
+					</div>
+					<div onclick = "slide(1);" id = "img1">
+						<div id = "figurebox">
+							<div id = "HERONAME"><img id = "typeicon"> </div>
+							<div style = "width: 100%; display: flex;">
+								<div class = "FIGURE">攻擊</div>
+								<div class = "progressbar">
+									<div class = "progressinner" id = "attack">&emsp;</div>
+									<div class = "progressinner2" id = "attack2"></div>
+								</div>
+							</div>
+							<div class = "spaceline">&emsp;</div>
+							<div style = "width: 100%; display: flex;">
+								<div class = "FIGURE">防禦</div>
+								<div class = "progressbar">
+									<div class = "progressinner" id = "defence">&emsp;</div>
+									<div class = "progressinner2" id = "defence2"></div>
+								</div>
+							</div>
+							<div class = "spaceline">&emsp;</div>
+							<div style = "width: 100%; display: flex;">
+								<div class = "FIGURE">體力</div>
+								<div class = "progressbar">
+									<div class = "progressinner" id = "hp">&emsp;</div>
+									<div class = "progressinner2" id = "hp2"></div>
+								</div>
+							</div>
+							<div id = "useCard">
+								<div id = "useCardTitle">カードスキル発動速度</div>
+								<div style = "display: flex;">
+									<div class = "cardType">近距離
+										<div class = "cardRate nearRate">速</div>
+									</div>
+									<div class = "cardType">遠距離
+										<div class = "cardRate farRate">速</div>
+									</div>
+									<div class = "cardType">周　圍
+										<div class = "cardRate roundRate">速</div>
+									</div>
+									<div class = "continueCard">連　續
+										<div class = "cardRate continueRate">速</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class = "spaceline">&emsp;</div>
-						<div style = "width: 100%; display: flex;">
-							<div class = "FIGURE">防禦</div>
-							<div class = "progressbar">
-								<div class = "progressinner" id = "defence">&emsp;</div>
-								<div class = "progressinner2" id = "defence2"></div>
-							</div>
-						</div>
-						<div class = "spaceline">&emsp;</div>
-						<div style = "width: 100%; display: flex;">
-							<div class = "FIGURE">體力</div>
-							<div class = "progressbar">
-								<div class = "progressinner" id = "hp">&emsp;</div>
-								<div class = "progressinner2" id = "hp2"></div>
-							</div>
-						</div>
-						<div id = "useCard">
+						<div id = "salonbox"></div>
+						<div id = "useCardm">
 							<div id = "useCardTitle">カードスキル発動速度</div>
 							<div style = "display: flex;">
 								<div class = "cardType">近距離
@@ -580,34 +616,17 @@
 							</div>
 						</div>
 					</div>
-					<div id = "salonbox"></div>
-					<div id = "useCardm">
-						<div id = "useCardTitle">カードスキル発動速度</div>
-						<div style = "display: flex;">
-							<div class = "cardType">近距離
-								<div class = "cardRate nearRate">速</div>
-							</div>
-							<div class = "cardType">遠距離
-								<div class = "cardRate farRate">速</div>
-							</div>
-							<div class = "cardType">周　圍
-								<div class = "cardRate roundRate">速</div>
-							</div>
-							<div class = "continueCard">連　續
-								<div class = "cardRate continueRate">速</div>
-							</div>
-						</div>
-					</div>
+					<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
+					<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
+					<div onclick = "slide(4);" id = "img4"><!-- <img> by JS--></div>
 				</div>
-				<div onclick = "slide(2);" id = "img2"><!-- <img> by JS--></div>
-				<div onclick = "slide(3);" id = "img3"><!-- <img> by JS--></div>
-				<div onclick = "slide(4);" id = "img4"><!-- <img> by JS--></div>
 			</div>
 		</div>
 	</div>
 </body>
 <script type = "text/javascript">
 	$("#category").css("width", $("#icon").width());
+	$("#roleALL").css("width", document.documentElement.clientWidth-$("#category").width());
 	var h = document.documentElement.clientHeight-$("#icon").height();
 	if(h < $("#roleALL").height()){
 		h = $("#roleALL").height() + 10;
@@ -617,6 +636,22 @@
 	
 	window.onresize = function(){
 		$("#category").css("width", $("#icon").width());
+		$("#roleALL").css("width", document.documentElement.clientWidth-$("#category").width());
+		if($("#roleDETAIL").css("display") == "none"){//bug of change window size in roleALL
+			$("#roleDETAIL").css("opacity", 0);
+			$("#roleDETAIL").css("display", "inline");
+		}
+		if(window.innerWidth > 550){
+			$("#salonbox").css("width", $("#salonbox img").width());
+		}
+		else{
+			$("#salonbox").css("width", "100vw");
+		}
+		if($("#roleDETAIL").css("opacity") == 0){
+			$("#roleDETAIL").css("opacity", 1);
+			$("#roleDETAIL").css("display", "none");
+		}
+		
 		var h = document.documentElement.clientHeight-$("#icon").height();
 		if(h < $("#roleALL").height()){
 			h = $("#roleALL").height() + 10;
@@ -691,10 +726,13 @@
 		back.style.visibility = "visible";
 		all.style.opacity = 0;
 		all.style.transition = "opacity 0.5s ease-in";
+		side.css("opacity", 0);
+		side.css("transition", "opacity 0.5s ease-in");
 		detail.style.display = "inline";
 	}
 	
 	var nowpicNum;
+	var c = 0;
 	function preload(){
 		//add
 		var salonbox_img = new Image();
@@ -730,6 +768,17 @@
 			$("#img4 img").css("width", "100vw");
 		}
 		model_img.onload = function(){
+			if(c != 1){
+				if($("#salonbox").width() > 1000){
+					c = 1;
+					if(window.innerWidth > 550){
+						$("#salonbox").css("width", $("#salonbox img").width());
+					}
+					else{
+						$("#salonbox").css("width", "100vw");
+					}
+				}
+			}
 			if(nowpicNum == null)
 				nowpicNum = 1;
 			$(".loading").css("display", "none");
@@ -741,15 +790,20 @@
 	
 	function lastdiv(){
 		toolBack();
+		slideto(1);
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
 		var back = document.getElementById("backTOall");
 		all.style.removeProperty("opacity");
 		all.style.removeProperty("transition");
+		side.css("opacity", "");
+		side.css("transition", "");
 		
 		back.style.visibility = "hidden";
 		all.style.opacity = 1;
 		all.style.transition = "opacity 0.5s ease-in";
+		side.css("opacity", 1);
+		side.css("transition", "opacity 0.5s ease-in");
 		detail.style.display = "none";
 		$("#attack").css("width", "");
 		$("#defence").css("width", "");
@@ -777,15 +831,15 @@
 			$("#icon").css("animation", "initial");
 			title.css("margin-top", "0%");
 			title.css("transition", "margin-top 0.8s ease");
-			side.css("margin-left", "0%");
-			side.css("transition", "margin-left 0.8s ease");
+			/*side.css("margin-left", "0%");
+			side.css("transition", "margin-left 0.8s ease");*/
 		}
 		else{
-			$("#icon").css("animation", "grow 0.65s linear infinite");
+			//$("#icon").css("animation", "grow 0.65s linear infinite");
 			title.css("margin-top", "-20%");
 			title.css("transition", "margin-top 1s ease");
-			side.css("margin-left", "-20%");
-			side.css("transition", "margin-left 1s ease");
+			/*side.css("margin-left", "-20%");
+			side.css("transition", "margin-left 1s ease");*/
 		}
 	}
 	
@@ -822,9 +876,12 @@
 	
 	const numOFpic = 4;//add
 	function slide(picNum){
+		if(picNum == 1)
+			$("html,body").animate({scrollTop:0}, 333);
 		nowpicNum = picNum + 1;
 		if(nowpicNum == numOFpic+1)
 			nowpicNum = 1;
+		changeColor(nowpicNum);
 		toolBack();
 		$(".progressinner2").css("width", $(".progressbar").width());
 		var before = document.getElementById("img"+Number(picNum-1))
@@ -871,23 +928,30 @@
 			before.style.paddingRight = "0px";
 		}
 	}
+	function slideto(num){
+		while(num != nowpicNum){
+			slide(nowpicNum);
+		}
+		changeColor(num);
+	}
+	
+	function changeColor(num){
+		for(var i = 1; i <= numOFpic; i++){
+			if(i != num)
+				$("#img" + i + "_num").css("color", "");
+			else{
+				$("#img" + i + "_num").css("color", "blue");
+			}
+		}
+	}
 	
 	function toolBack(){
 		clickcount = 0;
-		if(clickcount % 2 != 0){
-			$("#icon").css("animation", "initial");
-			title.css("margin-top", "0%");
-			title.css("transition", "margin-top 0.8s ease");
-			side.css("margin-left", "0%");
-			side.css("transition", "margin-left 0.8s ease");
-		}
-		else{
-			$("#icon").css("animation", "grow 0.65s linear infinite");
-			title.css("margin-top", "-20%");
-			title.css("transition", "margin-top 1s ease");
-			side.css("margin-left", "-20%");
-			side.css("transition", "margin-left 1s ease");
-		}
+		//$("#icon").css("animation", "grow 0.65s linear infinite");
+		title.css("margin-top", "-20%");
+		title.css("transition", "margin-top 1s ease");
+		/*side.css("margin-left", "-20%");
+		side.css("transition", "margin-left 1s ease");*/
 	}
 	
 	function runHerodata(){
