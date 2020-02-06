@@ -676,22 +676,6 @@
 	}
 	
 	const hero_num = 27;
-	for(var i = 1; i <= hero_num; i++){//preload pics
-		var folder = $("#changepic" + i + " img").attr("src").split("/")[2];
-	
-		var picd = new XMLHttpRequest();
-		picd.open("get", "picture/character/" + folder + "/d.png");
-		picd.send();
-		
-		var pics = new XMLHttpRequest();
-		pics.open("get", "picture/character/" + folder + "/s.png");
-		pics.send();
-		
-		var pics2 = new XMLHttpRequest();
-		pics2.open("get", "picture/character/" + folder + "/s2.png");
-		pics2.send();
-	}
-	
 	var herodetail = new Array(10);
 	var getHero = new XMLHttpRequest();
 	var clickcount = 0;
