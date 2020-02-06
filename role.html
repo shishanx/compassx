@@ -726,12 +726,14 @@
 			round = herodetail[8];
 			conti = herodetail[9];
 		};
+		getHero.addEventListener("load", function(){
+			preload();
+		});
 		getHero.send();
 		music.src = "music/compass_" + nowWho + ".mp3";
 		music.volume = 0.2;
 		if(pauseClick == 0)
 			playmusic();
-		preload();
 		toolBack();
 		var all = document.getElementById("roleALL");
 		var detail = document.getElementById("roleDETAIL");
@@ -1009,8 +1011,10 @@
 	
 	function stopmusic(){
 		pauseClick = 1;
-		$("#pau").css("display", "inline");
-		music.pause();
+		if(music.currentTime){
+			$("#pau").css("display", "inline");
+			music.pause();
+		}
 	}
 </script>
 </html>
