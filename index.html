@@ -246,7 +246,7 @@
 		</nav>
 		<div id = "skip"><span onclick = "skip();">skip</span></div>
 		<div class = "introvideo">
-			<iframe src="https://www.youtube.com/embed/_Pwnrug9Bsk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			<div id = "welcome" >Welcome To #COMPASS</div>
 		</div>
 	</div>
@@ -258,6 +258,14 @@
 		window.open('','_self');
 		window.close();
 	}
+	//------------Get the url of introduce video.------------
+	var iframeSrc = new XMLHttpRequest();
+	iframeSrc.open("get", "src/iframe_src.txt");
+	iframeSrc.onload = function(){
+		$("iframe").attr("src", iframeSrc.responseText);
+	}
+	iframeSrc.send();
+	
 	$("nav").css("height", $(".title div").height());
 	var videoW = $("iframe").width();
 	$("iframe").css("height", videoW*480/853);
