@@ -292,9 +292,9 @@
 						<th>CARD</th>
 						<th>NAME</th>
 						<th>LV</th>
-						<th>ATT♦</th>
-						<th>DEF♦</th>
-						<th>HP♦</th>
+						<th>ATT◂</th>
+						<th>DEF◂</th>
+						<th>HP◂</th>
 					</tr>
 				</table>
 			</div>
@@ -339,9 +339,9 @@
 	var noClick = 0;
 	$("th:nth-child(1)").on("click", function(){
 		noClick++;
-		$("th:nth-child(5)").html("ATT♦");
-		$("th:nth-child(6)").html("DEF♦");
-		$("th:nth-child(7)").html("HP♦");
+		$("th:nth-child(5)").html("ATT◂");
+		$("th:nth-child(6)").html("DEF◂");
+		$("th:nth-child(7)").html("HP◂");
 		if(noClick % 2 != 0){
 			this.innerHTML = "NO.▾";
 		}
@@ -353,9 +353,9 @@
 	var attClick = 0;
 	$("th:nth-child(5)").on("click", function(){
 		attClick++;
-		$("th:nth-child(1)").html("NO.♦");
-		$("th:nth-child(6)").html("DEF♦");
-		$("th:nth-child(7)").html("HP♦");
+		$("th:nth-child(1)").html("NO.◂");
+		$("th:nth-child(6)").html("DEF◂");
+		$("th:nth-child(7)").html("HP◂");
 		if(attClick % 2 != 0){
 			this.innerHTML = "ATT▾";
 		}
@@ -367,9 +367,9 @@
 	var defClick = 0;
 	$("th:nth-child(6)").on("click", function(){
 		defClick++;
-		$("th:nth-child(5)").html("ATT♦");
-		$("th:nth-child(1)").html("NO.♦");
-		$("th:nth-child(7)").html("HP♦");
+		$("th:nth-child(5)").html("ATT◂");
+		$("th:nth-child(1)").html("NO.◂");
+		$("th:nth-child(7)").html("HP◂");
 		if(defClick % 2 != 0){
 			this.innerHTML = "DEF▾";
 		}
@@ -381,9 +381,9 @@
 	var hpClick = 0;
 	$("th:nth-child(7)").on("click", function(){
 		hpClick++;
-		$("th:nth-child(5)").html("ATT♦");
-		$("th:nth-child(6)").html("DEF♦");
-		$("th:nth-child(1)").html("NO.♦");
+		$("th:nth-child(5)").html("ATT◂");
+		$("th:nth-child(6)").html("DEF◂");
+		$("th:nth-child(1)").html("NO.◂");
 		if(hpClick % 2 != 0){
 			this.innerHTML = "HP▾";
 		}
@@ -395,9 +395,9 @@
 	var UR_NUM; 
 	function URnewTable(num){//--------------------------------------------------------For UR
 		$("th:nth-child(1)").html("NO.▴");
-		$("th:nth-child(5)").html("ATT♦");
-		$("th:nth-child(6)").html("DEF♦");
-		$("th:nth-child(7)").html("HP♦");
+		$("th:nth-child(5)").html("ATT◂");
+		$("th:nth-child(6)").html("DEF◂");
+		$("th:nth-child(7)").html("HP◂");
 		var table = document.getElementById("cardTable");
 		now = "UR";
 		const ALL = 0;
@@ -547,9 +547,9 @@
 	}
 	function SRnewTable(num){//--------------------------------------------------------For SR
 		$("th:nth-child(1)").html("NO.▴");
-		$("th:nth-child(5)").html("ATT♦");
-		$("th:nth-child(6)").html("DEF♦");
-		$("th:nth-child(7)").html("HP♦");
+		$("th:nth-child(5)").html("ATT◂");
+		$("th:nth-child(6)").html("DEF◂");
+		$("th:nth-child(7)").html("HP◂");
 		var table = document.getElementById("cardTable");
 		now = "SR";
 		const ALL = 0;
