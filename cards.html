@@ -95,6 +95,9 @@
         -webkit-background-clip: text;
         color: transparent;*/
 	}
+	.list span{
+		font-size: 15px;
+	}
 	#rightarea{
 		width: 90%;
 		height: 79vh;
@@ -217,18 +220,26 @@
 			margin-top: 5%
 		}
 		.list{
+			font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 			font-size: 20px;
 		}
+		.list span{
+			font-size: 8px;
+		}
 		#ur{
+			font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 			font-size: 15px;
 		}
 		#sr{
+			font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 			font-size: 15px;
 		}
 		.attribute{
+			font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 			padding-left: 30%;
 		}
 		#cardTable{
+			font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 			font-size: 15px;
 		}
 	}
@@ -261,13 +272,13 @@
 		</div>
 		<div class = "content">
 			<div id = "leftarea" onmouseout = "disappear();">
-				<div class = "list" onmouseover = "appear('ur');" onclick = "URnewTable(0);">UR<span style = "font-size:15px;">▼</span></div>
+				<div class = "list" onmouseover = "appear('ur');" onclick = "URnewTable(0);">UR<span>▼</span></div>
 				<div id = "ur" style = "visibility: hidden;">
 					<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(1);" id = "fire" >火</div>
 					<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(2);" id = "water">水</div>
 					<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(3);" id = "wood" >木</div>
 				</div>
-				<div class = "list" onmouseover = "appear('sr');" onclick = "SRnewTable(0);">SR<span style = "font-size:15px">▼</span></div>
+				<div class = "list" onmouseover = "appear('sr');" onclick = "SRnewTable(0);">SR<span>▼</span></div>
 				<div id = "sr" style = "visibility: hidden;">
 					<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(1);" id = "fire" >火</div>
 					<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(2);" id = "water">水</div>
