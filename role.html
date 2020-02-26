@@ -113,7 +113,6 @@
 	}
 	#roleDETAIL{
 		width: 100%;
-		height: 80vh;
 		display: none;
 		position: absolute;
 	}
@@ -627,6 +626,7 @@
 <script type = "text/javascript">
 	$("#category").css("width", $("#icon").width());
 	$("#roleALL").css("width", document.documentElement.clientWidth-$("#category").width());
+	$("#roleDETAIL").css("height", $("#roleALL").css("height"));
 	var h = document.documentElement.clientHeight-$("#icon").height();
 	if(h < $("#roleALL").height()){
 		h = $("#roleALL").height() + 10;
@@ -637,6 +637,7 @@
 	window.onresize = function(){
 		$("#category").css("width", $("#icon").width());
 		$("#roleALL").css("width", document.documentElement.clientWidth-$("#category").width());
+		$("#roleDETAIL").css("height", $("#roleALL").css("height"));
 		if($("#roleDETAIL").css("display") == "none"){//bug of change window size in roleALL
 			$("#roleDETAIL").css("opacity", 0);
 			$("#roleDETAIL").css("display", "inline");
