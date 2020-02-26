@@ -13,38 +13,70 @@
 
 <meta charset="utf-8">
 <title>Cards</title>
+<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1"/>
+<link href="https://fonts.googleapis.com/css?family=Play|Exo|Cute+Font|Audiowide&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <style type = "text/css">
 	body{
+		margin: 0px;
+	}
+	body>div{
+		height: 100vh;
 		background-image: url(picture/back/back_card_filter.png);
-		background-attachment:fixed;
+		background-attachment: fixed;
 		background-position: center;
 		background-size: 100%, 100%;
 		-webkit-user-select: none;
 		-moz-user-select: none;
 		unselectable: on;
 	}
-	.title{
-		padding-top: 15px;
-		/*position: sticky;
-		top: 10px;*/
+	body::-webkit-scrollbar{
+		display: none;
 	}
-	.title span{
-		margin-right: 15px;
-		font-size: 40px;
-		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
+	nav{
+		display: flex;
+	}
+	.title{
+		width: 90%;
+		margin-top: -20%;
+		margin-bottom: -4%;
+		visibility: hidden;
+	}
+	.title div{
+		display: inline-block;
+		/*background: linear-gradient(45deg, #ccc 25%, #fff 0, #fff 50%, #ccc 0, #ccc 75%, #fff 0);
+		background-position: center;
+		background-size: 40px 40px;*/
+		margin-right: 5%;
+		font-size: 75px;
+		font-family: "Cute Font", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 		font-weight: bold;
 	}
 	.title span:hover{
 		color: green;
 		cursor: pointer;
 	}
+	#icon{
+		width: 70%;
+		animation: grow 0.65s linear infinite;
+	}
+	#iconclick{
+		visibility: hidden;
+		display: inline-block;
+	}
+	#icon:hover{
+		cursor: pointer;
+	}
 	.content{
 		display: flex;
+		margin-top: 2%
 	}
 	#leftarea{
 		width: 10%;
-		height: 350px;
+		height: 50%;
 		border-top: 2px dashed black;
 		border-left: 2px dashed black;
 		border-bottom: 2px dashed black;
@@ -55,7 +87,7 @@
 	.list{
 		padding-top: 20px;
 		text-align: center;
-		font-size: 35px;
+		font-size: 40px;
 		font-weight: bold;
 		font-family: "Comic Sans MS", "Microsoft YaHei", "Microsoft JhengHei", "fantacy";
 		cursor: pointer;
@@ -149,11 +181,56 @@
 		font-size: 28px;
 		font-weight: bold;
 		margin-left: 500px;
-		visibility: visible;
+		display: none;
 	}
 	#viewAll span:hover{
 		color: green;
 		cursor: pointer;
+	}
+	@keyframes grow {
+		0%{
+			transform: scale(0.1);
+			opacity: 0.5;
+		}
+		50%{
+			transform: scale(0.5);
+			opacity: 1;
+		}
+		100%{
+	  		transform: scale(1);
+	  		opacity: 0;
+		}
+	}
+	@media screen and (max-width:550px){
+		.title{
+			margin-left: -10%;
+		}
+		.title div{
+			font-size: 45px;
+			padding-top: 0%;
+			margin-right: 7%;
+		}
+		#icon{
+			width: 50%;
+		}
+		.content{
+			margin-top: 5%
+		}
+		.list{
+			font-size: 20px;
+		}
+		#ur{
+			font-size: 15px;
+		}
+		#sr{
+			font-size: 15px;
+		}
+		.attribute{
+			padding-left: 30%;
+		}
+		#cardTable{
+			font-size: 15px;
+		}
 	}
 	@media screen and (min-width:1400px){
 		#cardTable{
@@ -168,45 +245,56 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body onload = "URnewTable(0); SRnewTable(0);">
-	<div class = "title">
-		<span id = "home" onclick = "changeTo('index');">HOME</span>
-		<span id = "role" onclick = "changeTo('role');">CHARACTER</span>
-		<span id = "cards" onclick = "changeTo('cards');">CARDS</span>
-	</div>
-	<div id = "viewAll">
-		<span onclick = "URnewTable(0); SRnewTable(0);">└ all</span>
-	</div>
-	<div class = "content">
-		<div id = "leftarea" onmouseout = "disappear();">
-			<div class = "list" onmouseover = "appear('ur');">UR<span style = "font-size:15px;">▼</span></div>
-			<div id = "ur" style = "visibility: hidden;">
-				<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(1);" id = "fire" >火</div>
-				<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(2);" id = "water">水</div>
-				<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(3);" id = "wood" >木</div>
+	<div>
+		<nav>
+			<div class = "iconbox" style = "display: inline-block;">
+				<img id = "icon" src = "compass mark.png" onclick = "icon();" alt="">
+				<div id = "iconclick">click</div>
 			</div>
-			<div class = "list" onmouseover = "appear('sr');">SR<span style = "font-size:15px">▼</span></div>
-			<div id = "sr" style = "visibility: hidden;">
-				<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(1);" id = "fire" >火</div>
-				<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(2);" id = "water">水</div>
-				<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(3);" id = "wood" >木</div>
+			<div class = "title">
+				<div id = "home"><span onclick = "changeTo('index');">HOME</span></div>
+				<div id = "cards"><span onclick = "changeTo('role');">HERO</span></div>
 			</div>
+		</nav>
+		<div id = "viewAll">
+			<span onclick = "URnewTable(0); SRnewTable(0);">└ all</span>
 		</div>
-		<div id = "rightarea">
-			<table id = "cardTable">
-				<tr>
-					<th>NO.</th>
-					<th>CARD</th>
-					<th>NAME</th>
-					<th>LV</th>
-					<th>ATT</th>
-					<th>DEF</th>
-					<th>HP</th>
-				</tr>
-			</table>
+		<div class = "content">
+			<div id = "leftarea" onmouseout = "disappear();">
+				<div class = "list" onmouseover = "appear('ur');" onclick = "URnewTable(0);">UR<span style = "font-size:15px;">▼</span></div>
+				<div id = "ur" style = "visibility: hidden;">
+					<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(1);" id = "fire" >火</div>
+					<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(2);" id = "water">水</div>
+					<div class = "attribute" onmouseover = "appear('ur');" onclick = "URnewTable(3);" id = "wood" >木</div>
+				</div>
+				<div class = "list" onmouseover = "appear('sr');" onclick = "SRnewTable(0);">SR<span style = "font-size:15px">▼</span></div>
+				<div id = "sr" style = "visibility: hidden;">
+					<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(1);" id = "fire" >火</div>
+					<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(2);" id = "water">水</div>
+					<div class = "attribute" onmouseover = "appear('sr');" onclick = "SRnewTable(3);" id = "wood" >木</div>
+				</div>
+			</div>
+			<div id = "rightarea">
+				<table id = "cardTable">
+					<tr>
+						<th>NO.▴</th>
+						<th>CARD</th>
+						<th>NAME</th>
+						<th>LV</th>
+						<th>ATT◆</th>
+						<th>DEF◆</th>
+						<th>HP◆</th>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>
 <script type = "text/javascript">
+	var clickcount = 0;
+	var title = $(".title");
+	var now = "ALL";
+	var last;
 	function changeTo(page){
 		if(page == "cards"){
 			window.location.reload();
@@ -236,9 +324,71 @@
 			s.style.visibility = "hidden";
 		}
 	}
+	
+	var noClick = 0;
+	$("th:nth-child(1)").on("click", function(){
+		noClick++;
+		$("th:nth-child(5)").html("ATT◆");
+		$("th:nth-child(6)").html("DEF◆");
+		$("th:nth-child(7)").html("HP◆");
+		if(noClick % 2 != 0){
+			this.innerHTML = "NO.▾";
+		}
+		else{
+			this.innerHTML = "NO.▴";
+		}
+		cardSort(0, noClick);
+	});
+	var attClick = 0;
+	$("th:nth-child(5)").on("click", function(){
+		attClick++;
+		$("th:nth-child(1)").html("NO.◆");
+		$("th:nth-child(6)").html("DEF◆");
+		$("th:nth-child(7)").html("HP◆");
+		if(attClick % 2 != 0){
+			this.innerHTML = "ATT▾";
+		}
+		else{
+			this.innerHTML = "ATT▴";
+		}
+		cardSort(4, attClick);
+	});
+	var defClick = 0;
+	$("th:nth-child(6)").on("click", function(){
+		defClick++;
+		$("th:nth-child(5)").html("ATT◆");
+		$("th:nth-child(1)").html("NO.◆");
+		$("th:nth-child(7)").html("HP◆");
+		if(defClick % 2 != 0){
+			this.innerHTML = "DEF▾";
+		}
+		else{
+			this.innerHTML = "DEF▴";
+		}
+		cardSort(5, defClick);
+	});
+	var hpClick = 0;
+	$("th:nth-child(7)").on("click", function(){
+		hpClick++;
+		$("th:nth-child(5)").html("ATT◆");
+		$("th:nth-child(6)").html("DEF◆");
+		$("th:nth-child(1)").html("NO.◆");
+		if(hpClick % 2 != 0){
+			this.innerHTML = "HP▾";
+		}
+		else{
+			this.innerHTML = "HP▴";
+		}
+		cardSort(6, hpClick);
+	});
 	var UR_NUM; 
 	function URnewTable(num){//--------------------------------------------------------For UR
+		$("th:nth-child(1)").html("NO.▴");
+		$("th:nth-child(5)").html("ATT◆");
+		$("th:nth-child(6)").html("DEF◆");
+		$("th:nth-child(7)").html("HP◆");
 		var table = document.getElementById("cardTable");
+		now = "UR";
 		const ALL = 0;
 		const FIRE = 1;
 		const WATER = 2;
@@ -266,6 +416,7 @@
 		jump.onload = function(){
 			CARD_DATA = this.responseText;
 			CARD_ARR = CARD_DATA.split("\n");
+			
 			var other = 0;
 			var before = 0;
 			if(num == FIRE){
@@ -380,327 +531,16 @@
 				}
 				hp.innerHTML = currentCard[cur_col];//--col
 			}
-			/*switch(num){
-				case ALL:
-					//----------------------------------------------Fire----------------------------------------------
-					row = 1;
-					for(var i = row; i < row+fire; i++){
-						var new_row = table.insertRow(i);
-						col = 0;
-						cur_col = 0;
-						
-						new_row.insertCell(col).innerHTML = count;//NO.
-						col++;
-						cur_col++;
-						
-						new_row.insertCell(col).innerHTML = picHTML + "_fire_" + count + ".jpg'/>";//Picture
-						col++;
-						currentCard = CARD_ARR[count-1].split(",");
-						count++;
-						
-						var att = new_row.insertCell(col);//ATTRIBUTE
-						col++;
-						att.innerHTML = fName;
-						att.style.backgroundColor = "#ffcccc";
-						cur_col++;
-						
-						var name = new_row.insertCell(col);//NAME
-						col++;
-						name.style.background = "rgba(100, 100, 100, 0.5)";
-						name.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var level = new_row.insertCell(col);//LV
-						col++;
-						level.style.background = "rgba(200, 200, 200, 0.6)";
-						level.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var attack = new_row.insertCell(col);//ATT
-						col++;
-						attack.style.background = "rgba(100, 100, 100, 0.5)";
-						attack.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var defence = new_row.insertCell(col);//DEF
-						col++;
-						defence.style.background = "rgba(200, 200, 200, 0.6)";
-						defence.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var hp = new_row.insertCell(col);//HP
-						hp.style.background = "rgba(100, 100, 100, 0.5)";
-						hp.innerHTML = currentCard[cur_col];//--col
-					}
-					//----------------------------------------------Water----------------------------------------------
-					row = table.rows.length;
-					count = 1;
-					for(var i = row; i < row+water; i++){
-						var new_row = table.insertRow(i);
-						col = 0;
-						cur_col = 0;
-						
-						new_row.insertCell(col).innerHTML = count+fire;//NO.
-						col++;
-						cur_col++;
-						
-						new_row.insertCell(col).innerHTML = picHTML + "_water_" + count + ".jpg'/>";//Picture
-						col++;
-						currentCard = CARD_ARR[count+fire-1].split(",");
-						count++;
-						
-						var att = new_row.insertCell(col);//ATTRIBUTE
-						col++;
-						att.innerHTML = wName;
-						att.style.backgroundColor = "#ccccff";
-						cur_col++;
-						
-						var name = new_row.insertCell(col);//NAME
-						col++;
-						name.style.background = "rgba(100, 100, 100, 0.5)";
-						name.innerHTML = currentCard[cur_col]
-						cur_col++;
-						
-						var level = new_row.insertCell(col);//LV
-						col++;
-						level.style.background = "rgba(200, 200, 200, 0.6)";
-						level.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var attack = new_row.insertCell(col);//ATT
-						col++;
-						attack.style.background = "rgba(100, 100, 100, 0.5)";
-						attack.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var defence = new_row.insertCell(col);//DEF
-						col++;
-						defence.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var hp = new_row.insertCell(col);//HP
-						hp.style.background = "rgba(100, 100, 100, 0.5)";
-						hp.innerHTML = currentCard[cur_col];//--col
-					}
-					//----------------------------------------------Wood----------------------------------------------
-					row = table.rows.length;
-					count = 1;
-					for(var i = row; i < row+wood; i++){
-						var new_row = table.insertRow(i);
-						col = 0;
-						cur_col = 0;
-						
-						new_row.insertCell(col).innerHTML = count+fire+water;//NO.
-						col++;
-						cur_col++;
-						
-						new_row.insertCell(col).innerHTML = picHTML + "_wood_" + count + ".jpg'/>";//Picture
-						col++;
-						currentCard = CARD_ARR[count+fire+water-1].split(",");
-						count++;
-						
-						var att = new_row.insertCell(col);//ATTRIBUTE
-						col++;
-						att.innerHTML = woName;
-						att.style.backgroundColor = "#ccffcc";
-						cur_col++;
-						
-						var name = new_row.insertCell(col);//NAME
-						col++;
-						name.style.background = "rgba(100, 100, 100, 0.5)";
-						name.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var level = new_row.insertCell(col);//LV
-						col++;
-						level.style.background = "rgba(200, 200, 200, 0.6)";
-						level.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var attack = new_row.insertCell(col);//ATT
-						col++;
-						attack.style.background = "rgba(100, 100, 100, 0.5)";
-						attack.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var defence = new_row.insertCell(col);//DEF
-						col++;
-						defence.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var hp = new_row.insertCell(col);//HP
-						hp.style.background = "rgba(100, 100, 100, 0.5)";
-						hp.innerHTML = currentCard[cur_col];//--col
-					}
-					break;
-				
-				case FIRE:
-					row = 1;
-					count = 1;
-					//--------------------------------------------Only Fire--------------------------------------------
-					for(var i = row; i < row+fire; i++){
-						var new_row = table.insertRow(i);
-						col = 0;
-						cur_col = 0;
-						
-						new_row.insertCell(col).innerHTML = count;//NO.
-						col++;
-						cur_col++;
-						
-						new_row.insertCell(col).innerHTML = picHTML + "_fire_" + count + ".jpg'/>";//Picture
-						col++;
-						currentCard = CARD_ARR[count-1].split(",");
-						count++;
-						
-						var att = new_row.insertCell(col);//ATTRIBUTE
-						col++;
-						att.innerHTML = fName;
-						att.style.backgroundColor = "#ffcccc";
-						cur_col++;
-						
-						var name = new_row.insertCell(col);//NAME
-						col++;
-						name.style.background = "rgba(100, 100, 100, 0.5)";
-						name.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var level = new_row.insertCell(col);//LV
-						col++;
-						level.style.background = "rgba(200, 200, 200, 0.6)";
-						level.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var attack = new_row.insertCell(col);//ATT
-						col++;
-						attack.style.background = "rgba(100, 100, 100, 0.5)";
-						attack.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var defence = new_row.insertCell(col);//DEF
-						col++;
-						defence.style.background = "rgba(200, 200, 200, 0.6)";
-						defence.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var hp = new_row.insertCell(col);//HP
-						hp.style.background = "rgba(100, 100, 100, 0.5)";
-						hp.innerHTML = currentCard[cur_col];//--col
-					}
-					break;
-					
-				case WATER:
-					row = 1;
-					count = 1;
-					//--------------------------------------------Only Water--------------------------------------------
-					for(var i = row; i < row+water; i++){
-						var new_row = table.insertRow(i);
-						col = 0;
-						cur_col = 0;
-						
-						new_row.insertCell(col).innerHTML = count;//NO.
-						col++;
-						cur_col++;
-						
-						new_row.insertCell(col).innerHTML = picHTML + "_water_" + count + ".jpg'/>";//Picture
-						col++;
-						currentCard = CARD_ARR[count+fire-1].split(",");
-						count++;
-						
-						var att = new_row.insertCell(col);//ATTRIBUTE
-						col++;
-						att.innerHTML = wName;
-						att.style.backgroundColor = "#ccccff";
-						cur_col++;
-						
-						var name = new_row.insertCell(col);//NAME
-						col++;
-						name.style.background = "rgba(100, 100, 100, 0.5)";
-						name.innerHTML = currentCard[cur_col]
-						cur_col++;
-						
-						var level = new_row.insertCell(col);//LV
-						col++;
-						level.style.background = "rgba(200, 200, 200, 0.6)";
-						level.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var attack = new_row.insertCell(col);//ATT
-						col++;
-						attack.style.background = "rgba(100, 100, 100, 0.5)";
-						attack.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var defence = new_row.insertCell(col);//DEF
-						col++;
-						defence.style.background = "rgba(200, 200, 200, 0.6)";
-						defence.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var hp = new_row.insertCell(col);//HP
-						hp.style.background = "rgba(100, 100, 100, 0.5)";
-						hp.innerHTML = currentCard[cur_col];//--col
-					}
-					break;
-					
-				case WOOD:
-					row = 1;
-					count = 1;
-					//--------------------------------------------Only Wood--------------------------------------------
-					for(var i = row; i < row+wood; i++){
-						var new_row = table.insertRow(i);
-						col = 0;
-						cur_col = 0;
-						
-						new_row.insertCell(col).innerHTML = count;//NO.
-						col++;
-						cur_col++;
-						
-						new_row.insertCell(col).innerHTML = picHTML + "_wood_" + count + ".jpg'/>";//Picture
-						col++;
-						currentCard = CARD_ARR[count+fire+water-1].split(",");
-						count++;
-						
-						var att = new_row.insertCell(col);//ATTRIBUTE
-						col++;
-						att.innerHTML = woName;
-						att.style.backgroundColor = "#ccffcc";
-						cur_col++;
-						
-						var name = new_row.insertCell(col);//NAME
-						col++;
-						name.style.background = "rgba(100, 100, 100, 0.5)";
-						name.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var level = new_row.insertCell(col);//LV
-						col++;
-						level.style.background = "rgba(200, 200, 200, 0.6)";
-						level.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var attack = new_row.insertCell(col);//ATT
-						col++;
-						attack.style.background = "rgba(100, 100, 100, 0.5)";
-						attack.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var defence = new_row.insertCell(col);//DEF
-						col++;
-						defence.style.background = "rgba(200, 200, 200, 0.6)";
-						defence.innerHTML = currentCard[cur_col];
-						cur_col++;
-						
-						var hp = new_row.insertCell(col);//HP
-						hp.style.background = "rgba(100, 100, 100, 0.5)";
-						hp.innerHTML = currentCard[cur_col];//--col
-					}
-					break;
-			}*/
 		};
 		jump.send();
 	}
 	function SRnewTable(num){//--------------------------------------------------------For SR
+		$("th:nth-child(1)").html("NO.▴");
+		$("th:nth-child(5)").html("ATT◆");
+		$("th:nth-child(6)").html("DEF◆");
+		$("th:nth-child(7)").html("HP◆");
 		var table = document.getElementById("cardTable");
+		now = "SR";
 		const ALL = 0;
 		const FIRE = 1;
 		const WATER = 2;
@@ -727,6 +567,7 @@
 		jump.onload = function(){
 			CARD_DATA = this.responseText;
 			CARD_ARR = CARD_DATA.split("\n");
+
 			var other = 0;
 			var before = 0;
 			if(num == FIRE){
@@ -843,6 +684,165 @@
 			}
 		};
 		jump.send();
+	}
+	function cardSort(figure, times){
+		
+		var array = [];
+		var count = 0;
+		$("tr").each(function(){
+			var s = "";
+			if(count != 0){
+				for(var i = 0; i < 7; i++){
+					if(i == 1){
+						s = s + $(this).find("td").eq(i).html();
+					}
+					else{
+						s = s + $(this).find("td").eq(i).text();
+					}
+					if(i < 6){
+						s = s + ",";
+					}
+				}
+				array.push(s);
+			}
+			count++;
+		});
+		
+		var table = document.getElementById("cardTable");
+		var row = table.rows.length;
+		for(var i = 1; i < row; i++){
+			table.deleteRow(-1);
+		}
+		
+		array.sort(function(a, b){
+			if(times % 2 != 0){
+				if (Number(a.split(",")[figure]) < Number(b.split(",")[figure]))
+					return 1;
+				if (Number(a.split(",")[figure]) > Number(b.split(",")[figure]))
+					return -1;
+				return 0;
+			}
+			else{
+				if (Number(a.split(",")[figure]) > Number(b.split(",")[figure]))
+					return 1;
+				if (Number(a.split(",")[figure]) < Number(b.split(",")[figure]))
+					return -1;
+				return 0;
+			}
+		});
+
+		for(var i = 0; i < array.length; i++){
+			var new_row = table.insertRow(i+1);
+			col = 0;
+			cur_col = 0;
+
+			currentCard = array[i].split(",");
+			var NO = Number(currentCard[cur_col]);
+			new_row.insertCell(col).innerHTML = NO;//NO.
+			col++;
+			cur_col++;
+			
+			var curAttribute = currentCard[cur_col].substring(24, 28);
+			var pic = new_row.insertCell(col);
+			pic.innerHTML = currentCard[cur_col];//Picture
+			if(curAttribute == "fire"){
+				pic.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+			}
+			if(curAttribute == "wate"){
+				pic.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+			}
+			if(curAttribute == "wood"){
+				pic.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+			}
+			col++;
+			
+			cur_col++;
+			var name = new_row.insertCell(col);//NAME
+			col++;
+			if(curAttribute == "fire"){
+				name.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+			}
+			if(curAttribute == "wate"){
+				name.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+			}
+			if(curAttribute == "wood"){
+				name.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+			}
+			name.innerHTML = currentCard[cur_col];
+			cur_col++;
+			
+			var level = new_row.insertCell(col);//LV
+			col++;
+			if(curAttribute == "fire"){
+				level.style.backgroundColor = "rgba(255, 165, 165, 0.9)";
+			}
+			if(curAttribute == "wate"){
+				level.style.backgroundColor = "rgba(165, 165, 255, 0.9)";
+			}
+			if(curAttribute == "wood"){
+				level.style.backgroundColor = "rgba(151, 221, 159, 0.9)";
+			}
+			level.innerHTML = currentCard[cur_col];
+			cur_col++;
+			
+			var attack = new_row.insertCell(col);//ATT
+			col++;
+			if(curAttribute == "fire"){
+				attack.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+			}
+			if(curAttribute == "wate"){
+				attack.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+			}
+			if(curAttribute == "wood"){
+				attack.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+			}
+			attack.innerHTML = currentCard[cur_col];
+			cur_col++;
+			
+			var defence = new_row.insertCell(col);//DEF
+			col++;
+			if(curAttribute == "fire"){
+				defence.style.backgroundColor = "rgba(255, 165, 165, 0.9)";
+			}
+			if(curAttribute == "wate"){
+				defence.style.backgroundColor = "rgba(165, 165, 255, 0.9)";
+			}
+			if(curAttribute == "wood"){
+				defence.style.backgroundColor = "rgba(151, 221, 159, 0.9)";
+			}
+			defence.innerHTML = currentCard[cur_col];
+			cur_col++;
+			
+			var hp = new_row.insertCell(col);//HP
+			if(curAttribute == "fire"){
+				hp.style.backgroundColor = "rgba(255, 204, 204, 0.8)";
+			}
+			if(curAttribute == "wate"){
+				hp.style.backgroundColor = "rgba(204, 204, 255, 0.8)";
+			}
+			if(curAttribute == "wood"){
+				hp.style.backgroundColor = "rgba(199, 237, 204, 0.8)";
+			}
+			hp.innerHTML = currentCard[cur_col];//--col
+		}
+	}
+	function icon(){
+		clickcount++;
+		title.css("visibility", "visible");
+		if(clickcount % 2 != 0){
+			$("#icon").css("animation", "initial");
+			title.css("margin-top", "0%");
+			title.css("transition", "margin-top 0.8s ease");
+			/*side.css("margin-left", "0%");
+			side.css("transition", "margin-left 0.8s ease");*/
+		}
+		else{
+			//$("#icon").css("animation", "grow 0.65s linear infinite");
+			title.css("margin-top", "-20%");
+			title.css("transition", "margin-top 1s ease");
+			/*side.css("margin-left", "-20%");
+			side.css("transition", "margin-left 1s ease");*/
+		}
 	}
 </script>
 </html>
