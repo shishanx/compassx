@@ -299,8 +299,6 @@
 <script type = "text/javascript">
 	var clickcount = 0;
 	var title = $(".title");
-	var now = "ALL";
-	var last;
 	function changeTo(page){
 		if(page == "cards"){
 			window.location.reload();
@@ -311,6 +309,7 @@
 			document.location = "https://shishanx.github.io/compassx/" + page + ".html";
 		}
 	}
+	
 	function appear(rare){
 		var r = document.getElementById(rare);
 		if(r.style.visibility != "visible"){
@@ -320,6 +319,7 @@
 			r.style.visibility = "hidden";
 		}
 	}
+	
 	function disappear(){
 		var u = document.getElementById("ur");
 		var s = document.getElementById("sr");
@@ -332,8 +332,14 @@
 	}
 	
 	var noClick = 0;
-	$("th:nth-child(1)").on("click", function(){
+	var attClick = 0;
+	var defClick = 0;
+	var hpClick = 0;
+	$("th:nth-child(1)").on("click", function(){//---NO. cilck
 		noClick++;
+		attClick--;
+		defClick--;
+		hpClick--;
 		$("th:nth-child(5)").html("ATT◂");
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(7)").html("HP◂");
@@ -345,9 +351,11 @@
 		}
 		cardSort(0, noClick);
 	});
-	var attClick = 0;
-	$("th:nth-child(5)").on("click", function(){
+	$("th:nth-child(5)").on("click", function(){//---ATT cilck
 		attClick++;
+		noClick--;
+		defClick--;
+		hpClick--;
 		$("th:nth-child(1)").html("NO.◂");
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(7)").html("HP◂");
@@ -359,9 +367,11 @@
 		}
 		cardSort(4, attClick);
 	});
-	var defClick = 0;
-	$("th:nth-child(6)").on("click", function(){
+	$("th:nth-child(6)").on("click", function(){//---DEF cilck
 		defClick++;
+		noClick--;
+		attClick--;
+		hpClick--;
 		$("th:nth-child(5)").html("ATT◂");
 		$("th:nth-child(1)").html("NO.◂");
 		$("th:nth-child(7)").html("HP◂");
@@ -373,9 +383,11 @@
 		}
 		cardSort(5, defClick);
 	});
-	var hpClick = 0;
-	$("th:nth-child(7)").on("click", function(){
+	$("th:nth-child(7)").on("click", function(){//---HP cilck
 		hpClick++;
+		noClick--;
+		attClick--;
+		defClick--;
 		$("th:nth-child(5)").html("ATT◂");
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(1)").html("NO.◂");
@@ -387,6 +399,7 @@
 		}
 		cardSort(6, hpClick);
 	});
+	
 	var UR_NUM; 
 	function URnewTable(num){//--------------------------------------------------------For UR
 		$("th:nth-child(1)").html("NO.▴");
@@ -394,7 +407,6 @@
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(7)").html("HP◂");
 		var table = document.getElementById("cardTable");
-		now = "UR";
 		const ALL = 0;
 		const FIRE = 1;
 		const WATER = 2;
@@ -417,6 +429,7 @@
 		for(var i = 1; i < row; i++){
 			table.deleteRow(-1);
 		}
+		
 		var jump = new XMLHttpRequest();
 		jump.open("get", "picture/UR/UR_DATA.txt");
 		jump.onload = function(){
@@ -441,8 +454,8 @@
 			row = table.rows.length;
 			for(var i = row; i < row+fire+water+wood-other; i++){
 				var new_row = table.insertRow(i);
-				col = 0;
-				cur_col = 0;
+				col = 0;//--table col
+				cur_col = 0;//--data col
 
 				currentCard = CARD_ARR[count-1].split(",");
 				var NO = Number(currentCard[cur_col]);
@@ -540,13 +553,13 @@
 		};
 		jump.send();
 	}
+	
 	function SRnewTable(num){//--------------------------------------------------------For SR
 		$("th:nth-child(1)").html("NO.▴");
 		$("th:nth-child(5)").html("ATT◂");
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(7)").html("HP◂");
 		var table = document.getElementById("cardTable");
-		now = "SR";
 		const ALL = 0;
 		const FIRE = 1;
 		const WATER = 2;
@@ -568,6 +581,7 @@
 		for(var i = 1; i < row; i++){
 			table.deleteRow(-1);
 		}
+		
 		var jump = new XMLHttpRequest();
 		jump.open("get", "picture/SR/SR_DATA.txt");
 		jump.onload = function(){
@@ -691,11 +705,11 @@
 		};
 		jump.send();
 	}
+	
 	function cardSort(figure, times){
-		
 		var array = [];
 		var count = 0;
-		$("tr").each(function(){
+		$("tr").each(function(){//---get table data
 			var s = "";
 			if(count != 0){
 				for(var i = 0; i < 7; i++){
@@ -716,7 +730,7 @@
 		
 		var table = document.getElementById("cardTable");
 		var row = table.rows.length;
-		for(var i = 1; i < row; i++){
+		for(var i = 1; i < row; i++){//---clear table
 			table.deleteRow(-1);
 		}
 		
@@ -832,6 +846,7 @@
 			hp.innerHTML = currentCard[cur_col];//--col
 		}
 	}
+	
 	function icon(){
 		clickcount++;
 		title.css("visibility", "visible");
@@ -839,15 +854,11 @@
 			$("#icon").css("animation", "initial");
 			title.css("margin-top", "0%");
 			title.css("transition", "margin-top 0.8s ease");
-			/*side.css("margin-left", "0%");
-			side.css("transition", "margin-left 0.8s ease");*/
 		}
 		else{
 			//$("#icon").css("animation", "grow 0.65s linear infinite");
 			title.css("margin-top", "-20%");
 			title.css("transition", "margin-top 1s ease");
-			/*side.css("margin-left", "-20%");
-			side.css("transition", "margin-left 1s ease");*/
 		}
 	}
 </script>
