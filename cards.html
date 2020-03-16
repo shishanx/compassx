@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -331,15 +331,31 @@
 		}
 	}
 	
-	var noClick = 0;
+	var noClick = 0;//Times for click on NO.
+	var n = 0;//status of NO. ,0 for first click, -1 for click back NO., 1 for clicking NO. now
 	var attClick = 0;
+	var a = 0;
 	var defClick = 0;
+	var d = 0;
 	var hpClick = 0;
+	var h = 0;
 	$("th:nth-child(1)").on("click", function(){//---NO. cilck
-		noClick++;
-		attClick--;
-		defClick--;
-		hpClick--;
+		if(n == 0){
+			attClick++;
+			defClick++;
+			hpClick++;
+			n = 1;
+		}
+		if(n == -1){
+			noClick--;
+			n = 1;
+		}
+		if(n == 1){
+			noClick++;
+		}
+		a = -1;
+		d = -1;
+		h = -1;
 		$("th:nth-child(5)").html("ATT◂");
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(7)").html("HP◂");
@@ -352,10 +368,22 @@
 		cardSort(0, noClick);
 	});
 	$("th:nth-child(5)").on("click", function(){//---ATT cilck
-		attClick++;
-		noClick--;
-		defClick--;
-		hpClick--;
+		if(a == 0){
+			noClick = 0;
+			defClick++;
+			hpClick++;
+			a = 1;
+		}
+		if(a == -1){
+			attClick--;
+			a = 1;
+		}
+		if(a == 1){
+			attClick++;
+		}
+		n = -1;
+		d = -1;
+		h = -1;
 		$("th:nth-child(1)").html("NO.◂");
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(7)").html("HP◂");
@@ -368,10 +396,22 @@
 		cardSort(4, attClick);
 	});
 	$("th:nth-child(6)").on("click", function(){//---DEF cilck
-		defClick++;
-		noClick--;
-		attClick--;
-		hpClick--;
+		if(d == 0){
+			attClick++;
+			noClick = 0;
+			hpClick++;
+			d = 1;
+		}
+		if(d == -1){
+			defClick--;
+			d = 1;
+		}
+		if(d == 1){
+			defClick++;
+		}
+		n = -1;
+		a = -1;
+		h = -1;
 		$("th:nth-child(5)").html("ATT◂");
 		$("th:nth-child(1)").html("NO.◂");
 		$("th:nth-child(7)").html("HP◂");
@@ -384,10 +424,22 @@
 		cardSort(5, defClick);
 	});
 	$("th:nth-child(7)").on("click", function(){//---HP cilck
-		hpClick++;
-		noClick--;
-		attClick--;
-		defClick--;
+		if(h == 0){
+			attClick++;
+			defClick++;
+			noClick = 0;
+			h = 1;
+		}
+		if(h == -1){
+			hpClick--;
+			h = 1;
+		}
+		if(h == 1){
+			hpClick++;
+		}
+		n = -1;
+		d = -1;
+		a = -1;
 		$("th:nth-child(5)").html("ATT◂");
 		$("th:nth-child(6)").html("DEF◂");
 		$("th:nth-child(1)").html("NO.◂");
@@ -719,7 +771,7 @@
 		var count = 0;
 		$("tr").each(function(){//---get table data
 			var s = "";
-			if(count != 0){
+			if(count != 0){//skip title row
 				for(var i = 0; i < 7; i++){
 					if(i == 1){
 						s = s + $(this).find("td").eq(i).html();
@@ -742,16 +794,16 @@
 			table.deleteRow(-1);
 		}
 		
-		array.sort(function(a, b){
+		array.sort(function(a, b){//present->b, next->a
 			if(times % 2 != 0){
-				if (Number(a.split(",")[figure]) < Number(b.split(",")[figure]))
+				if (Number(a.split(",")[figure]) < Number(b.split(",")[figure]))//降冪
 					return 1;
 				if (Number(a.split(",")[figure]) > Number(b.split(",")[figure]))
 					return -1;
 				return 0;
 			}
 			else{
-				if (Number(a.split(",")[figure]) > Number(b.split(",")[figure]))
+				if (Number(a.split(",")[figure]) > Number(b.split(",")[figure]))//升冪
 					return 1;
 				if (Number(a.split(",")[figure]) < Number(b.split(",")[figure]))
 					return -1;
@@ -764,7 +816,7 @@
 			col = 0;
 			cur_col = 0;
 
-			currentCard = array[i].split(",");
+			currentCard = array[i].split(","); 
 			var NO = Number(currentCard[cur_col]);
 			new_row.insertCell(col).innerHTML = NO;//NO.
 			col++;
